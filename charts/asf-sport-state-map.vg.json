@@ -1,0 +1,279 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "description": "Published ASF survey percentages by state, transcribed from page 28. These describe club respondents, not population participation or a census of clubs.",
+  "width": "container",
+  "height": 460,
+  "data": {
+    "url": "data/raw/asf-sports-by-state-2023.csv",
+    "format": {
+      "type": "csv",
+      "parse": {
+        "source_row": "number",
+        "percentage": "number",
+        "response_base": "number",
+        "state_code": "string"
+      }
+    }
+  },
+  "params": [
+    {
+      "name": "selectedSportRow",
+      "value": 1,
+      "bind": {
+        "input": "select",
+        "options": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10,
+          11,
+          12,
+          13,
+          14,
+          15,
+          16,
+          17,
+          18,
+          19,
+          20,
+          21,
+          22,
+          23,
+          24,
+          25,
+          26,
+          27,
+          28,
+          29,
+          30,
+          31,
+          32,
+          33,
+          34,
+          35,
+          36
+        ],
+        "labels": [
+          "Football/Soccer",
+          "Athletics/Running",
+          "Swimming",
+          "Australian Football",
+          "Netball",
+          "Basketball",
+          "Cricket",
+          "Hockey",
+          "Tennis",
+          "Rugby Union",
+          "Gymnastics",
+          "Cycling",
+          "Water Polo",
+          "Rugby League",
+          "Touch Football",
+          "Softball",
+          "Golf",
+          "Skateboarding (source row 18)",
+          "Martial Arts",
+          "Volleyball",
+          "Baseball",
+          "Equestrian",
+          "Sailing",
+          "Rowing",
+          "Weightlifting",
+          "Taekwondo",
+          "Canoeing/Kayaking",
+          "Triathlon",
+          "Mountain Biking",
+          "Surfing",
+          "Boxing",
+          "Badminton",
+          "Skateboarding (source row 33)",
+          "Lawn Bowls",
+          "Shooting",
+          "Other"
+        ],
+        "name": "Sport: "
+      }
+    }
+  ],
+  "transform": [
+    {
+      "filter": "datum.source_row == selectedSportRow"
+    },
+    {
+      "lookup": "state_code",
+      "from": {
+        "data": {
+          "url": "maps/australia-states-2021.geojson",
+          "format": {
+            "type": "json",
+            "property": "features"
+          }
+        },
+        "key": "properties.state_code_2021",
+        "fields": [
+          "geometry",
+          "properties.label_lon",
+          "properties.label_lat"
+        ]
+      },
+      "as": [
+        "Geometry",
+        "LabelLongitude",
+        "LabelLatitude"
+      ]
+    },
+    {
+      "calculate": "datum.percentage / 100",
+      "as": "Share"
+    },
+    {
+      "calculate": "datum.state + \" \u00b7 \" + datum.percentage + \"%\"",
+      "as": "StateLabel"
+    }
+  ],
+  "projection": {
+    "type": "mercator"
+  },
+  "encoding": {
+    "tooltip": [
+      {
+        "field": "state_name",
+        "type": "nominal",
+        "title": "State / territory"
+      },
+      {
+        "field": "sport",
+        "type": "nominal",
+        "title": "Sport"
+      },
+      {
+        "field": "Share",
+        "type": "quantitative",
+        "title": "Share of club respondents",
+        "format": ".0%"
+      },
+      {
+        "field": "response_base",
+        "type": "quantitative",
+        "title": "State response base (n)",
+        "format": ","
+      }
+    ]
+  },
+  "layer": [
+    {
+      "mark": {
+        "type": "geoshape",
+        "stroke": "white",
+        "strokeWidth": 1.5
+      },
+      "encoding": {
+        "shape": {
+          "field": "Geometry",
+          "type": "geojson"
+        },
+        "color": {
+          "field": "Share",
+          "type": "quantitative",
+          "scale": {
+            "domain": [
+              0,
+              0.5
+            ],
+            "range": [
+              "#eff6f5",
+              "#07585d"
+            ],
+            "clamp": true
+          },
+          "legend": {
+            "title": "Share of club respondents",
+            "format": ".0%",
+            "orient": "bottom",
+            "gradientLength": 300,
+            "titleLimit": 300,
+            "values": [
+              0,
+              0.1,
+              0.2,
+              0.3,
+              0.4,
+              0.5
+            ]
+          }
+        }
+      }
+    },
+    {
+      "transform": [
+        {
+          "filter": "datum.state == \"ACT\""
+        }
+      ],
+      "mark": {
+        "type": "rule",
+        "color": "#354d58",
+        "strokeWidth": 1
+      },
+      "encoding": {
+        "longitude": {
+          "datum": 149.05
+        },
+        "latitude": {
+          "datum": -35.45
+        },
+        "longitude2": {
+          "datum": 151.2
+        },
+        "latitude2": {
+          "datum": -35.6
+        }
+      }
+    },
+    {
+      "mark": {
+        "type": "text",
+        "fontSize": 12,
+        "fontWeight": "bold"
+      },
+      "encoding": {
+        "longitude": {
+          "field": "LabelLongitude",
+          "type": "quantitative"
+        },
+        "latitude": {
+          "field": "LabelLatitude",
+          "type": "quantitative"
+        },
+        "text": {
+          "field": "StateLabel",
+          "type": "nominal"
+        },
+        "color": {
+          "condition": {
+            "test": "datum.Share > 0.28 && datum.state != \"ACT\"",
+            "value": "white"
+          },
+          "value": "#132f3a"
+        }
+      }
+    }
+  ],
+  "config": {
+    "font": "Arial",
+    "background": "white",
+    "view": {
+      "stroke": null
+    },
+    "legend": {
+      "labelFontSize": 12,
+      "titleFontSize": 12
+    }
+  }
+}

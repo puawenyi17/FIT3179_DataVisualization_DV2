@@ -1,0 +1,289 @@
+source_page,source_row,state_code,state,state_name,sport,percentage,response_base,significance
+28,1,1,NSW,New South Wales,Football/Soccer,44,812,higher
+28,1,2,VIC,Victoria,Football/Soccer,10,683,lower
+28,1,3,QLD,Queensland,Football/Soccer,37,739,higher
+28,1,8,ACT,Australian Capital Territory,Football/Soccer,18,39,not marked
+28,1,5,WA,Western Australia,Football/Soccer,13,235,lower
+28,1,4,SA,South Australia,Football/Soccer,8,353,lower
+28,1,7,NT,Northern Territory,Football/Soccer,6,32,not marked
+28,1,6,TAS,Tasmania,Football/Soccer,16,89,not marked
+28,2,1,NSW,New South Wales,Athletics/Running,7,812,not marked
+28,2,2,VIC,Victoria,Athletics/Running,5,683,not marked
+28,2,3,QLD,Queensland,Athletics/Running,6,739,not marked
+28,2,8,ACT,Australian Capital Territory,Athletics/Running,8,39,not marked
+28,2,5,WA,Western Australia,Athletics/Running,6,235,not marked
+28,2,4,SA,South Australia,Athletics/Running,5,353,not marked
+28,2,7,NT,Northern Territory,Athletics/Running,6,32,not marked
+28,2,6,TAS,Tasmania,Athletics/Running,10,89,not marked
+28,3,1,NSW,New South Wales,Swimming,7,812,not marked
+28,3,2,VIC,Victoria,Swimming,2,683,lower
+28,3,3,QLD,Queensland,Swimming,6,739,not marked
+28,3,8,ACT,Australian Capital Territory,Swimming,5,39,not marked
+28,3,5,WA,Western Australia,Swimming,7,235,not marked
+28,3,4,SA,South Australia,Swimming,8,353,not marked
+28,3,7,NT,Northern Territory,Swimming,3,32,not marked
+28,3,6,TAS,Tasmania,Swimming,1,89,not marked
+28,4,1,NSW,New South Wales,Australian Football,7,812,lower
+28,4,2,VIC,Victoria,Australian Football,25,683,higher
+28,4,3,QLD,Queensland,Australian Football,6,739,lower
+28,4,8,ACT,Australian Capital Territory,Australian Football,10,39,not marked
+28,4,5,WA,Western Australia,Australian Football,11,235,not marked
+28,4,4,SA,South Australia,Australian Football,20,353,higher
+28,4,7,NT,Northern Territory,Australian Football,9,32,not marked
+28,4,6,TAS,Tasmania,Australian Football,21,89,not marked
+28,5,1,NSW,New South Wales,Netball,6,812,lower
+28,5,2,VIC,Victoria,Netball,17,683,higher
+28,5,3,QLD,Queensland,Netball,10,739,not marked
+28,5,8,ACT,Australian Capital Territory,Netball,10,39,not marked
+28,5,5,WA,Western Australia,Netball,13,235,not marked
+28,5,4,SA,South Australia,Netball,17,353,higher
+28,5,7,NT,Northern Territory,Netball,9,32,not marked
+28,5,6,TAS,Tasmania,Netball,8,89,not marked
+28,6,1,NSW,New South Wales,Basketball,5,812,not marked
+28,6,2,VIC,Victoria,Basketball,9,683,higher
+28,6,3,QLD,Queensland,Basketball,4,739,lower
+28,6,8,ACT,Australian Capital Territory,Basketball,5,39,not marked
+28,6,5,WA,Western Australia,Basketball,13,235,higher
+28,6,4,SA,South Australia,Basketball,8,353,not marked
+28,6,7,NT,Northern Territory,Basketball,0,32,not marked
+28,6,6,TAS,Tasmania,Basketball,7,89,not marked
+28,7,1,NSW,New South Wales,Cricket,8,812,not marked
+28,7,2,VIC,Victoria,Cricket,15,683,higher
+28,7,3,QLD,Queensland,Cricket,5,739,lower
+28,7,8,ACT,Australian Capital Territory,Cricket,5,39,not marked
+28,7,5,WA,Western Australia,Cricket,9,235,not marked
+28,7,4,SA,South Australia,Cricket,13,353,not marked
+28,7,7,NT,Northern Territory,Cricket,0,32,not marked
+28,7,6,TAS,Tasmania,Cricket,18,89,higher
+28,8,1,NSW,New South Wales,Hockey,3,812,not marked
+28,8,2,VIC,Victoria,Hockey,2,683,not marked
+28,8,3,QLD,Queensland,Hockey,2,739,not marked
+28,8,8,ACT,Australian Capital Territory,Hockey,5,39,not marked
+28,8,5,WA,Western Australia,Hockey,7,235,higher
+28,8,4,SA,South Australia,Hockey,4,353,not marked
+28,8,7,NT,Northern Territory,Hockey,9,32,not marked
+28,8,6,TAS,Tasmania,Hockey,0,89,not marked
+28,9,1,NSW,New South Wales,Tennis,3,812,lower
+28,9,2,VIC,Victoria,Tennis,8,683,higher
+28,9,3,QLD,Queensland,Tennis,3,739,not marked
+28,9,8,ACT,Australian Capital Territory,Tennis,10,39,not marked
+28,9,5,WA,Western Australia,Tennis,4,235,not marked
+28,9,4,SA,South Australia,Tennis,6,353,not marked
+28,9,7,NT,Northern Territory,Tennis,9,32,not marked
+28,9,6,TAS,Tasmania,Tennis,0,89,not marked
+28,10,1,NSW,New South Wales,Rugby Union,5,812,higher
+28,10,2,VIC,Victoria,Rugby Union,1,683,lower
+28,10,3,QLD,Queensland,Rugby Union,4,739,not marked
+28,10,8,ACT,Australian Capital Territory,Rugby Union,15,39,higher
+28,10,5,WA,Western Australia,Rugby Union,6,235,not marked
+28,10,4,SA,South Australia,Rugby Union,1,353,not marked
+28,10,7,NT,Northern Territory,Rugby Union,6,32,not marked
+28,10,6,TAS,Tasmania,Rugby Union,1,89,not marked
+28,11,1,NSW,New South Wales,Gymnastics,1,812,not marked
+28,11,2,VIC,Victoria,Gymnastics,1,683,not marked
+28,11,3,QLD,Queensland,Gymnastics,3,739,not marked
+28,11,8,ACT,Australian Capital Territory,Gymnastics,0,39,not marked
+28,11,5,WA,Western Australia,Gymnastics,1,235,not marked
+28,11,4,SA,South Australia,Gymnastics,3,353,not marked
+28,11,7,NT,Northern Territory,Gymnastics,6,32,not marked
+28,11,6,TAS,Tasmania,Gymnastics,0,89,not marked
+28,12,1,NSW,New South Wales,Cycling,2,812,not marked
+28,12,2,VIC,Victoria,Cycling,1,683,not marked
+28,12,3,QLD,Queensland,Cycling,2,739,not marked
+28,12,8,ACT,Australian Capital Territory,Cycling,8,39,higher
+28,12,5,WA,Western Australia,Cycling,2,235,not marked
+28,12,4,SA,South Australia,Cycling,1,353,not marked
+28,12,7,NT,Northern Territory,Cycling,3,32,not marked
+28,12,6,TAS,Tasmania,Cycling,0,89,not marked
+28,13,1,NSW,New South Wales,Water Polo,1,812,not marked
+28,13,2,VIC,Victoria,Water Polo,1,683,not marked
+28,13,3,QLD,Queensland,Water Polo,1,739,not marked
+28,13,8,ACT,Australian Capital Territory,Water Polo,0,39,not marked
+28,13,5,WA,Western Australia,Water Polo,1,235,not marked
+28,13,4,SA,South Australia,Water Polo,2,353,not marked
+28,13,7,NT,Northern Territory,Water Polo,0,32,not marked
+28,13,6,TAS,Tasmania,Water Polo,6,89,higher
+28,14,1,NSW,New South Wales,Rugby League,6,812,higher
+28,14,2,VIC,Victoria,Rugby League,2,683,not marked
+28,14,3,QLD,Queensland,Rugby League,7,739,higher
+28,14,8,ACT,Australian Capital Territory,Rugby League,0,39,not marked
+28,14,5,WA,Western Australia,Rugby League,0,235,lower
+28,14,4,SA,South Australia,Rugby League,0,353,lower
+28,14,7,NT,Northern Territory,Rugby League,9,32,not marked
+28,14,6,TAS,Tasmania,Rugby League,0,89,not marked
+28,15,1,NSW,New South Wales,Touch Football,2,812,not marked
+28,15,2,VIC,Victoria,Touch Football,1,683,not marked
+28,15,3,QLD,Queensland,Touch Football,2,739,not marked
+28,15,8,ACT,Australian Capital Territory,Touch Football,0,39,not marked
+28,15,5,WA,Western Australia,Touch Football,0,235,not marked
+28,15,4,SA,South Australia,Touch Football,0,353,not marked
+28,15,7,NT,Northern Territory,Touch Football,0,32,not marked
+28,15,6,TAS,Tasmania,Touch Football,0,89,not marked
+28,16,1,NSW,New South Wales,Softball,1,812,not marked
+28,16,2,VIC,Victoria,Softball,2,683,not marked
+28,16,3,QLD,Queensland,Softball,1,739,not marked
+28,16,8,ACT,Australian Capital Territory,Softball,0,39,not marked
+28,16,5,WA,Western Australia,Softball,5,235,higher
+28,16,4,SA,South Australia,Softball,1,353,not marked
+28,16,7,NT,Northern Territory,Softball,0,32,not marked
+28,16,6,TAS,Tasmania,Softball,1,89,not marked
+28,17,1,NSW,New South Wales,Golf,4,812,not marked
+28,17,2,VIC,Victoria,Golf,4,683,not marked
+28,17,3,QLD,Queensland,Golf,2,739,not marked
+28,17,8,ACT,Australian Capital Territory,Golf,0,39,not marked
+28,17,5,WA,Western Australia,Golf,2,235,not marked
+28,17,4,SA,South Australia,Golf,2,353,not marked
+28,17,7,NT,Northern Territory,Golf,9,32,not marked
+28,17,6,TAS,Tasmania,Golf,4,89,not marked
+28,18,1,NSW,New South Wales,Skateboarding,1,812,not marked
+28,18,2,VIC,Victoria,Skateboarding,1,683,not marked
+28,18,3,QLD,Queensland,Skateboarding,1,739,not marked
+28,18,8,ACT,Australian Capital Territory,Skateboarding,0,39,not marked
+28,18,5,WA,Western Australia,Skateboarding,1,235,not marked
+28,18,4,SA,South Australia,Skateboarding,2,353,not marked
+28,18,7,NT,Northern Territory,Skateboarding,0,32,not marked
+28,18,6,TAS,Tasmania,Skateboarding,3,89,not marked
+28,19,1,NSW,New South Wales,Martial Arts,1,812,not marked
+28,19,2,VIC,Victoria,Martial Arts,0,683,not marked
+28,19,3,QLD,Queensland,Martial Arts,1,739,not marked
+28,19,8,ACT,Australian Capital Territory,Martial Arts,0,39,not marked
+28,19,5,WA,Western Australia,Martial Arts,1,235,not marked
+28,19,4,SA,South Australia,Martial Arts,1,353,not marked
+28,19,7,NT,Northern Territory,Martial Arts,0,32,not marked
+28,19,6,TAS,Tasmania,Martial Arts,0,89,not marked
+28,20,1,NSW,New South Wales,Volleyball,1,812,not marked
+28,20,2,VIC,Victoria,Volleyball,1,683,not marked
+28,20,3,QLD,Queensland,Volleyball,1,739,not marked
+28,20,8,ACT,Australian Capital Territory,Volleyball,5,39,not marked
+28,20,5,WA,Western Australia,Volleyball,1,235,not marked
+28,20,4,SA,South Australia,Volleyball,2,353,not marked
+28,20,7,NT,Northern Territory,Volleyball,0,32,not marked
+28,20,6,TAS,Tasmania,Volleyball,2,89,not marked
+28,21,1,NSW,New South Wales,Baseball,3,812,not marked
+28,21,2,VIC,Victoria,Baseball,2,683,not marked
+28,21,3,QLD,Queensland,Baseball,1,739,not marked
+28,21,8,ACT,Australian Capital Territory,Baseball,5,39,not marked
+28,21,5,WA,Western Australia,Baseball,1,235,not marked
+28,21,4,SA,South Australia,Baseball,3,353,not marked
+28,21,7,NT,Northern Territory,Baseball,3,32,not marked
+28,21,6,TAS,Tasmania,Baseball,0,89,not marked
+28,22,1,NSW,New South Wales,Equestrian,2,812,not marked
+28,22,2,VIC,Victoria,Equestrian,1,683,not marked
+28,22,3,QLD,Queensland,Equestrian,3,739,not marked
+28,22,8,ACT,Australian Capital Territory,Equestrian,0,39,not marked
+28,22,5,WA,Western Australia,Equestrian,4,235,not marked
+28,22,4,SA,South Australia,Equestrian,3,353,not marked
+28,22,7,NT,Northern Territory,Equestrian,13,32,higher
+28,22,6,TAS,Tasmania,Equestrian,4,89,not marked
+28,23,1,NSW,New South Wales,Sailing,1,812,not marked
+28,23,2,VIC,Victoria,Sailing,1,683,not marked
+28,23,3,QLD,Queensland,Sailing,2,739,not marked
+28,23,8,ACT,Australian Capital Territory,Sailing,0,39,not marked
+28,23,5,WA,Western Australia,Sailing,3,235,not marked
+28,23,4,SA,South Australia,Sailing,1,353,not marked
+28,23,7,NT,Northern Territory,Sailing,3,32,not marked
+28,23,6,TAS,Tasmania,Sailing,1,89,not marked
+28,24,1,NSW,New South Wales,Rowing,1,812,not marked
+28,24,2,VIC,Victoria,Rowing,1,683,not marked
+28,24,3,QLD,Queensland,Rowing,1,739,not marked
+28,24,8,ACT,Australian Capital Territory,Rowing,5,39,not marked
+28,24,5,WA,Western Australia,Rowing,1,235,not marked
+28,24,4,SA,South Australia,Rowing,3,353,higher
+28,24,7,NT,Northern Territory,Rowing,0,32,not marked
+28,24,6,TAS,Tasmania,Rowing,0,89,not marked
+28,25,1,NSW,New South Wales,Weightlifting,0,812,not marked
+28,25,2,VIC,Victoria,Weightlifting,0,683,not marked
+28,25,3,QLD,Queensland,Weightlifting,0,739,not marked
+28,25,8,ACT,Australian Capital Territory,Weightlifting,3,39,higher
+28,25,5,WA,Western Australia,Weightlifting,0,235,not marked
+28,25,4,SA,South Australia,Weightlifting,0,353,not marked
+28,25,7,NT,Northern Territory,Weightlifting,0,32,not marked
+28,25,6,TAS,Tasmania,Weightlifting,0,89,not marked
+28,26,1,NSW,New South Wales,Taekwondo,0,812,higher
+28,26,2,VIC,Victoria,Taekwondo,0,683,not marked
+28,26,3,QLD,Queensland,Taekwondo,0,739,not marked
+28,26,8,ACT,Australian Capital Territory,Taekwondo,0,39,not marked
+28,26,5,WA,Western Australia,Taekwondo,0,235,not marked
+28,26,4,SA,South Australia,Taekwondo,0,353,not marked
+28,26,7,NT,Northern Territory,Taekwondo,0,32,not marked
+28,26,6,TAS,Tasmania,Taekwondo,0,89,not marked
+28,27,1,NSW,New South Wales,Canoeing/Kayaking,0,812,not marked
+28,27,2,VIC,Victoria,Canoeing/Kayaking,1,683,not marked
+28,27,3,QLD,Queensland,Canoeing/Kayaking,1,739,not marked
+28,27,8,ACT,Australian Capital Territory,Canoeing/Kayaking,0,39,not marked
+28,27,5,WA,Western Australia,Canoeing/Kayaking,1,235,not marked
+28,27,4,SA,South Australia,Canoeing/Kayaking,0,353,not marked
+28,27,7,NT,Northern Territory,Canoeing/Kayaking,0,32,not marked
+28,27,6,TAS,Tasmania,Canoeing/Kayaking,0,89,not marked
+28,28,1,NSW,New South Wales,Triathlon,1,812,not marked
+28,28,2,VIC,Victoria,Triathlon,0,683,not marked
+28,28,3,QLD,Queensland,Triathlon,0,739,not marked
+28,28,8,ACT,Australian Capital Territory,Triathlon,5,39,higher
+28,28,5,WA,Western Australia,Triathlon,1,235,not marked
+28,28,4,SA,South Australia,Triathlon,0,353,not marked
+28,28,7,NT,Northern Territory,Triathlon,0,32,not marked
+28,28,6,TAS,Tasmania,Triathlon,0,89,not marked
+28,29,1,NSW,New South Wales,Mountain Biking,1,812,not marked
+28,29,2,VIC,Victoria,Mountain Biking,0,683,not marked
+28,29,3,QLD,Queensland,Mountain Biking,1,739,not marked
+28,29,8,ACT,Australian Capital Territory,Mountain Biking,3,39,not marked
+28,29,5,WA,Western Australia,Mountain Biking,1,235,not marked
+28,29,4,SA,South Australia,Mountain Biking,0,353,not marked
+28,29,7,NT,Northern Territory,Mountain Biking,0,32,not marked
+28,29,6,TAS,Tasmania,Mountain Biking,0,89,not marked
+28,30,1,NSW,New South Wales,Surfing,1,812,not marked
+28,30,2,VIC,Victoria,Surfing,0,683,not marked
+28,30,3,QLD,Queensland,Surfing,1,739,not marked
+28,30,8,ACT,Australian Capital Territory,Surfing,0,39,not marked
+28,30,5,WA,Western Australia,Surfing,1,235,not marked
+28,30,4,SA,South Australia,Surfing,0,353,not marked
+28,30,7,NT,Northern Territory,Surfing,0,32,not marked
+28,30,6,TAS,Tasmania,Surfing,2,89,not marked
+28,31,1,NSW,New South Wales,Boxing,1,812,not marked
+28,31,2,VIC,Victoria,Boxing,0,683,not marked
+28,31,3,QLD,Queensland,Boxing,1,739,not marked
+28,31,8,ACT,Australian Capital Territory,Boxing,3,39,not marked
+28,31,5,WA,Western Australia,Boxing,0,235,not marked
+28,31,4,SA,South Australia,Boxing,1,353,not marked
+28,31,7,NT,Northern Territory,Boxing,0,32,not marked
+28,31,6,TAS,Tasmania,Boxing,0,89,not marked
+28,32,1,NSW,New South Wales,Badminton,0,812,not marked
+28,32,2,VIC,Victoria,Badminton,0,683,not marked
+28,32,3,QLD,Queensland,Badminton,0,739,not marked
+28,32,8,ACT,Australian Capital Territory,Badminton,0,39,not marked
+28,32,5,WA,Western Australia,Badminton,1,235,not marked
+28,32,4,SA,South Australia,Badminton,0,353,not marked
+28,32,7,NT,Northern Territory,Badminton,0,32,not marked
+28,32,6,TAS,Tasmania,Badminton,0,89,not marked
+28,33,1,NSW,New South Wales,Skateboarding,0,812,not marked
+28,33,2,VIC,Victoria,Skateboarding,0,683,not marked
+28,33,3,QLD,Queensland,Skateboarding,0,739,not marked
+28,33,8,ACT,Australian Capital Territory,Skateboarding,0,39,not marked
+28,33,5,WA,Western Australia,Skateboarding,0,235,not marked
+28,33,4,SA,South Australia,Skateboarding,0,353,not marked
+28,33,7,NT,Northern Territory,Skateboarding,0,32,not marked
+28,33,6,TAS,Tasmania,Skateboarding,0,89,not marked
+28,34,1,NSW,New South Wales,Lawn Bowls,1,812,not marked
+28,34,2,VIC,Victoria,Lawn Bowls,4,683,higher
+28,34,3,QLD,Queensland,Lawn Bowls,2,739,not marked
+28,34,8,ACT,Australian Capital Territory,Lawn Bowls,0,39,not marked
+28,34,5,WA,Western Australia,Lawn Bowls,3,235,not marked
+28,34,4,SA,South Australia,Lawn Bowls,1,353,not marked
+28,34,7,NT,Northern Territory,Lawn Bowls,0,32,not marked
+28,34,6,TAS,Tasmania,Lawn Bowls,3,89,not marked
+28,35,1,NSW,New South Wales,Shooting,0,812,not marked
+28,35,2,VIC,Victoria,Shooting,1,683,not marked
+28,35,3,QLD,Queensland,Shooting,1,739,not marked
+28,35,8,ACT,Australian Capital Territory,Shooting,0,39,not marked
+28,35,5,WA,Western Australia,Shooting,0,235,not marked
+28,35,4,SA,South Australia,Shooting,0,353,not marked
+28,35,7,NT,Northern Territory,Shooting,0,32,not marked
+28,35,6,TAS,Tasmania,Shooting,2,89,not marked
+28,36,1,NSW,New South Wales,Other,8,812,lower
+28,36,2,VIC,Victoria,Other,14,683,not marked
+28,36,3,QLD,Queensland,Other,12,739,not marked
+28,36,8,ACT,Australian Capital Territory,Other,15,39,not marked
+28,36,5,WA,Western Australia,Other,17,235,not marked
+28,36,4,SA,South Australia,Other,16,353,not marked
+28,36,7,NT,Northern Territory,Other,22,32,not marked
+28,36,6,TAS,Tasmania,Other,18,89,not marked

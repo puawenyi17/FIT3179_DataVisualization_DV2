@@ -1,0 +1,236 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "description": "Top activities are chosen by combined record count across all three rounds; yearly ranks are calculated among ALL activities before filtering. Ties are ordered alphabetically.",
+  "data": {
+    "url": "data/raw/active-clubs-records.csv",
+    "format": {
+      "type": "csv",
+      "parse": {
+        "Project Funding Approved Date": "date:'%d/%m/%Y'",
+        "Project Approved Funding $ (GST exclusive)": "number"
+      }
+    }
+  },
+  "width": "container",
+  "height": 390,
+  "params": [
+    {
+      "name": "topN",
+      "value": 10,
+      "bind": {
+        "input": "select",
+        "options": [
+          5,
+          10
+        ],
+        "name": "Leading activities: "
+      }
+    },
+    {
+      "name": "highlight",
+      "select": {
+        "type": "point",
+        "fields": [
+          "Activity"
+        ]
+      },
+      "bind": "legend"
+    }
+  ],
+  "transform": [
+    {
+      "calculate": "year(datum[\"Project Funding Approved Date\"])",
+      "as": "Year"
+    },
+    {
+      "calculate": "datum[\"Project Funded Activity\"]",
+      "as": "Activity"
+    },
+    {
+      "calculate": "datum[\"Project Approved Funding $ (GST exclusive)\"]",
+      "as": "Funding"
+    },
+    {
+      "aggregate": [
+        {
+          "op": "count",
+          "as": "Records"
+        }
+      ],
+      "groupby": [
+        "Year",
+        "Activity"
+      ]
+    },
+    {
+      "joinaggregate": [
+        {
+          "op": "sum",
+          "field": "Records",
+          "as": "AllYearsRecords"
+        }
+      ],
+      "groupby": [
+        "Activity"
+      ]
+    },
+    {
+      "window": [
+        {
+          "op": "dense_rank",
+          "as": "OverallRank"
+        }
+      ],
+      "sort": [
+        {
+          "field": "AllYearsRecords",
+          "order": "descending"
+        },
+        {
+          "field": "Activity",
+          "order": "ascending"
+        }
+      ]
+    },
+    {
+      "window": [
+        {
+          "op": "row_number",
+          "as": "YearRank"
+        }
+      ],
+      "sort": [
+        {
+          "field": "Records",
+          "order": "descending"
+        },
+        {
+          "field": "Activity",
+          "order": "ascending"
+        }
+      ],
+      "groupby": [
+        "Year"
+      ]
+    },
+    {
+      "filter": "datum.OverallRank <= topN"
+    }
+  ],
+  "mark": {
+    "type": "line",
+    "strokeWidth": 3,
+    "point": {
+      "filled": true,
+      "size": 85
+    }
+  },
+  "encoding": {
+    "x": {
+      "field": "Year",
+      "type": "ordinal",
+      "sort": "ascending",
+      "title": "Approval year",
+      "axis": {
+        "labelAngle": 0
+      }
+    },
+    "y": {
+      "field": "YearRank",
+      "type": "quantitative",
+      "title": "Rank among all funded activities",
+      "scale": {
+        "reverse": true,
+        "zero": false,
+        "domainMin": 1
+      },
+      "axis": {
+        "tickMinStep": 1,
+        "format": "d"
+      }
+    },
+    "order": {
+      "field": "Year",
+      "type": "quantitative"
+    },
+    "color": {
+      "field": "Activity",
+      "type": "nominal",
+      "title": null,
+      "scale": {
+        "range": [
+          "#087e83",
+          "#d16b37",
+          "#4266a8",
+          "#9d5788",
+          "#748c35",
+          "#a76439",
+          "#625eaa",
+          "#278b65",
+          "#b54d5d",
+          "#5b7a8b"
+        ]
+      },
+      "legend": {
+        "orient": "bottom",
+        "columns": 2,
+        "labelLimit": 210
+      }
+    },
+    "opacity": {
+      "condition": {
+        "param": "highlight",
+        "value": 1
+      },
+      "value": 0.15
+    },
+    "tooltip": [
+      {
+        "field": "Activity",
+        "type": "nominal"
+      },
+      {
+        "field": "Year",
+        "type": "ordinal"
+      },
+      {
+        "field": "YearRank",
+        "type": "quantitative",
+        "title": "Annual rank"
+      },
+      {
+        "field": "Records",
+        "type": "quantitative",
+        "title": "Funding records",
+        "format": ","
+      },
+      {
+        "field": "AllYearsRecords",
+        "type": "quantitative",
+        "title": "Records across three rounds",
+        "format": ","
+      }
+    ]
+  },
+  "config": {
+    "font": "Arial",
+    "background": "white",
+    "view": {
+      "stroke": null
+    },
+    "axis": {
+      "labelFontSize": 12,
+      "titleFontSize": 13,
+      "titlePadding": 12,
+      "labelColor": "#354d58",
+      "titleColor": "#354d58",
+      "gridColor": "#e8eef1",
+      "domain": false,
+      "tickColor": "#cbd8de"
+    },
+    "legend": {
+      "labelFontSize": 12,
+      "titleFontSize": 12
+    }
+  }
+}

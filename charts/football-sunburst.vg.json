@@ -1,0 +1,525 @@
+{
+  "$schema": "https://vega.github.io/schema/vega/v5.json",
+  "description": "Three-ring sunburst of published football participant counts: MiniRoos/Youth/Senior, gender, report year. Inner rings sum annual counts, not unique people.",
+  "width": 560,
+  "height": 560,
+  "padding": 16,
+  "autosize": {
+    "type": "pad",
+    "contains": "padding"
+  },
+  "signals": [
+    {
+      "name": "selectedFootballRegion",
+      "value": "All reporting regions",
+      "bind": {
+        "input": "select",
+        "options": [
+          "All reporting regions",
+          "NSW",
+          "Northern NSW",
+          "VIC",
+          "QLD",
+          "WA",
+          "SA",
+          "ACT",
+          "TAS",
+          "NT"
+        ],
+        "name": "Reporting region: "
+      }
+    },
+    {
+      "name": "ringWidth",
+      "update": "min(width, height) / 8"
+    },
+    {
+      "name": "totalCount",
+      "update": "length(data('total')) ? data('total')[0].Participants : 0"
+    }
+  ],
+  "data": [
+    {
+      "name": "sourceCounts",
+      "url": "data/raw/football-sunburst-counts-2022-2025.csv",
+      "format": {
+        "type": "csv",
+        "parse": {
+          "Year": "number",
+          "Participants": "number"
+        }
+      }
+    },
+    {
+      "name": "selectedRows",
+      "source": "sourceCounts",
+      "transform": [
+        {
+          "type": "filter",
+          "expr": "selectedFootballRegion === 'All reporting regions' || datum.Region === selectedFootballRegion"
+        }
+      ]
+    },
+    {
+      "name": "total",
+      "source": "selectedRows",
+      "transform": [
+        {
+          "type": "aggregate",
+          "fields": [
+            "Participants"
+          ],
+          "ops": [
+            "sum"
+          ],
+          "as": [
+            "Participants"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "rootNode",
+      "values": [
+        {
+          "id": "root",
+          "parent": null,
+          "LeafValue": 0,
+          "Participants": 0,
+          "AgeOrder": -1,
+          "GenderOrder": -1,
+          "Year": 0
+        }
+      ]
+    },
+    {
+      "name": "ageNodes",
+      "source": "selectedRows",
+      "transform": [
+        {
+          "type": "aggregate",
+          "groupby": [
+            "AgeGroup"
+          ],
+          "fields": [
+            "Participants"
+          ],
+          "ops": [
+            "sum"
+          ],
+          "as": [
+            "Participants"
+          ]
+        },
+        {
+          "type": "formula",
+          "expr": "'age/' + datum.AgeGroup",
+          "as": "id"
+        },
+        {
+          "type": "formula",
+          "expr": "'root'",
+          "as": "parent"
+        },
+        {
+          "type": "formula",
+          "expr": "0",
+          "as": "LeafValue"
+        },
+        {
+          "type": "formula",
+          "expr": "''",
+          "as": "Gender"
+        },
+        {
+          "type": "formula",
+          "expr": "0",
+          "as": "Year"
+        },
+        {
+          "type": "formula",
+          "expr": "datum.AgeGroup",
+          "as": "Label"
+        },
+        {
+          "type": "formula",
+          "expr": "datum.AgeGroup === 'MiniRoos' ? 0 : datum.AgeGroup === 'Youth' ? 1 : 2",
+          "as": "AgeOrder"
+        },
+        {
+          "type": "formula",
+          "expr": "datum.Gender === 'Male' ? 0 : 1",
+          "as": "GenderOrder"
+        }
+      ]
+    },
+    {
+      "name": "genderNodes",
+      "source": "selectedRows",
+      "transform": [
+        {
+          "type": "aggregate",
+          "groupby": [
+            "AgeGroup",
+            "Gender"
+          ],
+          "fields": [
+            "Participants"
+          ],
+          "ops": [
+            "sum"
+          ],
+          "as": [
+            "Participants"
+          ]
+        },
+        {
+          "type": "formula",
+          "expr": "'gender/' + datum.AgeGroup + '/' + datum.Gender",
+          "as": "id"
+        },
+        {
+          "type": "formula",
+          "expr": "'age/' + datum.AgeGroup",
+          "as": "parent"
+        },
+        {
+          "type": "formula",
+          "expr": "0",
+          "as": "LeafValue"
+        },
+        {
+          "type": "formula",
+          "expr": "0",
+          "as": "Year"
+        },
+        {
+          "type": "formula",
+          "expr": "datum.Gender",
+          "as": "Label"
+        },
+        {
+          "type": "formula",
+          "expr": "datum.AgeGroup === 'MiniRoos' ? 0 : datum.AgeGroup === 'Youth' ? 1 : 2",
+          "as": "AgeOrder"
+        },
+        {
+          "type": "formula",
+          "expr": "datum.Gender === 'Male' ? 0 : 1",
+          "as": "GenderOrder"
+        }
+      ]
+    },
+    {
+      "name": "yearNodes",
+      "source": "selectedRows",
+      "transform": [
+        {
+          "type": "aggregate",
+          "groupby": [
+            "AgeGroup",
+            "Gender",
+            "Year"
+          ],
+          "fields": [
+            "Participants"
+          ],
+          "ops": [
+            "sum"
+          ],
+          "as": [
+            "Participants"
+          ]
+        },
+        {
+          "type": "formula",
+          "expr": "'year/' + datum.AgeGroup + '/' + datum.Gender + '/' + datum.Year",
+          "as": "id"
+        },
+        {
+          "type": "formula",
+          "expr": "'gender/' + datum.AgeGroup + '/' + datum.Gender",
+          "as": "parent"
+        },
+        {
+          "type": "formula",
+          "expr": "datum.Participants",
+          "as": "LeafValue"
+        },
+        {
+          "type": "formula",
+          "expr": "toString(datum.Year)",
+          "as": "Label"
+        },
+        {
+          "type": "formula",
+          "expr": "datum.AgeGroup === 'MiniRoos' ? 0 : datum.AgeGroup === 'Youth' ? 1 : 2",
+          "as": "AgeOrder"
+        },
+        {
+          "type": "formula",
+          "expr": "datum.Gender === 'Male' ? 0 : 1",
+          "as": "GenderOrder"
+        }
+      ]
+    },
+    {
+      "name": "tree",
+      "source": [
+        "rootNode",
+        "ageNodes",
+        "genderNodes",
+        "yearNodes"
+      ],
+      "transform": [
+        {
+          "type": "stratify",
+          "key": "id",
+          "parentKey": "parent"
+        },
+        {
+          "type": "partition",
+          "field": "LeafValue",
+          "sort": {
+            "field": [
+              "data.AgeOrder",
+              "data.GenderOrder",
+              "data.Year"
+            ],
+            "order": [
+              "ascending",
+              "ascending",
+              "ascending"
+            ]
+          },
+          "size": [
+            {
+              "signal": "2 * PI"
+            },
+            4
+          ],
+          "as": [
+            "startAngle",
+            "innerLayer",
+            "endAngle",
+            "outerLayer",
+            "depth",
+            "children"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "segments",
+      "source": "tree",
+      "transform": [
+        {
+          "type": "filter",
+          "expr": "datum.depth > 0"
+        },
+        {
+          "type": "formula",
+          "expr": "(datum.startAngle + datum.endAngle) / 2",
+          "as": "midAngle"
+        },
+        {
+          "type": "formula",
+          "expr": "((datum.innerLayer + datum.outerLayer) / 2) * ringWidth",
+          "as": "labelRadius"
+        }
+      ]
+    }
+  ],
+  "scales": [
+    {
+      "name": "ageColor",
+      "type": "ordinal",
+      "domain": [
+        "MiniRoos",
+        "Youth",
+        "Senior"
+      ],
+      "range": [
+        "#287d8e",
+        "#b66624",
+        "#625599"
+      ]
+    }
+  ],
+  "legends": [
+    {
+      "fill": "ageColor",
+      "title": "Age group",
+      "orient": "bottom",
+      "direction": "horizontal",
+      "labelFontSize": 13,
+      "titleFontSize": 13
+    }
+  ],
+  "marks": [
+    {
+      "type": "arc",
+      "from": {
+        "data": "segments"
+      },
+      "encode": {
+        "enter": {
+          "x": {
+            "signal": "width / 2"
+          },
+          "y": {
+            "signal": "height / 2"
+          },
+          "stroke": {
+            "value": "white"
+          },
+          "strokeWidth": {
+            "value": 1.4
+          }
+        },
+        "update": {
+          "startAngle": {
+            "field": "startAngle"
+          },
+          "endAngle": {
+            "field": "endAngle"
+          },
+          "innerRadius": {
+            "signal": "datum.innerLayer * ringWidth"
+          },
+          "outerRadius": {
+            "signal": "datum.outerLayer * ringWidth"
+          },
+          "fill": {
+            "scale": "ageColor",
+            "field": "AgeGroup"
+          },
+          "fillOpacity": {
+            "signal": "datum.depth === 1 ? 1 : datum.Gender === 'Male' ? 0.86 : 0.52"
+          },
+          "tooltip": {
+            "signal": "{'Age group': datum.AgeGroup, 'Gender': datum.depth > 1 ? datum.Gender : 'Male + Female', 'Report year': datum.depth === 3 ? datum.Year : '2022\u20132025 combined', 'Reported participant count': format(datum.Participants, ',')}"
+          }
+        },
+        "hover": {
+          "stroke": {
+            "value": "#142b35"
+          },
+          "strokeWidth": {
+            "value": 2.5
+          }
+        }
+      }
+    },
+    {
+      "type": "text",
+      "from": {
+        "data": "segments"
+      },
+      "encode": {
+        "enter": {
+          "align": {
+            "value": "center"
+          },
+          "baseline": {
+            "value": "middle"
+          },
+          "font": {
+            "value": "Arial"
+          },
+          "fontSize": {
+            "value": 12
+          }
+        },
+        "update": {
+          "x": {
+            "signal": "width / 2 + sin(datum.midAngle) * datum.labelRadius"
+          },
+          "y": {
+            "signal": "height / 2 - cos(datum.midAngle) * datum.labelRadius"
+          },
+          "text": {
+            "signal": "(datum.endAngle - datum.startAngle) * datum.labelRadius > 42 ? datum.Label : ''"
+          },
+          "angle": {
+            "signal": "datum.midAngle * 180 / PI + (datum.midAngle > PI ? 90 : -90)"
+          },
+          "fontWeight": {
+            "signal": "datum.depth === 1 ? 'bold' : 'normal'"
+          },
+          "fill": {
+            "signal": "datum.depth === 1 || datum.Gender === 'Male' ? 'white' : '#172e39'"
+          }
+        }
+      },
+      "interactive": false
+    },
+    {
+      "type": "text",
+      "encode": {
+        "enter": {
+          "x": {
+            "signal": "width / 2"
+          },
+          "y": {
+            "signal": "height / 2 - 8"
+          },
+          "align": {
+            "value": "center"
+          },
+          "font": {
+            "value": "Arial"
+          },
+          "fontSize": {
+            "value": 15
+          },
+          "fontWeight": {
+            "value": "bold"
+          },
+          "fill": {
+            "value": "#172e39"
+          }
+        },
+        "update": {
+          "text": {
+            "signal": "format(totalCount, ',')"
+          }
+        }
+      },
+      "interactive": false
+    },
+    {
+      "type": "text",
+      "encode": {
+        "enter": {
+          "x": {
+            "signal": "width / 2"
+          },
+          "y": {
+            "signal": "height / 2 + 13"
+          },
+          "align": {
+            "value": "center"
+          },
+          "font": {
+            "value": "Arial"
+          },
+          "fontSize": {
+            "value": 10
+          },
+          "fill": {
+            "value": "#354d58"
+          },
+          "text": {
+            "value": "2022\u20132025 sum"
+          }
+        }
+      },
+      "interactive": false
+    }
+  ],
+  "config": {
+    "background": "white",
+    "font": "Arial"
+  }
+}

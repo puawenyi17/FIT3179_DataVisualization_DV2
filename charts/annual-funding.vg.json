@@ -1,0 +1,124 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "description": "Total approved funding by approval year, summed directly from original funding records.",
+  "data": {
+    "url": "data/raw/active-clubs-records.csv",
+    "format": {
+      "type": "csv",
+      "parse": {
+        "Project Funding Approved Date": "date:'%d/%m/%Y'",
+        "Project Approved Funding $ (GST exclusive)": "number"
+      }
+    }
+  },
+  "width": "container",
+  "height": 260,
+  "transform": [
+    {
+      "calculate": "year(datum[\"Project Funding Approved Date\"])",
+      "as": "Year"
+    },
+    {
+      "calculate": "datum[\"Project Approved Funding $ (GST exclusive)\"]",
+      "as": "Funding"
+    },
+    {
+      "aggregate": [
+        {
+          "op": "sum",
+          "field": "Funding",
+          "as": "ApprovedFunding"
+        }
+      ],
+      "groupby": [
+        "Year"
+      ]
+    }
+  ],
+  "encoding": {
+    "x": {
+      "field": "Year",
+      "type": "ordinal",
+      "sort": "ascending",
+      "title": "Approval year",
+      "axis": {
+        "labelAngle": 0
+      },
+      "scale": {
+        "paddingInner": 0.5,
+        "paddingOuter": 0.25
+      }
+    },
+    "y": {
+      "field": "ApprovedFunding",
+      "type": "quantitative",
+      "title": "Approved funding (AUD)",
+      "scale": {
+        "zero": true
+      },
+      "axis": {
+        "format": "$~s"
+      }
+    },
+    "tooltip": [
+      {
+        "field": "Year",
+        "type": "ordinal",
+        "title": "Approval year"
+      },
+      {
+        "field": "ApprovedFunding",
+        "type": "quantitative",
+        "title": "Approved funding (AUD)",
+        "format": "$,.0f"
+      }
+    ]
+  },
+  "layer": [
+    {
+      "mark": {
+        "type": "bar",
+        "color": "#087e83",
+        "cornerRadiusTopLeft": 3,
+        "cornerRadiusTopRight": 3
+      }
+    },
+    {
+      "mark": {
+        "type": "text",
+        "dy": -10,
+        "fontSize": 14,
+        "fontWeight": "bold",
+        "color": "#132f3a"
+      },
+      "encoding": {
+        "text": {
+          "field": "ApprovedFunding",
+          "type": "quantitative",
+          "format": "$,.0f"
+        }
+      }
+    }
+  ],
+  "config": {
+    "font": "Arial",
+    "background": "white",
+    "view": {
+      "stroke": null
+    },
+    "axis": {
+      "labelFontSize": 12,
+      "titleFontSize": 13,
+      "titlePadding": 12,
+      "labelColor": "#354d58",
+      "titleColor": "#354d58",
+      "gridColor": "#e8eef1",
+      "domain": false,
+      "tickColor": "#cbd8de"
+    },
+    "legend": {
+      "labelFontSize": 12,
+      "titleFontSize": 12
+    }
+  }
+}

@@ -1,0 +1,223 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "description": "One equal-sized dot per council with funding records in the selected year. Dot colour represents record count on a fixed yellow-to-dark-red square-root scale; positions represent council areas, not club addresses.",
+  "width": "container",
+  "height": 510,
+  "params": [
+    {
+      "name": "selectedYear",
+      "value": 2024,
+      "bind": {
+        "input": "select",
+        "options": [
+          2022,
+          2023,
+          2024
+        ],
+        "name": "Approval year: "
+      }
+    }
+  ],
+  "projection": {
+    "type": "mercator"
+  },
+  "layer": [
+    {
+      "data": {
+        "url": "maps/qld-lga-2024.geojson",
+        "format": {
+          "type": "json",
+          "property": "features"
+        }
+      },
+      "mark": {
+        "type": "geoshape",
+        "fill": "#e8eef0",
+        "stroke": "#81959d",
+        "strokeWidth": 0.6
+      },
+      "encoding": {
+        "tooltip": {
+          "field": "properties.lga_name_2024",
+          "type": "nominal",
+          "title": "Council area"
+        }
+      }
+    },
+    {
+      "data": {
+        "url": "data/raw/active-clubs-records.csv",
+        "format": {
+          "type": "csv",
+          "parse": {
+            "Project Funding Approved Date": "date:'%d/%m/%Y'",
+            "Project Approved Funding $ (GST exclusive)": "number"
+          }
+        }
+      },
+      "transform": [
+        {
+          "calculate": "year(datum[\"Project Funding Approved Date\"])",
+          "as": "Year"
+        },
+        {
+          "calculate": "datum[\"Project Funded Activity\"]",
+          "as": "Activity"
+        },
+        {
+          "calculate": "datum[\"Project Approved Funding $ (GST exclusive)\"]",
+          "as": "Funding"
+        },
+        {
+          "filter": "datum.Year == selectedYear"
+        },
+        {
+          "calculate": "upper(trim(datum[\"Project Local Government Authority of Approved Funding\"] || \"\"))",
+          "as": "LGAKey"
+        },
+        {
+          "calculate": "replace(datum.LGAKey, / (REGIONAL COUNCIL|ABORIGINAL SHIRE|ISLAND REGIONAL|REGIONAL|SHIRE|CITY|COUNCIL|TOWN)$/, \"\")",
+          "as": "LGAKey"
+        },
+        {
+          "filter": "datum.LGAKey != \"\""
+        },
+        {
+          "aggregate": [
+            {
+              "op": "count",
+              "as": "Records"
+            },
+            {
+              "op": "sum",
+              "field": "Funding",
+              "as": "ApprovedFunding"
+            }
+          ],
+          "groupby": [
+            "LGAKey",
+            "Year"
+          ]
+        },
+        {
+          "lookup": "LGAKey",
+          "from": {
+            "data": {
+              "url": "maps/qld-lga-2024.geojson",
+              "format": {
+                "type": "json",
+                "property": "features"
+              }
+            },
+            "key": "properties.lga_key",
+            "fields": [
+              "properties.longitude",
+              "properties.latitude",
+              "properties.lga_name_2024"
+            ]
+          },
+          "as": [
+            "Longitude",
+            "Latitude",
+            "Council"
+          ]
+        },
+        {
+          "filter": "isValid(datum.Longitude) && isValid(datum.Latitude)"
+        }
+      ],
+      "mark": {
+        "type": "circle",
+        "size": 36,
+        "opacity": 1,
+        "stroke": "white",
+        "strokeWidth": 0.6
+      },
+      "encoding": {
+        "longitude": {
+          "field": "Longitude",
+          "type": "quantitative"
+        },
+        "latitude": {
+          "field": "Latitude",
+          "type": "quantitative"
+        },
+        "tooltip": [
+          {
+            "field": "Council",
+            "type": "nominal"
+          },
+          {
+            "field": "Year",
+            "type": "ordinal"
+          },
+          {
+            "field": "Records",
+            "type": "quantitative",
+            "title": "Funding records",
+            "format": ","
+          },
+          {
+            "field": "ApprovedFunding",
+            "type": "quantitative",
+            "title": "Approved funding",
+            "format": "$,.0f"
+          }
+        ],
+        "color": {
+          "field": "Records",
+          "type": "quantitative",
+          "scale": {
+            "type": "sqrt",
+            "domain": [
+              0,
+              350
+            ],
+            "range": [
+              "#ffd43b",
+              "#ff922b",
+              "#e03131",
+              "#7f0000"
+            ],
+            "clamp": true
+          },
+          "legend": {
+            "title": "Funding records",
+            "orient": "bottom",
+            "gradientLength": 220,
+            "titleLimit": 400,
+            "values": [
+              0,
+              10,
+              50,
+              150,
+              250,
+              350
+            ]
+          }
+        }
+      }
+    }
+  ],
+  "config": {
+    "font": "Arial",
+    "background": "white",
+    "view": {
+      "stroke": null
+    },
+    "axis": {
+      "labelFontSize": 12,
+      "titleFontSize": 13,
+      "titlePadding": 12,
+      "labelColor": "#354d58",
+      "titleColor": "#354d58",
+      "gridColor": "#e8eef1",
+      "domain": false,
+      "tickColor": "#cbd8de"
+    },
+    "legend": {
+      "labelFontSize": 12,
+      "titleFontSize": 12
+    }
+  }
+}

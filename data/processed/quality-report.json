@@ -1,0 +1,16 @@
+{
+  "3": {
+    "duplicate_looking_rows_retained": 2,
+    "unspecified_purpose": 0,
+    "records": 2116,
+    "missing_seifa": 132,
+    "lgas_with_records": 61
+  },
+  "4": {
+    "duplicate_looking_rows_retained": 15,
+    "unspecified_purpose": 4,
+    "records": 1757,
+    "missing_seifa": 108,
+    "lgas_with_records": 61
+  }
+}

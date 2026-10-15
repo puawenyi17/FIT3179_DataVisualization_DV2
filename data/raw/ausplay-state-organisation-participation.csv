@@ -1,0 +1,9 @@
+state,state_name,state_code,estimate,participation_rate,period_filter,population
+ACT,Australian Capital Territory,8,120222,0.308,All,Adult
+NSW,New South Wales,1,1872382,0.269,All,Adult
+NT,Northern Territory,7,65641,0.322,All,Adult
+QLD,Queensland,3,1089243,0.239,All,Adult
+SA,South Australia,4,386110,0.247,All,Adult
+TAS,Tasmania,6,121188,0.252,All,Adult
+VIC,Victoria,2,1549162,0.271,All,Adult
+WA,Western Australia,5,671632,0.279,All,Adult

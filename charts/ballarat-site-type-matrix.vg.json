@@ -1,0 +1,265 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "description": "Site-by-ground-type matrix of original Ballarat sports-ground features. Counts are calculated in Vega-Lite; combined source types remain intact. Zero means no matching source records, not proof of facility absence.",
+  "data": {
+    "url": "data/raw/Ballarat Sports Grounds.json",
+    "format": {
+      "type": "json",
+      "property": "features"
+    }
+  },
+  "width": {
+    "step": 65
+  },
+  "height": {
+    "step": 27
+  },
+  "params": [
+    {
+      "name": "topSites",
+      "value": 10,
+      "bind": {
+        "input": "select",
+        "options": [
+          10,
+          20,
+          36
+        ],
+        "labels": [
+          "Top 10 sites",
+          "Top 20 sites",
+          "All 36 sites"
+        ],
+        "name": "Show: "
+      }
+    }
+  ],
+  "transform": [
+    {
+      "calculate": "datum.properties.Site",
+      "as": "Site"
+    },
+    {
+      "calculate": "replace(datum.properties.Feat_Type, 'SG-', '')",
+      "as": "GroundType"
+    },
+    {
+      "aggregate": [
+        {
+          "op": "count",
+          "as": "Features"
+        }
+      ],
+      "groupby": [
+        "Site",
+        "GroundType"
+      ]
+    },
+    {
+      "joinaggregate": [
+        {
+          "op": "sum",
+          "field": "Features",
+          "as": "SiteTotal"
+        }
+      ],
+      "groupby": [
+        "Site"
+      ]
+    },
+    {
+      "window": [
+        {
+          "op": "dense_rank",
+          "as": "SiteRank"
+        }
+      ],
+      "sort": [
+        {
+          "field": "SiteTotal",
+          "order": "descending"
+        },
+        {
+          "field": "Site",
+          "order": "ascending"
+        }
+      ]
+    },
+    {
+      "filter": "datum.SiteRank <= topSites"
+    },
+    {
+      "impute": "Features",
+      "key": "GroundType",
+      "keyvals": [
+        "Athletics",
+        "Baseball/Softball",
+        "Cricket Pitch",
+        "Cricket/Football",
+        "Cricket/Football/Soccer",
+        "Equestrian",
+        "Football",
+        "Greyhound Slipping Track",
+        "Hockey",
+        "Soccer"
+      ],
+      "groupby": [
+        "Site",
+        "SiteTotal",
+        "SiteRank"
+      ],
+      "value": 0
+    }
+  ],
+  "encoding": {
+    "x": {
+      "field": "GroundType",
+      "type": "nominal",
+      "sort": [
+        "Athletics",
+        "Baseball/Softball",
+        "Cricket Pitch",
+        "Cricket/Football",
+        "Cricket/Football/Soccer",
+        "Equestrian",
+        "Football",
+        "Greyhound Slipping Track",
+        "Hockey",
+        "Soccer"
+      ],
+      "title": null,
+      "axis": {
+        "labelAngle": -35,
+        "labelLimit": 240,
+        "labelFontSize": 11,
+        "labelPadding": 8,
+        "ticks": false
+      }
+    },
+    "y": {
+      "field": "Site",
+      "type": "nominal",
+      "title": null,
+      "sort": {
+        "field": "SiteRank",
+        "op": "min",
+        "order": "ascending"
+      },
+      "axis": {
+        "labelLimit": 290,
+        "labelPadding": 8,
+        "labelFontSize": 12,
+        "ticks": false
+      }
+    },
+    "tooltip": [
+      {
+        "field": "Site",
+        "type": "nominal",
+        "title": "Site"
+      },
+      {
+        "field": "GroundType",
+        "type": "nominal",
+        "title": "Recorded type"
+      },
+      {
+        "field": "Features",
+        "type": "quantitative",
+        "title": "Recorded features",
+        "format": ","
+      },
+      {
+        "field": "SiteTotal",
+        "type": "quantitative",
+        "title": "All features at this site",
+        "format": ","
+      },
+      {
+        "field": "SiteRank",
+        "type": "ordinal",
+        "title": "Site rank by feature count"
+      }
+    ]
+  },
+  "layer": [
+    {
+      "mark": {
+        "type": "rect",
+        "stroke": "white",
+        "strokeWidth": 1.5
+      },
+      "encoding": {
+        "color": {
+          "field": "Features",
+          "type": "quantitative",
+          "scale": {
+            "type": "sqrt",
+            "domain": [
+              0,
+              20
+            ],
+            "range": [
+              "#f0f3f5",
+              "#50a9a5",
+              "#07585d"
+            ]
+          },
+          "legend": {
+            "title": "Recorded features",
+            "orient": "bottom",
+            "gradientLength": 240,
+            "values": [
+              0,
+              1,
+              5,
+              10,
+              15,
+              20
+            ]
+          }
+        }
+      }
+    },
+    {
+      "mark": {
+        "type": "text",
+        "fontSize": 12,
+        "fontWeight": "bold"
+      },
+      "encoding": {
+        "text": {
+          "condition": {
+            "test": "datum.Features > 0",
+            "field": "Features",
+            "type": "quantitative",
+            "format": ","
+          },
+          "value": ""
+        },
+        "color": {
+          "condition": {
+            "test": "datum.Features >= 6",
+            "value": "white"
+          },
+          "value": "#173d45"
+        }
+      }
+    }
+  ],
+  "config": {
+    "font": "Arial",
+    "background": "white",
+    "view": {
+      "stroke": null
+    },
+    "axis": {
+      "domain": false,
+      "grid": false
+    },
+    "legend": {
+      "labelFontSize": 12,
+      "titleFontSize": 13
+    }
+  }
+}

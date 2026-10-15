@@ -1,0 +1,385 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "description": "Spike map of estimated adult participants through organisations. Fixed-width triangle height is proportional to count; Period All from supplied screenshot.",
+  "width": 820,
+  "height": 560,
+  "projection": {
+    "type": "mercator"
+  },
+  "layer": [
+    {
+      "data": {
+        "url": "maps/australia-states-2021.geojson",
+        "format": {
+          "type": "json",
+          "property": "features"
+        }
+      },
+      "mark": {
+        "type": "geoshape",
+        "fill": "#edf1f2",
+        "stroke": "white",
+        "strokeWidth": 1.5
+      }
+    },
+    {
+      "data": {
+        "values": [
+          {
+            "lon": 149.05,
+            "lat": -35.45,
+            "lon2": 153,
+            "lat2": -38
+          }
+        ]
+      },
+      "mark": {
+        "type": "rule",
+        "color": "#71808a",
+        "strokeWidth": 1
+      },
+      "encoding": {
+        "longitude": {
+          "field": "lon",
+          "type": "quantitative"
+        },
+        "latitude": {
+          "field": "lat",
+          "type": "quantitative"
+        },
+        "longitude2": {
+          "field": "lon2"
+        },
+        "latitude2": {
+          "field": "lat2"
+        }
+      }
+    },
+    {
+      "data": {
+        "url": "data/raw/ausplay-state-organisation-participation.csv",
+        "format": {
+          "type": "csv",
+          "parse": {
+            "estimate": "number",
+            "participation_rate": "number"
+          }
+        }
+      },
+      "transform": [
+        {
+          "lookup": "state",
+          "from": {
+            "data": {
+              "values": [
+                {
+                  "state": "WA",
+                  "Longitude": 118,
+                  "Latitude": -29
+                },
+                {
+                  "state": "NT",
+                  "Longitude": 133,
+                  "Latitude": -23
+                },
+                {
+                  "state": "SA",
+                  "Longitude": 135,
+                  "Latitude": -34
+                },
+                {
+                  "state": "QLD",
+                  "Longitude": 140,
+                  "Latitude": -27
+                },
+                {
+                  "state": "NSW",
+                  "Longitude": 146,
+                  "Latitude": -35
+                },
+                {
+                  "state": "VIC",
+                  "Longitude": 142,
+                  "Latitude": -38.3
+                },
+                {
+                  "state": "TAS",
+                  "Longitude": 146.8,
+                  "Latitude": -43
+                },
+                {
+                  "state": "ACT",
+                  "Longitude": 153,
+                  "Latitude": -38
+                }
+              ]
+            },
+            "key": "state",
+            "fields": [
+              "Longitude",
+              "Latitude"
+            ]
+          }
+        },
+        {
+          "calculate": "datum.estimate / 2000000 * 160",
+          "as": "SpikeHeight"
+        },
+        {
+          "calculate": "'M -5,0 L 0,' + (-datum.SpikeHeight) + ' L 5,0 Z'",
+          "as": "SpikePath"
+        },
+        {
+          "calculate": "datum.state + ' \u00b7 ' + format(datum.estimate, ',')",
+          "as": "SpikeLabel"
+        }
+      ],
+      "mark": {
+        "type": "point",
+        "filled": true,
+        "size": 4,
+        "opacity": 0.9,
+        "color": "#276e86"
+      },
+      "encoding": {
+        "longitude": {
+          "field": "Longitude",
+          "type": "quantitative"
+        },
+        "latitude": {
+          "field": "Latitude",
+          "type": "quantitative"
+        },
+        "shape": {
+          "field": "SpikePath",
+          "type": "nominal",
+          "scale": null,
+          "legend": null
+        },
+        "tooltip": [
+          {
+            "field": "state_name",
+            "type": "nominal",
+            "title": "State / territory"
+          },
+          {
+            "field": "estimate",
+            "type": "quantitative",
+            "format": ",",
+            "title": "Estimated adult participants"
+          },
+          {
+            "field": "participation_rate",
+            "type": "quantitative",
+            "format": ".1%",
+            "title": "Participation rate"
+          },
+          {
+            "field": "period_filter",
+            "type": "nominal",
+            "title": "Source period filter"
+          }
+        ]
+      }
+    },
+    {
+      "data": {
+        "url": "data/raw/ausplay-state-organisation-participation.csv",
+        "format": {
+          "type": "csv",
+          "parse": {
+            "estimate": "number",
+            "participation_rate": "number"
+          }
+        }
+      },
+      "transform": [
+        {
+          "lookup": "state",
+          "from": {
+            "data": {
+              "values": [
+                {
+                  "state": "WA",
+                  "Longitude": 118,
+                  "Latitude": -29
+                },
+                {
+                  "state": "NT",
+                  "Longitude": 133,
+                  "Latitude": -23
+                },
+                {
+                  "state": "SA",
+                  "Longitude": 135,
+                  "Latitude": -34
+                },
+                {
+                  "state": "QLD",
+                  "Longitude": 140,
+                  "Latitude": -27
+                },
+                {
+                  "state": "NSW",
+                  "Longitude": 146,
+                  "Latitude": -35
+                },
+                {
+                  "state": "VIC",
+                  "Longitude": 142,
+                  "Latitude": -38.3
+                },
+                {
+                  "state": "TAS",
+                  "Longitude": 146.8,
+                  "Latitude": -43
+                },
+                {
+                  "state": "ACT",
+                  "Longitude": 153,
+                  "Latitude": -38
+                }
+              ]
+            },
+            "key": "state",
+            "fields": [
+              "Longitude",
+              "Latitude"
+            ]
+          }
+        },
+        {
+          "calculate": "datum.estimate / 2000000 * 160",
+          "as": "SpikeHeight"
+        },
+        {
+          "calculate": "'M -5,0 L 0,' + (-datum.SpikeHeight) + ' L 5,0 Z'",
+          "as": "SpikePath"
+        },
+        {
+          "calculate": "datum.state + ' \u00b7 ' + format(datum.estimate, ',')",
+          "as": "SpikeLabel"
+        }
+      ],
+      "mark": {
+        "type": "text",
+        "align": "center",
+        "dy": 15,
+        "fontSize": 12,
+        "fontWeight": "bold",
+        "color": "#233c48",
+        "baseline": "top"
+      },
+      "encoding": {
+        "longitude": {
+          "field": "Longitude",
+          "type": "quantitative"
+        },
+        "latitude": {
+          "field": "Latitude",
+          "type": "quantitative"
+        },
+        "text": {
+          "field": "SpikeLabel"
+        },
+        "tooltip": [
+          {
+            "field": "state_name",
+            "type": "nominal",
+            "title": "State / territory"
+          },
+          {
+            "field": "estimate",
+            "type": "quantitative",
+            "format": ",",
+            "title": "Estimated adult participants"
+          },
+          {
+            "field": "participation_rate",
+            "type": "quantitative",
+            "format": ".1%",
+            "title": "Participation rate"
+          },
+          {
+            "field": "period_filter",
+            "type": "nominal",
+            "title": "Source period filter"
+          }
+        ]
+      }
+    },
+    {
+      "data": {
+        "values": [
+          {
+            "Longitude": 115,
+            "Latitude": -40,
+            "Shape": "M -5,0 L 0,-80 L 5,0 Z"
+          }
+        ]
+      },
+      "mark": {
+        "type": "point",
+        "filled": true,
+        "size": 4,
+        "opacity": 0.9,
+        "color": "#276e86"
+      },
+      "encoding": {
+        "longitude": {
+          "field": "Longitude",
+          "type": "quantitative"
+        },
+        "latitude": {
+          "field": "Latitude",
+          "type": "quantitative"
+        },
+        "shape": {
+          "field": "Shape",
+          "type": "nominal",
+          "scale": null,
+          "legend": null
+        }
+      }
+    },
+    {
+      "data": {
+        "values": [
+          {
+            "Longitude": 115,
+            "Latitude": -40,
+            "Label": "1,000,000 participants"
+          }
+        ]
+      },
+      "mark": {
+        "type": "text",
+        "align": "left",
+        "dx": 12,
+        "dy": -40,
+        "fontSize": 12,
+        "color": "#233c48"
+      },
+      "encoding": {
+        "longitude": {
+          "field": "Longitude",
+          "type": "quantitative"
+        },
+        "latitude": {
+          "field": "Latitude",
+          "type": "quantitative"
+        },
+        "text": {
+          "field": "Label"
+        }
+      }
+    }
+  ],
+  "config": {
+    "font": "Arial",
+    "background": "white",
+    "view": {
+      "stroke": null
+    }
+  }
+}

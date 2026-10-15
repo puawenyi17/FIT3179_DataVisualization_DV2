@@ -1,0 +1,180 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "description": "Actual sports-ground feature locations in Ballarat. Equal-size dots represent source features, not clubs or participants.",
+  "width": "container",
+  "height": 520,
+  "params": [
+    {
+      "name": "selectedGroundType",
+      "value": "All types",
+      "bind": {
+        "input": "select",
+        "options": [
+          "All types",
+          "SG-Athletics",
+          "SG-Baseball/Softball",
+          "SG-Cricket Pitch",
+          "SG-Cricket/Football",
+          "SG-Cricket/Football/Soccer",
+          "SG-Equestrian",
+          "SG-Football",
+          "SG-Greyhound Slipping Track",
+          "SG-Hockey",
+          "SG-Soccer"
+        ],
+        "labels": [
+          "All types",
+          "Athletics",
+          "Baseball/Softball",
+          "Cricket Pitch",
+          "Cricket/Football",
+          "Cricket/Football/Soccer",
+          "Equestrian",
+          "Football",
+          "Greyhound Slipping Track",
+          "Hockey",
+          "Soccer"
+        ],
+        "name": "Ground type: "
+      }
+    }
+  ],
+  "projection": {
+    "type": "mercator"
+  },
+  "layer": [
+    {
+      "data": {
+        "url": "maps/ballarat-lga-2024.geojson",
+        "format": {
+          "type": "json",
+          "property": "features"
+        }
+      },
+      "mark": {
+        "type": "geoshape",
+        "fill": "#eef3ef",
+        "stroke": "#92a79a",
+        "strokeWidth": 1.2
+      }
+    },
+    {
+      "data": {
+        "url": "data/raw/ballarat-sports-grounds-wgs84.geojson",
+        "format": {
+          "type": "json",
+          "property": "features"
+        }
+      },
+      "transform": [
+        {
+          "calculate": "datum.properties.Feat_Type",
+          "as": "GroundType"
+        },
+        {
+          "calculate": "replace(datum.properties.Feat_Type, 'SG-', '')",
+          "as": "TypeLabel"
+        },
+        {
+          "calculate": "datum.geometry.coordinates[0]",
+          "as": "Longitude"
+        },
+        {
+          "calculate": "datum.geometry.coordinates[1]",
+          "as": "Latitude"
+        },
+        {
+          "calculate": "datum.properties.Site",
+          "as": "Site"
+        },
+        {
+          "calculate": "datum.properties.Location || 'Not recorded'",
+          "as": "Location"
+        },
+        {
+          "calculate": "datum.properties.ID",
+          "as": "FeatureID"
+        },
+        {
+          "filter": "selectedGroundType === 'All types' || datum.GroundType === selectedGroundType"
+        }
+      ],
+      "mark": {
+        "type": "circle",
+        "size": 65,
+        "opacity": 0.8,
+        "stroke": "white",
+        "strokeWidth": 0.8
+      },
+      "encoding": {
+        "longitude": {
+          "field": "Longitude",
+          "type": "quantitative"
+        },
+        "latitude": {
+          "field": "Latitude",
+          "type": "quantitative"
+        },
+        "color": {
+          "field": "TypeLabel",
+          "type": "nominal",
+          "title": "Ground type",
+          "scale": {
+            "domain": [
+              "Athletics",
+              "Baseball/Softball",
+              "Cricket Pitch",
+              "Cricket/Football",
+              "Cricket/Football/Soccer",
+              "Equestrian",
+              "Football",
+              "Greyhound Slipping Track",
+              "Hockey",
+              "Soccer"
+            ],
+            "scheme": "tableau10"
+          },
+          "legend": {
+            "orient": "bottom",
+            "columns": 2,
+            "labelLimit": 260
+          }
+        },
+        "tooltip": [
+          {
+            "field": "Site",
+            "type": "nominal",
+            "title": "Site"
+          },
+          {
+            "field": "Location",
+            "type": "nominal",
+            "title": "Location"
+          },
+          {
+            "field": "TypeLabel",
+            "type": "nominal",
+            "title": "Ground type"
+          },
+          {
+            "field": "FeatureID",
+            "type": "nominal",
+            "title": "Feature ID"
+          }
+        ]
+      }
+    }
+  ],
+  "config": {
+    "font": "Arial",
+    "background": "white",
+    "view": {
+      "stroke": null
+    },
+    "legend": {
+      "labelFontSize": 12,
+      "titleFontSize": 13,
+      "padding": 12
+    }
+  }
+}
