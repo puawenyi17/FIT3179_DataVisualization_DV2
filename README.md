@@ -127,6 +127,6 @@ Spikes show estimated adult participants, not general population or club members
 
 ## Funding map dots
 
-The first map now uses one equal-sized dot per council with mapped records, not one dot per funding record. `mark.size = 36` fixes the dot area in screen pixels. The previous quantitative `size` encoding is replaced with `color` for `Records`; a square-root colour scale has the same 0–350 domain in all three years. No record values or representative positions are changed. Exact counts and funding totals remain in hover details. Smaller dots reduce overlap but do not guarantee that every nearby council position is separated. A missing dot does not establish no sporting activity or no clubs.
+The first map now uses one equal-sized dot per council with mapped records, not one dot per funding record. `mark.size = 36` fixes the dot area in screen pixels. The previous quantitative `size` encoding is replaced with `color` for `Records`; a square-root colour scale has the same 0–350 domain in all three years. No record values or representative positions are changed. Exact counts and funding totals remain in hover details. Smaller dots reduce overlap but do not guarantee that every nearby council position is separated. A missing dot does not establish no sporting activity.
 
 The funding dots use a yellow/orange/red palette with a fixed maximum of 350 across all years. The largest mapped source count is 304. The square-root transformation and wider palette make low and medium counts more distinct without changing their values.
