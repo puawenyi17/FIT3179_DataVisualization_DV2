@@ -1,0 +1,322 @@
+{
+  "$schema": "https://vega.github.io/schema/vega/v5.json",
+  "description": "PARC membership types by financial year. Shares calculated from counts; cumulative rounding allocates exactly 100 squares.",
+  "width": 520,
+  "height": 335,
+  "padding": {
+    "top": 8,
+    "left": 8,
+    "right": 8,
+    "bottom": 8
+  },
+  "autosize": {
+    "type": "none",
+    "contains": "content"
+  },
+  "background": "white",
+  "signals": [
+    {
+      "name": "financialYear",
+      "value": "2024-25",
+      "bind": {
+        "input": "select",
+        "options": [
+          "2022-23",
+          "2023-24",
+          "2024-25"
+        ],
+        "name": "Financial year: "
+      }
+    },
+    {
+      "name": "totalMembers",
+      "update": "length(data('source')) ? data('source')[0].total_members : 0"
+    },
+    {
+      "name": "firstBoundary",
+      "update": "length(data('source')) ? round(data('source')[0].Share * 100) : 0"
+    },
+    {
+      "name": "secondBoundary",
+      "update": "length(data('source')) > 1 ? round((data('source')[0].Share + data('source')[1].Share) * 100) : 0"
+    }
+  ],
+  "data": [
+    {
+      "name": "source",
+      "url": "data/processed/parc-membership-types.csv",
+      "format": {
+        "type": "csv",
+        "parse": {
+          "members": "number",
+          "total_members": "number"
+        }
+      },
+      "transform": [
+        {
+          "type": "filter",
+          "expr": "datum.financial_year === financialYear"
+        },
+        {
+          "type": "formula",
+          "expr": "datum.membership_type",
+          "as": "Category"
+        },
+        {
+          "type": "formula",
+          "expr": "datum.total_members > 0 ? datum.members / datum.total_members : 0",
+          "as": "Share"
+        },
+        {
+          "type": "formula",
+          "expr": "datum.membership_type === 'Full Access' ? 0 : datum.membership_type === 'Aquatic Access' ? 1 : 2",
+          "as": "Order"
+        },
+        {
+          "type": "collect",
+          "sort": {
+            "field": "Order"
+          }
+        }
+      ]
+    },
+    {
+      "name": "cells",
+      "transform": [
+        {
+          "type": "sequence",
+          "start": 0,
+          "stop": 100,
+          "as": "Cell"
+        },
+        {
+          "type": "formula",
+          "expr": "datum.Cell < firstBoundary ? 0 : datum.Cell < secondBoundary ? 1 : 2",
+          "as": "Order"
+        },
+        {
+          "type": "lookup",
+          "from": "source",
+          "key": "Order",
+          "fields": [
+            "Order"
+          ],
+          "values": [
+            "Category",
+            "Share",
+            "members"
+          ],
+          "as": [
+            "Category",
+            "Share",
+            "Members"
+          ]
+        }
+      ]
+    }
+  ],
+  "marks": [
+    {
+      "type": "text",
+      "encode": {
+        "update": {
+          "x": {
+            "value": 0
+          },
+          "y": {
+            "value": 27
+          },
+          "text": {
+            "signal": "format(totalMembers, ',') + ' members'"
+          },
+          "fontSize": {
+            "value": 25
+          },
+          "fill": {
+            "value": "#173c4a"
+          },
+          "fontWeight": {
+            "value": "bold"
+          }
+        }
+      }
+    },
+    {
+      "type": "text",
+      "encode": {
+        "update": {
+          "x": {
+            "value": 0
+          },
+          "y": {
+            "value": 53
+          },
+          "text": {
+            "signal": "'All membership types, ' + financialYear"
+          },
+          "fontSize": {
+            "value": 16
+          },
+          "fill": {
+            "value": "#4d6068"
+          }
+        }
+      }
+    },
+    {
+      "name": "waffleCells",
+      "type": "rect",
+      "from": {
+        "data": "cells"
+      },
+      "encode": {
+        "update": {
+          "x": {
+            "signal": "(datum.Cell % 10) * 24"
+          },
+          "y": {
+            "signal": "78 + (9 - floor(datum.Cell / 10)) * 24"
+          },
+          "width": {
+            "value": 21
+          },
+          "height": {
+            "value": 21
+          },
+          "cornerRadius": {
+            "value": 2
+          },
+          "fill": {
+            "scale": "colour",
+            "field": "Category"
+          },
+          "tooltip": {
+            "signal": "{'Membership type': datum.Category, 'Members': format(datum.Members, ','), 'Share': format(datum.Share, '.1%'), 'Total members': format(totalMembers, ','), 'Financial year': financialYear, 'Note': 'Squares approximate percentages; hover values use exact counts.'}"
+          }
+        }
+      }
+    },
+    {
+      "type": "rect",
+      "from": {
+        "data": "source"
+      },
+      "encode": {
+        "update": {
+          "x": {
+            "value": 265
+          },
+          "y": {
+            "signal": "87 + datum.Order * 76"
+          },
+          "width": {
+            "value": 13
+          },
+          "height": {
+            "value": 13
+          },
+          "fill": {
+            "scale": "colour",
+            "field": "Category"
+          }
+        }
+      }
+    },
+    {
+      "type": "text",
+      "encode": {
+        "update": {
+          "x": {
+            "value": 288
+          },
+          "y": {
+            "signal": "100 + datum.Order * 76 + 0"
+          },
+          "text": {
+            "signal": "datum.Category"
+          },
+          "fontSize": {
+            "value": 17
+          },
+          "fill": {
+            "value": "#173c4a"
+          },
+          "fontWeight": {
+            "value": "bold"
+          }
+        }
+      },
+      "from": {
+        "data": "source"
+      }
+    },
+    {
+      "type": "text",
+      "encode": {
+        "update": {
+          "x": {
+            "value": 288
+          },
+          "y": {
+            "signal": "100 + datum.Order * 76 + 27"
+          },
+          "text": {
+            "signal": "format(datum.Share, '.1%') + ' · ' + format(datum.members, ',') + ' members'"
+          },
+          "fontSize": {
+            "value": 16
+          },
+          "fill": {
+            "value": "#173c4a"
+          }
+        }
+      },
+      "from": {
+        "data": "source"
+      }
+    },
+    {
+      "type": "text",
+      "encode": {
+        "update": {
+          "x": {
+            "value": 0
+          },
+          "y": {
+            "value": 333
+          },
+          "text": {
+            "value": "100 squares; category areas rounded to whole squares."
+          },
+          "fontSize": {
+            "value": 14
+          },
+          "fill": {
+            "value": "#4d6068"
+          }
+        }
+      }
+    }
+  ],
+  "config": {
+    "text": {
+      "font": "Arial"
+    }
+  },
+  "scales": [
+    {
+      "name": "colour",
+      "type": "ordinal",
+      "domain": [
+        "Full Access",
+        "Aquatic Access",
+        "PARC Swim"
+      ],
+      "range": [
+        "#087f87",
+        "#4267a5",
+        "#c48b27"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,396 @@
+{
+  "$schema": "https://vega.github.io/schema/vega/v5.json",
+  "description": "A 100-square waffle showing the selected ground type as a percentage of all recorded features in the Ballarat Sports Grounds dataset. One raw feature is one record, not one site, club or person. Counts are aggregated in Vega; filled squares are rounded to the nearest whole percent and the exact share is labelled.",
+  "width": 620,
+  "height": 390,
+  "padding": {
+    "top": 8,
+    "right": 10,
+    "bottom": 8,
+    "left": 10
+  },
+  "background": "white",
+  "signals": [
+    {
+      "name": "groundType",
+      "value": "Cricket Pitch",
+      "bind": {
+        "input": "select",
+        "options": [
+          "Athletics",
+          "Baseball/Softball",
+          "Cricket Pitch",
+          "Cricket/Football",
+          "Cricket/Football/Soccer",
+          "Equestrian",
+          "Football",
+          "Greyhound Slipping Track",
+          "Hockey",
+          "Soccer"
+        ],
+        "name": "Ground type: "
+      }
+    },
+    {
+      "name": "totalFeatures",
+      "update": "length(data('features'))"
+    },
+    {
+      "name": "selectedCount",
+      "update": "length(data('selectedType')) ? data('selectedType')[0].Count : 0"
+    },
+    {
+      "name": "selectedShare",
+      "update": "totalFeatures > 0 ? selectedCount / totalFeatures : 0"
+    },
+    {
+      "name": "filledSquares",
+      "update": "round(selectedShare * 100)"
+    }
+  ],
+  "data": [
+    {
+      "name": "features",
+      "url": "data/raw/Ballarat Sports Grounds.json",
+      "format": {
+        "type": "json",
+        "property": "features"
+      },
+      "transform": [
+        {
+          "type": "formula",
+          "expr": "isValid(datum.properties.Feat_Type) ? replace(datum.properties.Feat_Type, 'SG-', '') : 'Unspecified'",
+          "as": "GroundType"
+        }
+      ]
+    },
+    {
+      "name": "groundTypes",
+      "source": "features",
+      "transform": [
+        {
+          "type": "aggregate",
+          "groupby": [
+            "GroundType"
+          ],
+          "ops": [
+            "count"
+          ],
+          "as": [
+            "Count"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "selectedType",
+      "source": "groundTypes",
+      "transform": [
+        {
+          "type": "filter",
+          "expr": "datum.GroundType === groundType"
+        }
+      ]
+    },
+    {
+      "name": "cells",
+      "transform": [
+        {
+          "type": "sequence",
+          "start": 0,
+          "stop": 100,
+          "step": 1,
+          "as": "Cell"
+        },
+        {
+          "type": "formula",
+          "expr": "datum.Cell % 10",
+          "as": "Column"
+        },
+        {
+          "type": "formula",
+          "expr": "9 - floor(datum.Cell / 10)",
+          "as": "Row"
+        }
+      ]
+    }
+  ],
+  "marks": [
+    {
+      "type": "text",
+      "encode": {
+        "update": {
+          "x": {
+            "value": 0
+          },
+          "y": {
+            "value": 23
+          },
+          "text": {
+            "value": "Share of recorded sports-ground features"
+          },
+          "fontSize": {
+            "value": 19
+          },
+          "fontWeight": {
+            "value": "bold"
+          },
+          "fill": {
+            "value": "#123d50"
+          }
+        }
+      }
+    },
+    {
+      "type": "rect",
+      "name": "waffleCells",
+      "from": {
+        "data": "cells"
+      },
+      "encode": {
+        "update": {
+          "x": {
+            "signal": "datum.Column * 29"
+          },
+          "y": {
+            "signal": "65 + datum.Row * 29"
+          },
+          "width": {
+            "value": 26
+          },
+          "height": {
+            "value": 26
+          },
+          "cornerRadius": {
+            "value": 2
+          },
+          "fill": {
+            "signal": "datum.Cell < filledSquares ? '#087f87' : '#e4e9e9'"
+          },
+          "tooltip": {
+            "signal": "{'Ground type': datum.Cell < filledSquares ? groundType : 'All other ground types', 'Recorded features': datum.Cell < filledSquares ? selectedCount : totalFeatures - selectedCount, 'All recorded features': totalFeatures, 'Share': totalFeatures > 0 ? format(datum.Cell < filledSquares ? selectedShare : 1 - selectedShare, '.1%') : 'No records', 'Note': 'Each square represents approximately 1%; squares are rounded.'}"
+          }
+        }
+      }
+    },
+    {
+      "type": "text",
+      "encode": {
+        "update": {
+          "x": {
+            "value": 325
+          },
+          "y": {
+            "value": 91
+          },
+          "text": {
+            "signal": "groundType"
+          },
+          "fontSize": {
+            "value": 18
+          },
+          "fontWeight": {
+            "value": "bold"
+          },
+          "fill": {
+            "value": "#123d50"
+          }
+        }
+      }
+    },
+    {
+      "type": "text",
+      "encode": {
+        "update": {
+          "x": {
+            "value": 325
+          },
+          "y": {
+            "value": 150
+          },
+          "text": {
+            "signal": "totalFeatures > 0 ? format(selectedShare, '.1%') : 'No records'"
+          },
+          "fontSize": {
+            "value": 48
+          },
+          "fontWeight": {
+            "value": "bold"
+          },
+          "fill": {
+            "value": "#087f87"
+          }
+        }
+      }
+    },
+    {
+      "type": "text",
+      "encode": {
+        "update": {
+          "x": {
+            "value": 325
+          },
+          "y": {
+            "value": 182
+          },
+          "text": {
+            "signal": "format(selectedCount, ',') + ' of ' + format(totalFeatures, ',') + ' recorded features'"
+          },
+          "fontSize": {
+            "value": 18
+          },
+          "fill": {
+            "value": "#123d50"
+          }
+        }
+      }
+    },
+    {
+      "type": "rect",
+      "encode": {
+        "update": {
+          "x": {
+            "value": 325
+          },
+          "y": {
+            "value": 230
+          },
+          "width": {
+            "value": 14
+          },
+          "height": {
+            "value": 14
+          },
+          "fill": {
+            "value": "#087f87"
+          }
+        }
+      }
+    },
+    {
+      "type": "text",
+      "encode": {
+        "update": {
+          "x": {
+            "value": 349
+          },
+          "y": {
+            "value": 242
+          },
+          "text": {
+            "value": "Selected ground type"
+          },
+          "fontSize": {
+            "value": 16
+          },
+          "fill": {
+            "value": "#36515e"
+          }
+        }
+      }
+    },
+    {
+      "type": "rect",
+      "encode": {
+        "update": {
+          "x": {
+            "value": 325
+          },
+          "y": {
+            "value": 259
+          },
+          "width": {
+            "value": 14
+          },
+          "height": {
+            "value": 14
+          },
+          "fill": {
+            "value": "#e4e9e9"
+          }
+        }
+      }
+    },
+    {
+      "type": "text",
+      "encode": {
+        "update": {
+          "x": {
+            "value": 349
+          },
+          "y": {
+            "value": 271
+          },
+          "text": {
+            "value": "All other ground types"
+          },
+          "fontSize": {
+            "value": 16
+          },
+          "fill": {
+            "value": "#36515e"
+          }
+        }
+      }
+    },
+    {
+      "type": "text",
+      "encode": {
+        "update": {
+          "x": {
+            "value": 325
+          },
+          "y": {
+            "value": 317
+          },
+          "text": {
+            "value": [
+              "Counts describe recorded features,",
+              "not sites, clubs or participants."
+            ]
+          },
+          "lineHeight": {
+            "value": 23
+          },
+          "fontSize": {
+            "value": 16
+          },
+          "fill": {
+            "value": "#36515e"
+          }
+        }
+      }
+    },
+    {
+      "type": "text",
+      "encode": {
+        "update": {
+          "x": {
+            "value": 0
+          },
+          "y": {
+            "value": 382
+          },
+          "text": {
+            "value": "Each square represents about 1%; filled squares are rounded."
+          },
+          "fontSize": {
+            "value": 16
+          },
+          "fill": {
+            "value": "#36515e"
+          }
+        }
+      }
+    }
+  ],
+  "config": {
+    "text": {
+      "font": "Arial"
+    }
+  },
+  "autosize": {
+    "type": "none",
+    "contains": "content"
+  }
+}

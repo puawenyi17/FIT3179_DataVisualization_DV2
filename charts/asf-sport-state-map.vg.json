@@ -1,8 +1,8 @@
 {
   "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
   "description": "Published ASF survey percentages by state, transcribed from page 28. These describe club respondents, not population participation or a census of clubs.",
-  "width": "container",
-  "height": 460,
+  "width": 480,
+  "height": 450,
   "data": {
     "url": "data/raw/asf-sports-by-state-2023.csv",
     "format": {
@@ -138,7 +138,16 @@
     }
   ],
   "projection": {
-    "type": "mercator"
+    "type": "mercator",
+    "center": [
+      134,
+      -28
+    ],
+    "scale": 600,
+    "translate": [
+      240,
+      225
+    ]
   },
   "encoding": {
     "tooltip": [
@@ -193,11 +202,14 @@
             "clamp": true
           },
           "legend": {
-            "title": "Share of club respondents",
+            "title": [
+              "Share of club",
+              "respondents"
+            ],
             "format": ".0%",
-            "orient": "bottom",
-            "gradientLength": 300,
-            "titleLimit": 300,
+            "orient": "right",
+            "gradientLength": 150,
+            "titleLimit": 0,
             "values": [
               0,
               0.1,
@@ -205,7 +217,9 @@
               0.3,
               0.4,
               0.5
-            ]
+            ],
+            "direction": "vertical",
+            "offset": 16
           }
         }
       }
@@ -272,8 +286,15 @@
       "stroke": null
     },
     "legend": {
-      "labelFontSize": 12,
-      "titleFontSize": 12
+      "labelFontSize": 13,
+      "titleFontSize": 13,
+      "orient": "right",
+      "direction": "vertical",
+      "offset": 16
+    },
+    "axis": {
+      "labelFontSize": 13,
+      "titleFontSize": 14
     }
   }
 }

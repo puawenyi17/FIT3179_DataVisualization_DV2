@@ -1,0 +1,697 @@
+{
+  "$schema": "https://vega.github.io/schema/vega/v5.json",
+  "description": "Overseas country-labelled swimming teams connected to the 2024 Pan Pacific Masters Games venue. Affiliation links, not observed travel.",
+  "width": 1000,
+  "height": 530,
+  "padding": 8,
+  "autosize": "none",
+  "background": "white",
+  "config": {
+    "text": {
+      "font": "Arial"
+    }
+  },
+  "signals": [
+    {
+      "name": "topN",
+      "value": 6,
+      "bind": {
+        "input": "select",
+        "options": [
+          3,
+          6,
+          12
+        ],
+        "labels": [
+          "Leading 3",
+          "Leading 6",
+          "All 12 country teams"
+        ],
+        "name": "Show teams: "
+      }
+    },
+    {
+      "name": "hoverTeam",
+      "value": null,
+      "on": [
+        {
+          "events": "@connections:mouseover, @origins:mouseover",
+          "update": "datum.team"
+        },
+        {
+          "events": "@connections:mouseout, @origins:mouseout",
+          "update": "null"
+        },
+        {
+          "events": {
+            "signal": "topN"
+          },
+          "update": "null"
+        }
+      ]
+    }
+  ],
+  "projections": [
+    {
+      "name": "world",
+      "type": "equirectangular",
+      "rotate": [
+        -150,
+        0,
+        0
+      ],
+      "scale": 150,
+      "translate": [
+        500,
+        265
+      ]
+    }
+  ],
+  "data": [
+    {
+      "name": "countries",
+      "url": "maps/world-countries-110m.json",
+      "format": {
+        "type": "topojson",
+        "feature": "countries"
+      },
+      "transform": [
+        {
+          "type": "filter",
+          "expr": "datum.id !== '010'"
+        }
+      ]
+    },
+    {
+      "name": "teams",
+      "url": "data/processed/ppmg-2024-country-teams.csv",
+      "format": {
+        "type": "csv",
+        "parse": {
+          "athletes": "number",
+          "female": "number",
+          "male": "number",
+          "origin_lon": "number",
+          "origin_lat": "number",
+          "destination_lon": "number",
+          "destination_lat": "number"
+        }
+      },
+      "transform": [
+        {
+          "type": "collect",
+          "sort": {
+            "field": [
+              "athletes",
+              "team"
+            ],
+            "order": [
+              "descending",
+              "ascending"
+            ]
+          }
+        },
+        {
+          "type": "window",
+          "ops": [
+            "row_number"
+          ],
+          "as": [
+            "rank"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "shown",
+      "source": "teams",
+      "transform": [
+        {
+          "type": "filter",
+          "expr": "datum.rank <= topN"
+        },
+        {
+          "type": "formula",
+          "expr": "{type:'LineString',coordinates:[[datum.origin_lon,datum.origin_lat],[datum.destination_lon,datum.destination_lat]]}",
+          "as": "geometry"
+        },
+        {
+          "type": "geopoint",
+          "projection": "world",
+          "fields": [
+            "origin_lon",
+            "origin_lat"
+          ],
+          "as": [
+            "x",
+            "y"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "venue",
+      "values": [
+        {
+          "lon": 153.415,
+          "lat": -27.965
+        }
+      ],
+      "transform": [
+        {
+          "type": "geopoint",
+          "projection": "world",
+          "fields": [
+            "lon",
+            "lat"
+          ],
+          "as": [
+            "x",
+            "y"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "legend",
+      "values": [
+        {
+          "n": 1,
+          "y": 53
+        },
+        {
+          "n": 10,
+          "y": 79
+        },
+        {
+          "n": 30,
+          "y": 105
+        }
+      ]
+    }
+  ],
+  "scales": [
+    {
+      "name": "lineWidth",
+      "type": "linear",
+      "domain": [
+        0,
+        36
+      ],
+      "range": [
+        0,
+        14.4
+      ],
+      "zero": true
+    }
+  ],
+  "marks": [
+    {
+      "type": "shape",
+      "from": {
+        "data": "countries"
+      },
+      "interactive": false,
+      "transform": [
+        {
+          "type": "geoshape",
+          "projection": "world"
+        }
+      ],
+      "encode": {
+        "update": {
+          "fill": {
+            "value": "#edf2f3"
+          },
+          "stroke": {
+            "value": "#c5d2d6"
+          },
+          "strokeWidth": {
+            "value": 0.6
+          }
+        }
+      }
+    },
+    {
+      "name": "connections",
+      "type": "shape",
+      "from": {
+        "data": "shown"
+      },
+      "transform": [
+        {
+          "type": "geoshape",
+          "projection": "world",
+          "field": "datum.geometry"
+        }
+      ],
+      "encode": {
+        "update": {
+          "fill": {
+            "value": null
+          },
+          "stroke": {
+            "value": "#087e83"
+          },
+          "strokeWidth": {
+            "scale": "lineWidth",
+            "field": "athletes"
+          },
+          "strokeOpacity": {
+            "signal": "hoverTeam === null ? 0.30 : hoverTeam === datum.team ? 0.95 : 0.05"
+          },
+          "zindex": {
+            "signal": "hoverTeam === datum.team ? 1 : 0"
+          },
+          "cursor": {
+            "value": "pointer"
+          },
+          "tooltip": {
+            "signal": "{'Team':datum.team, 'Listed athletes':datum.athletes, 'Female':datum.female, 'Male':datum.male, 'Destination':'Gold Coast Aquatic Centre', 'Meaning':'Team representation; not a recorded journey'}"
+          }
+        }
+      }
+    },
+    {
+      "name": "origins",
+      "type": "symbol",
+      "from": {
+        "data": "shown"
+      },
+      "encode": {
+        "update": {
+          "x": {
+            "field": "x"
+          },
+          "y": {
+            "field": "y"
+          },
+          "size": {
+            "value": 65
+          },
+          "fill": {
+            "value": "#087e83"
+          },
+          "stroke": {
+            "value": "white"
+          },
+          "strokeWidth": {
+            "value": 1.4
+          },
+          "opacity": {
+            "signal": "hoverTeam === null || hoverTeam === datum.team ? 1 : 0.25"
+          },
+          "cursor": {
+            "value": "pointer"
+          },
+          "tooltip": {
+            "signal": "{'Team':datum.team, 'Listed athletes':datum.athletes, 'Female':datum.female, 'Male':datum.male, 'Destination':'Gold Coast Aquatic Centre', 'Meaning':'Team representation; not a recorded journey'}"
+          }
+        }
+      }
+    },
+    {
+      "type": "text",
+      "from": {
+        "data": "shown"
+      },
+      "interactive": false,
+      "encode": {
+        "update": {
+          "x": {
+            "field": "x"
+          },
+          "y": {
+            "field": "y"
+          },
+          "dy": {
+            "value": -13
+          },
+          "align": {
+            "value": "center"
+          },
+          "fontSize": {
+            "value": 17
+          },
+          "fontWeight": {
+            "value": "bold"
+          },
+          "fill": {
+            "value": "#173c4a"
+          },
+          "stroke": {
+            "value": "white"
+          },
+          "strokeWidth": {
+            "value": 4
+          },
+          "strokeJoin": {
+            "value": "round"
+          },
+          "text": {
+            "signal": "datum.team + ' \u00b7 ' + datum.athletes"
+          },
+          "opacity": {
+            "signal": "hoverTeam === datum.team || (hoverTeam === null && datum.rank <= 3) ? 1 : 0"
+          }
+        }
+      }
+    },
+    {
+      "type": "text",
+      "from": {
+        "data": "shown"
+      },
+      "interactive": false,
+      "encode": {
+        "update": {
+          "x": {
+            "field": "x"
+          },
+          "y": {
+            "field": "y"
+          },
+          "dy": {
+            "value": -13
+          },
+          "align": {
+            "value": "center"
+          },
+          "fontSize": {
+            "value": 17
+          },
+          "fontWeight": {
+            "value": "bold"
+          },
+          "fill": {
+            "value": "#173c4a"
+          },
+          "text": {
+            "signal": "datum.team + ' \u00b7 ' + datum.athletes"
+          },
+          "opacity": {
+            "signal": "hoverTeam === datum.team || (hoverTeam === null && datum.rank <= 3) ? 1 : 0"
+          }
+        }
+      }
+    },
+    {
+      "type": "symbol",
+      "from": {
+        "data": "venue"
+      },
+      "encode": {
+        "update": {
+          "x": {
+            "field": "x"
+          },
+          "y": {
+            "field": "y"
+          },
+          "shape": {
+            "value": "diamond"
+          },
+          "size": {
+            "value": 180
+          },
+          "fill": {
+            "value": "#b66a32"
+          },
+          "stroke": {
+            "value": "white"
+          },
+          "strokeWidth": {
+            "value": 2
+          }
+        }
+      }
+    },
+    {
+      "type": "rule",
+      "from": {
+        "data": "venue"
+      },
+      "interactive": false,
+      "encode": {
+        "update": {
+          "x": {
+            "field": "x"
+          },
+          "y": {
+            "signal": "datum.y + 10"
+          },
+          "y2": {
+            "signal": "datum.y + 46"
+          },
+          "stroke": {
+            "value": "#b66a32"
+          },
+          "strokeWidth": {
+            "value": 1
+          }
+        }
+      }
+    },
+    {
+      "type": "text",
+      "from": {
+        "data": "venue"
+      },
+      "interactive": false,
+      "encode": {
+        "update": {
+          "x": {
+            "field": "x"
+          },
+          "y": {
+            "field": "y"
+          },
+          "dy": {
+            "value": 66
+          },
+          "align": {
+            "value": "center"
+          },
+          "fontSize": {
+            "value": 17
+          },
+          "fontWeight": {
+            "value": "bold"
+          },
+          "fill": {
+            "value": "#173c4a"
+          },
+          "text": {
+            "value": "Gold Coast Aquatic Centre"
+          }
+        }
+      }
+    },
+    {
+      "type": "text",
+      "interactive": false,
+      "encode": {
+        "update": {
+          "x": {
+            "value": 18
+          },
+          "y": {
+            "value": 26
+          },
+          "text": {
+            "value": "Swimming connections \u00b7 2024"
+          },
+          "fontSize": {
+            "value": 22
+          },
+          "fill": {
+            "value": "#173c4a"
+          },
+          "fontWeight": {
+            "value": "bold"
+          }
+        }
+      }
+    },
+    {
+      "type": "text",
+      "interactive": false,
+      "encode": {
+        "update": {
+          "x": {
+            "value": 18
+          },
+          "y": {
+            "value": 51
+          },
+          "text": {
+            "signal": "length(data('shown')) + ' of 12 overseas country-labelled teams'"
+          },
+          "fontSize": {
+            "value": 16
+          },
+          "fill": {
+            "value": "#4d6068"
+          }
+        }
+      }
+    },
+    {
+      "type": "rect",
+      "interactive": false,
+      "encode": {
+        "update": {
+          "x": {
+            "value": 825
+          },
+          "y": {
+            "value": 8
+          },
+          "width": {
+            "value": 175
+          },
+          "height": {
+            "value": 122
+          },
+          "fill": {
+            "value": "white"
+          },
+          "fillOpacity": {
+            "value": 0.92
+          }
+        }
+      }
+    },
+    {
+      "type": "text",
+      "interactive": false,
+      "encode": {
+        "update": {
+          "x": {
+            "value": 840
+          },
+          "y": {
+            "value": 28
+          },
+          "text": {
+            "value": "Listed athletes"
+          },
+          "fontSize": {
+            "value": 16
+          },
+          "fill": {
+            "value": "#173c4a"
+          },
+          "fontWeight": {
+            "value": "bold"
+          }
+        }
+      }
+    },
+    {
+      "type": "rule",
+      "from": {
+        "data": "legend"
+      },
+      "interactive": false,
+      "encode": {
+        "update": {
+          "x": {
+            "value": 842
+          },
+          "x2": {
+            "value": 900
+          },
+          "y": {
+            "field": "y"
+          },
+          "stroke": {
+            "value": "#087e83"
+          },
+          "strokeOpacity": {
+            "value": 0.6
+          },
+          "strokeWidth": {
+            "scale": "lineWidth",
+            "field": "n"
+          }
+        }
+      }
+    },
+    {
+      "type": "text",
+      "from": {
+        "data": "legend"
+      },
+      "interactive": false,
+      "encode": {
+        "update": {
+          "x": {
+            "value": 915
+          },
+          "y": {
+            "field": "y"
+          },
+          "baseline": {
+            "value": "middle"
+          },
+          "text": {
+            "field": "n"
+          },
+          "fontSize": {
+            "value": 16
+          },
+          "fill": {
+            "value": "#173c4a"
+          }
+        }
+      }
+    },
+    {
+      "type": "text",
+      "interactive": false,
+      "encode": {
+        "update": {
+          "x": {
+            "value": 18
+          },
+          "y": {
+            "value": 498
+          },
+          "text": {
+            "value": "Hover over a dot or connection to isolate a team."
+          },
+          "fontSize": {
+            "value": 16
+          },
+          "fill": {
+            "value": "#4d6068"
+          }
+        }
+      }
+    },
+    {
+      "type": "text",
+      "interactive": false,
+      "encode": {
+        "update": {
+          "x": {
+            "value": 18
+          },
+          "y": {
+            "value": 522
+          },
+          "text": {
+            "value": "Connections show team representation, not recorded travel routes."
+          },
+          "fontSize": {
+            "value": 15
+          },
+          "fill": {
+            "value": "#4d6068"
+          }
+        }
+      }
+    }
+  ]
+}

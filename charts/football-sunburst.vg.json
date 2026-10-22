@@ -350,10 +350,11 @@
     {
       "fill": "ageColor",
       "title": "Age group",
-      "orient": "bottom",
-      "direction": "horizontal",
-      "labelFontSize": 13,
-      "titleFontSize": 13
+      "orient": "right",
+      "direction": "vertical",
+      "labelFontSize": 14,
+      "titleFontSize": 13,
+      "offset": 16
     }
   ],
   "marks": [

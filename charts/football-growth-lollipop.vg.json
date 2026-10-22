@@ -1,6 +1,6 @@
 {
   "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
-  "description": "Diverging lollipop chart of percentage change in reported football participant counts relative to 2022, by region, gender and selected age group/year. Not population participation rates.",
+  "description": "Grouped lollipop chart comparing male and female football participation growth within each reporting region. Position and stem length show percentage change since 2022; colour shows gender; circle area shows selected-year Participants for the selected age group, on a fixed shared linear size scale. Counts are not population participation rates.",
   "data": {
     "url": "data/raw/football-sunburst-counts-2022-2025.csv",
     "format": {
@@ -65,392 +65,13 @@
       "as": "Growth"
     },
     {
-      "calculate": "datum.Growth < 0 ? 'Decrease' : 'Increase or unchanged'",
-      "as": "Direction"
+      "filter": "datum.AgeGroup === selectedFootballAge && datum.Year === selectedFootballYear && isValid(datum.Growth)"
     },
     {
-      "filter": "datum.AgeGroup === selectedFootballAge && datum.Year === selectedFootballYear && isValid(datum.Growth)"
+      "calculate": "indexof([\"NSW\", \"Northern NSW\", \"VIC\", \"QLD\", \"WA\", \"SA\", \"ACT\", \"TAS\", \"NT\"], datum.Region) * 2 + (datum.Gender === \"Male\" ? 0 : 1)",
+      "as": "GenderRow"
     }
   ],
-  "facet": {
-    "column": {
-      "field": "Gender",
-      "type": "nominal",
-      "sort": [
-        "Male",
-        "Female"
-      ],
-      "title": null,
-      "header": {
-        "labelFontSize": 18,
-        "labelFontWeight": "bold"
-      }
-    }
-  },
-  "spacing": 36,
-  "spec": {
-    "width": 330,
-    "height": 350,
-    "layer": [
-      {
-        "data": {
-          "values": [
-            {}
-          ]
-        },
-        "mark": {
-          "type": "rule",
-          "color": "#81959d",
-          "strokeWidth": 1.2
-        },
-        "encoding": {
-          "x": {
-            "datum": 0,
-            "type": "quantitative"
-          }
-        }
-      },
-      {
-        "mark": {
-          "type": "rule",
-          "strokeWidth": 2.5
-        },
-        "encoding": {
-          "x": {
-            "field": "Growth",
-            "type": "quantitative",
-            "title": "Change from 2022",
-            "scale": {
-              "domain": [
-                -0.5,
-                {
-                  "expr": "selectedFootballAge === 'MiniRoos' ? 1.8 : selectedFootballAge === 'Youth' ? 1 : 0.7"
-                }
-              ],
-              "nice": false
-            },
-            "axis": {
-              "format": ".0%",
-              "tickCount": 6,
-              "grid": true,
-              "labelOverlap": false
-            }
-          },
-          "x2": {
-            "datum": 0
-          },
-          "y": {
-            "field": "Region",
-            "type": "nominal",
-            "sort": [
-              "NSW",
-              "Northern NSW",
-              "VIC",
-              "QLD",
-              "WA",
-              "SA",
-              "ACT",
-              "TAS",
-              "NT"
-            ],
-            "title": null,
-            "axis": {
-              "labelPadding": 8,
-              "grid": false
-            }
-          },
-          "color": {
-            "field": "Direction",
-            "type": "nominal",
-            "scale": {
-              "domain": [
-                "Increase or unchanged",
-                "Decrease"
-              ],
-              "range": [
-                "#187f83",
-                "#c56329"
-              ]
-            },
-            "legend": {
-              "title": null,
-              "orient": "bottom",
-              "labelLimit": 220
-            }
-          },
-          "tooltip": [
-            {
-              "field": "Region",
-              "type": "nominal",
-              "title": "Reporting region"
-            },
-            {
-              "field": "AgeGroup",
-              "type": "nominal",
-              "title": "Age group"
-            },
-            {
-              "field": "Gender",
-              "type": "nominal"
-            },
-            {
-              "field": "Year",
-              "type": "ordinal",
-              "title": "Comparison year"
-            },
-            {
-              "field": "Participants",
-              "type": "quantitative",
-              "format": ",",
-              "title": "Participants in selected year"
-            },
-            {
-              "field": "Baseline",
-              "type": "quantitative",
-              "format": ",",
-              "title": "Participants in 2022"
-            },
-            {
-              "field": "Growth",
-              "type": "quantitative",
-              "format": "+.1%",
-              "title": "Change from 2022"
-            },
-            {
-              "field": "SourcePage",
-              "type": "quantitative",
-              "title": "Selected-year report page"
-            }
-          ]
-        }
-      },
-      {
-        "mark": {
-          "type": "point",
-          "filled": true,
-          "size": 105,
-          "stroke": "white",
-          "strokeWidth": 0.8
-        },
-        "encoding": {
-          "x": {
-            "field": "Growth",
-            "type": "quantitative",
-            "title": "Change from 2022",
-            "scale": {
-              "domain": [
-                -0.5,
-                {
-                  "expr": "selectedFootballAge === 'MiniRoos' ? 1.8 : selectedFootballAge === 'Youth' ? 1 : 0.7"
-                }
-              ],
-              "nice": false
-            },
-            "axis": {
-              "format": ".0%",
-              "tickCount": 6,
-              "grid": true,
-              "labelOverlap": false
-            }
-          },
-          "y": {
-            "field": "Region",
-            "type": "nominal",
-            "sort": [
-              "NSW",
-              "Northern NSW",
-              "VIC",
-              "QLD",
-              "WA",
-              "SA",
-              "ACT",
-              "TAS",
-              "NT"
-            ],
-            "title": null,
-            "axis": {
-              "labelPadding": 8,
-              "grid": false
-            }
-          },
-          "color": {
-            "field": "Direction",
-            "type": "nominal",
-            "scale": {
-              "domain": [
-                "Increase or unchanged",
-                "Decrease"
-              ],
-              "range": [
-                "#187f83",
-                "#c56329"
-              ]
-            },
-            "legend": {
-              "title": null,
-              "orient": "bottom",
-              "labelLimit": 220
-            }
-          },
-          "tooltip": [
-            {
-              "field": "Region",
-              "type": "nominal",
-              "title": "Reporting region"
-            },
-            {
-              "field": "AgeGroup",
-              "type": "nominal",
-              "title": "Age group"
-            },
-            {
-              "field": "Gender",
-              "type": "nominal"
-            },
-            {
-              "field": "Year",
-              "type": "ordinal",
-              "title": "Comparison year"
-            },
-            {
-              "field": "Participants",
-              "type": "quantitative",
-              "format": ",",
-              "title": "Participants in selected year"
-            },
-            {
-              "field": "Baseline",
-              "type": "quantitative",
-              "format": ",",
-              "title": "Participants in 2022"
-            },
-            {
-              "field": "Growth",
-              "type": "quantitative",
-              "format": "+.1%",
-              "title": "Change from 2022"
-            },
-            {
-              "field": "SourcePage",
-              "type": "quantitative",
-              "title": "Selected-year report page"
-            }
-          ]
-        }
-      },
-      {
-        "mark": {
-          "type": "text",
-          "align": {
-            "expr": "datum.Growth < 0 ? 'right' : 'left'"
-          },
-          "dx": {
-            "expr": "datum.Growth < 0 ? -9 : 9"
-          },
-          "fontSize": 11,
-          "color": "#233c48"
-        },
-        "encoding": {
-          "x": {
-            "field": "Growth",
-            "type": "quantitative",
-            "title": "Change from 2022",
-            "scale": {
-              "domain": [
-                -0.5,
-                {
-                  "expr": "selectedFootballAge === 'MiniRoos' ? 1.8 : selectedFootballAge === 'Youth' ? 1 : 0.7"
-                }
-              ],
-              "nice": false
-            },
-            "axis": {
-              "format": ".0%",
-              "tickCount": 6,
-              "grid": true,
-              "labelOverlap": false
-            }
-          },
-          "y": {
-            "field": "Region",
-            "type": "nominal",
-            "sort": [
-              "NSW",
-              "Northern NSW",
-              "VIC",
-              "QLD",
-              "WA",
-              "SA",
-              "ACT",
-              "TAS",
-              "NT"
-            ],
-            "title": null,
-            "axis": {
-              "labelPadding": 8,
-              "grid": false
-            }
-          },
-          "text": {
-            "field": "Growth",
-            "type": "quantitative",
-            "format": "+.1%"
-          },
-          "tooltip": [
-            {
-              "field": "Region",
-              "type": "nominal",
-              "title": "Reporting region"
-            },
-            {
-              "field": "AgeGroup",
-              "type": "nominal",
-              "title": "Age group"
-            },
-            {
-              "field": "Gender",
-              "type": "nominal"
-            },
-            {
-              "field": "Year",
-              "type": "ordinal",
-              "title": "Comparison year"
-            },
-            {
-              "field": "Participants",
-              "type": "quantitative",
-              "format": ",",
-              "title": "Participants in selected year"
-            },
-            {
-              "field": "Baseline",
-              "type": "quantitative",
-              "format": ",",
-              "title": "Participants in 2022"
-            },
-            {
-              "field": "Growth",
-              "type": "quantitative",
-              "format": "+.1%",
-              "title": "Change from 2022"
-            },
-            {
-              "field": "SourcePage",
-              "type": "quantitative",
-              "title": "Selected-year report page"
-            }
-          ]
-        }
-      }
-    ]
-  },
-  "resolve": {
-    "scale": {
-      "x": "shared",
-      "y": "shared",
-      "color": "shared"
-    }
-  },
   "config": {
     "font": "Arial",
     "background": "white",
@@ -458,8 +79,8 @@
       "stroke": null
     },
     "axis": {
-      "labelFontSize": 12,
-      "titleFontSize": 13,
+      "labelFontSize": 13,
+      "titleFontSize": 14,
       "titlePadding": 12,
       "labelColor": "#354d58",
       "titleColor": "#354d58",
@@ -468,8 +89,433 @@
       "tickColor": "#cbd8de"
     },
     "legend": {
-      "labelFontSize": 12,
-      "titleFontSize": 12
+      "labelFontSize": 13,
+      "titleFontSize": 13,
+      "orient": "right",
+      "direction": "vertical",
+      "offset": 16
     }
-  }
+  },
+  "width": 700,
+  "height": 504,
+  "layer": [
+    {
+      "data": {
+        "values": [
+          {}
+        ]
+      },
+      "mark": {
+        "type": "rule",
+        "color": "#81959d",
+        "strokeWidth": 1.2
+      },
+      "encoding": {
+        "x": {
+          "datum": 0,
+          "type": "quantitative"
+        }
+      }
+    },
+    {
+      "mark": {
+        "type": "rule",
+        "strokeWidth": 2.5
+      },
+      "encoding": {
+        "x": {
+          "field": "Growth",
+          "type": "quantitative",
+          "title": "Change from 2022",
+          "scale": {
+            "domain": [
+              -0.5,
+              {
+                "expr": "selectedFootballAge === 'MiniRoos' ? 1.8 : selectedFootballAge === 'Youth' ? 1 : 0.7"
+              }
+            ],
+            "nice": false
+          },
+          "axis": {
+            "format": ".0%",
+            "tickCount": 6,
+            "grid": true,
+            "labelOverlap": false
+          }
+        },
+        "x2": {
+          "datum": 0
+        },
+        "y": {
+          "field": "GenderRow",
+          "type": "quantitative",
+          "scale": {
+            "domain": [
+              17.5,
+              -0.5
+            ],
+            "nice": false
+          },
+          "axis": {
+            "title": null,
+            "values": [
+              0.5,
+              2.5,
+              4.5,
+              6.5,
+              8.5,
+              10.5,
+              12.5,
+              14.5,
+              16.5
+            ],
+            "labelExpr": "[\"NSW\", \"Northern NSW\", \"VIC\", \"QLD\", \"WA\", \"SA\", \"ACT\", \"TAS\", \"NT\"][floor(datum.value / 2)]",
+            "labelPadding": 12,
+            "grid": false,
+            "ticks": false,
+            "labelLimit": 0
+          }
+        },
+        "color": {
+          "field": "Gender",
+          "type": "nominal",
+          "scale": {
+            "domain": [
+              "Male",
+              "Female"
+            ],
+            "range": [
+              "#187f83",
+              "#c56329"
+            ]
+          },
+          "legend": {
+            "title": "Gender",
+            "orient": "right",
+            "direction": "vertical",
+            "offset": 16
+          }
+        },
+        "tooltip": [
+          {
+            "field": "Region",
+            "type": "nominal",
+            "title": "Reporting region"
+          },
+          {
+            "field": "AgeGroup",
+            "type": "nominal",
+            "title": "Age group"
+          },
+          {
+            "field": "Gender",
+            "type": "nominal"
+          },
+          {
+            "field": "Year",
+            "type": "ordinal",
+            "title": "Comparison year"
+          },
+          {
+            "field": "Participants",
+            "type": "quantitative",
+            "format": ",.0f",
+            "title": "Participants in selected year"
+          },
+          {
+            "field": "Baseline",
+            "type": "quantitative",
+            "format": ",.0f",
+            "title": "Participants in 2022"
+          },
+          {
+            "field": "Growth",
+            "type": "quantitative",
+            "format": "+.1%",
+            "title": "Change from 2022"
+          },
+          {
+            "field": "SourcePage",
+            "type": "quantitative",
+            "title": "Selected-year report page"
+          }
+        ]
+      }
+    },
+    {
+      "mark": {
+        "type": "point",
+        "filled": true,
+        "stroke": "white",
+        "strokeWidth": 0.8,
+        "opacity": 0.9
+      },
+      "encoding": {
+        "x": {
+          "field": "Growth",
+          "type": "quantitative",
+          "title": "Change from 2022",
+          "scale": {
+            "domain": [
+              -0.5,
+              {
+                "expr": "selectedFootballAge === 'MiniRoos' ? 1.8 : selectedFootballAge === 'Youth' ? 1 : 0.7"
+              }
+            ],
+            "nice": false
+          },
+          "axis": {
+            "format": ".0%",
+            "tickCount": 6,
+            "grid": true,
+            "labelOverlap": false
+          }
+        },
+        "y": {
+          "field": "GenderRow",
+          "type": "quantitative",
+          "scale": {
+            "domain": [
+              17.5,
+              -0.5
+            ],
+            "nice": false
+          },
+          "axis": {
+            "title": null,
+            "values": [
+              0.5,
+              2.5,
+              4.5,
+              6.5,
+              8.5,
+              10.5,
+              12.5,
+              14.5,
+              16.5
+            ],
+            "labelExpr": "[\"NSW\", \"Northern NSW\", \"VIC\", \"QLD\", \"WA\", \"SA\", \"ACT\", \"TAS\", \"NT\"][floor(datum.value / 2)]",
+            "labelPadding": 12,
+            "grid": false,
+            "ticks": false,
+            "labelLimit": 0
+          }
+        },
+        "color": {
+          "field": "Gender",
+          "type": "nominal",
+          "scale": {
+            "domain": [
+              "Male",
+              "Female"
+            ],
+            "range": [
+              "#187f83",
+              "#c56329"
+            ]
+          },
+          "legend": {
+            "title": "Gender",
+            "orient": "right",
+            "direction": "vertical",
+            "offset": 16
+          }
+        },
+        "tooltip": [
+          {
+            "field": "Region",
+            "type": "nominal",
+            "title": "Reporting region"
+          },
+          {
+            "field": "AgeGroup",
+            "type": "nominal",
+            "title": "Age group"
+          },
+          {
+            "field": "Gender",
+            "type": "nominal"
+          },
+          {
+            "field": "Year",
+            "type": "ordinal",
+            "title": "Comparison year"
+          },
+          {
+            "field": "Participants",
+            "type": "quantitative",
+            "format": ",.0f",
+            "title": "Participants in selected year"
+          },
+          {
+            "field": "Baseline",
+            "type": "quantitative",
+            "format": ",.0f",
+            "title": "Participants in 2022"
+          },
+          {
+            "field": "Growth",
+            "type": "quantitative",
+            "format": "+.1%",
+            "title": "Change from 2022"
+          },
+          {
+            "field": "SourcePage",
+            "type": "quantitative",
+            "title": "Selected-year report page"
+          }
+        ],
+        "size": {
+          "field": "Participants",
+          "type": "quantitative",
+          "scale": {
+            "type": "linear",
+            "domain": [
+              0,
+              100000
+            ],
+            "range": [
+              0,
+              640
+            ],
+            "zero": true,
+            "nice": false
+          },
+          "legend": {
+            "title": [
+              "Participants in",
+              "selected year"
+            ],
+            "orient": "right",
+            "direction": "vertical",
+            "offset": 16,
+            "values": [
+              1000,
+              10000,
+              50000,
+              100000
+            ],
+            "format": ",.0f",
+            "symbolFillColor": "#8b9fa8",
+            "symbolStrokeColor": "white",
+            "labelLimit": 180
+          }
+        }
+      }
+    },
+    {
+      "mark": {
+        "type": "text",
+        "align": {
+          "expr": "datum.Growth < 0 ? 'right' : 'left'"
+        },
+        "dx": {
+          "expr": "(datum.Growth < 0 ? -1 : 1) * (sqrt(datum.Participants / 100000 * 640) / 2 + 8)"
+        },
+        "fontSize": 12,
+        "color": "#233c48"
+      },
+      "encoding": {
+        "x": {
+          "field": "Growth",
+          "type": "quantitative",
+          "title": "Change from 2022",
+          "scale": {
+            "domain": [
+              -0.5,
+              {
+                "expr": "selectedFootballAge === 'MiniRoos' ? 1.8 : selectedFootballAge === 'Youth' ? 1 : 0.7"
+              }
+            ],
+            "nice": false
+          },
+          "axis": {
+            "format": ".0%",
+            "tickCount": 6,
+            "grid": true,
+            "labelOverlap": false
+          }
+        },
+        "y": {
+          "field": "GenderRow",
+          "type": "quantitative",
+          "scale": {
+            "domain": [
+              17.5,
+              -0.5
+            ],
+            "nice": false
+          },
+          "axis": {
+            "title": null,
+            "values": [
+              0.5,
+              2.5,
+              4.5,
+              6.5,
+              8.5,
+              10.5,
+              12.5,
+              14.5,
+              16.5
+            ],
+            "labelExpr": "[\"NSW\", \"Northern NSW\", \"VIC\", \"QLD\", \"WA\", \"SA\", \"ACT\", \"TAS\", \"NT\"][floor(datum.value / 2)]",
+            "labelPadding": 12,
+            "grid": false,
+            "ticks": false,
+            "labelLimit": 0
+          }
+        },
+        "text": {
+          "field": "Growth",
+          "type": "quantitative",
+          "format": "+.1%"
+        },
+        "tooltip": [
+          {
+            "field": "Region",
+            "type": "nominal",
+            "title": "Reporting region"
+          },
+          {
+            "field": "AgeGroup",
+            "type": "nominal",
+            "title": "Age group"
+          },
+          {
+            "field": "Gender",
+            "type": "nominal"
+          },
+          {
+            "field": "Year",
+            "type": "ordinal",
+            "title": "Comparison year"
+          },
+          {
+            "field": "Participants",
+            "type": "quantitative",
+            "format": ",.0f",
+            "title": "Participants in selected year"
+          },
+          {
+            "field": "Baseline",
+            "type": "quantitative",
+            "format": ",.0f",
+            "title": "Participants in 2022"
+          },
+          {
+            "field": "Growth",
+            "type": "quantitative",
+            "format": "+.1%",
+            "title": "Change from 2022"
+          },
+          {
+            "field": "SourcePage",
+            "type": "quantitative",
+            "title": "Selected-year report page"
+          }
+        ]
+      }
+    }
+  ]
 }

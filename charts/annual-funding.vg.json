@@ -11,7 +11,7 @@
       }
     }
   },
-  "width": "container",
+  "width": 480,
   "height": 260,
   "transform": [
     {
@@ -107,8 +107,8 @@
       "stroke": null
     },
     "axis": {
-      "labelFontSize": 12,
-      "titleFontSize": 13,
+      "labelFontSize": 13,
+      "titleFontSize": 14,
       "titlePadding": 12,
       "labelColor": "#354d58",
       "titleColor": "#354d58",
@@ -117,8 +117,11 @@
       "tickColor": "#cbd8de"
     },
     "legend": {
-      "labelFontSize": 12,
-      "titleFontSize": 12
+      "labelFontSize": 13,
+      "titleFontSize": 13,
+      "orient": "right",
+      "direction": "vertical",
+      "offset": 16
     }
   }
 }

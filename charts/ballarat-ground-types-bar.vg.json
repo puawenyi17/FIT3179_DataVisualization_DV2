@@ -1,0 +1,282 @@
+{
+  "$schema": "https://vega.github.io/schema/vega/v5.json",
+  "description": "Descending counts of Ballarat sports-ground features by recorded ground type; not sites or people.",
+  "width": 700,
+  "height": 400,
+  "padding": {
+    "top": 10,
+    "left": 8,
+    "right": 12,
+    "bottom": 10
+  },
+  "autosize": {
+    "type": "none",
+    "contains": "content"
+  },
+  "background": "white",
+  "data": [
+    {
+      "name": "features",
+      "url": "data/raw/Ballarat Sports Grounds.json",
+      "format": {
+        "type": "json",
+        "property": "features"
+      },
+      "transform": [
+        {
+          "type": "formula",
+          "expr": "isValid(datum.properties.Feat_Type) ? replace(datum.properties.Feat_Type, 'SG-', '') : 'Unspecified'",
+          "as": "GroundType"
+        }
+      ]
+    },
+    {
+      "name": "types",
+      "source": "features",
+      "transform": [
+        {
+          "type": "aggregate",
+          "groupby": [
+            "GroundType"
+          ],
+          "ops": [
+            "count"
+          ],
+          "as": [
+            "Count"
+          ]
+        },
+        {
+          "type": "joinaggregate",
+          "ops": [
+            "sum"
+          ],
+          "fields": [
+            "Count"
+          ],
+          "as": [
+            "Total"
+          ]
+        },
+        {
+          "type": "formula",
+          "expr": "datum.Count / datum.Total",
+          "as": "Share"
+        },
+        {
+          "type": "collect",
+          "sort": {
+            "field": [
+              "Count",
+              "GroundType"
+            ],
+            "order": [
+              "descending",
+              "ascending"
+            ]
+          }
+        }
+      ]
+    }
+  ],
+  "scales": [
+    {
+      "name": "y",
+      "type": "band",
+      "domain": {
+        "data": "types",
+        "field": "GroundType"
+      },
+      "range": [
+        36,
+        360
+      ],
+      "padding": 0.24
+    },
+    {
+      "name": "x",
+      "type": "linear",
+      "domain": {
+        "data": "types",
+        "field": "Count"
+      },
+      "range": [
+        225,
+        598
+      ],
+      "zero": true,
+      "nice": true
+    }
+  ],
+  "marks": [
+    {
+      "type": "text",
+      "encode": {
+        "update": {
+          "x": {
+            "value": 0
+          },
+          "y": {
+            "value": 19
+          },
+          "text": {
+            "value": "Recorded features by ground type"
+          },
+          "fontSize": {
+            "value": 21
+          },
+          "fill": {
+            "value": "#173c4a"
+          },
+          "fontWeight": {
+            "value": "bold"
+          }
+        }
+      }
+    },
+    {
+      "type": "text",
+      "from": {
+        "data": "types"
+      },
+      "encode": {
+        "update": {
+          "x": {
+            "value": 212
+          },
+          "y": {
+            "scale": "y",
+            "field": "GroundType",
+            "band": 0.5
+          },
+          "text": {
+            "field": "GroundType"
+          },
+          "align": {
+            "value": "right"
+          },
+          "baseline": {
+            "value": "middle"
+          },
+          "fontSize": {
+            "value": 14
+          },
+          "fill": {
+            "value": "#173c4a"
+          }
+        }
+      }
+    },
+    {
+      "type": "rect",
+      "from": {
+        "data": "types"
+      },
+      "encode": {
+        "update": {
+          "x": {
+            "scale": "x",
+            "value": 0
+          },
+          "x2": {
+            "scale": "x",
+            "field": "Count"
+          },
+          "y": {
+            "scale": "y",
+            "field": "GroundType"
+          },
+          "height": {
+            "scale": "y",
+            "band": 1
+          },
+          "fill": {
+            "value": "#087f87"
+          },
+          "tooltip": {
+            "signal": "{'Ground type': datum.GroundType, 'Recorded features': datum.Count, 'Share of all features': format(datum.Share, '.1%'), 'Total features': datum.Total}"
+          }
+        }
+      }
+    },
+    {
+      "type": "text",
+      "from": {
+        "data": "types"
+      },
+      "encode": {
+        "update": {
+          "x": {
+            "scale": "x",
+            "field": "Count",
+            "offset": 8
+          },
+          "y": {
+            "scale": "y",
+            "field": "GroundType",
+            "band": 0.5
+          },
+          "baseline": {
+            "value": "middle"
+          },
+          "text": {
+            "signal": "format(datum.Count, ',') + '  (' + format(datum.Share, '.1%') + ')'"
+          },
+          "fontSize": {
+            "value": 14
+          },
+          "fill": {
+            "value": "#173c4a"
+          }
+        }
+      }
+    },
+    {
+      "type": "text",
+      "encode": {
+        "update": {
+          "x": {
+            "value": 225
+          },
+          "y": {
+            "value": 396
+          },
+          "text": {
+            "value": "Feature count · bars start at zero"
+          },
+          "fontSize": {
+            "value": 14
+          },
+          "fill": {
+            "value": "#4d6068"
+          }
+        }
+      }
+    }
+  ],
+  "axes": [
+    {
+      "orient": "bottom",
+      "scale": "x",
+      "offset": -32,
+      "values": [
+        0,
+        20,
+        40,
+        60,
+        80
+      ],
+      "domain": false,
+      "ticks": true,
+      "labelFont": "Arial",
+      "labelFontSize": 13,
+      "labelColor": "#4d6068",
+      "tickColor": "#b6c5c9"
+    }
+  ],
+  "config": {
+    "text": {
+      "font": "Arial"
+    }
+  }
+}

@@ -1,0 +1,68 @@
+PARC and PINES annual-report transcriptions, 2022-23 to 2024-25
+
+Prepared 2026-10-22 for the FIT3179 visualisation project.
+Source: Peninsula Leisure annual reports. These CSVs are manually transcribed
+from the official PDFs and visually checked. They are not official CSV releases.
+They cover membership and the accompanying PINES user/participation panels,
+plus directly related attendance figures; they are not the full reports.
+
+FILES
+parc-membership-summary.csv: 13 reported membership-related metrics, in long form.
+parc-membership-types.csv: 9 membership-type rows, with counts, reported shares
+  where available, and separately calculated shares (members / total * 100).
+parc-membership-demographics.csv: 8 gender rows with population scopes and flags.
+pines-participation.csv: 15 attendance/programme metrics; PINES is a separate facility.
+pines-user-profile.csv: 6 published PINES profile percentages from 2022-23 only.
+
+FIELD CONVENTIONS
+UTF-8 comma-separated files, one header row, numeric values without separators.
+financial_year identifies the annual report, not a calendar year.
+Percentage columns use 0-100 units (58 means 58%, not 0.58).
+Blank cells mean not reported/not applicable, never zero. Missing years/categories
+are not filled with zeros or estimated. Counts are not inferred from percentages.
+source_printed_page is the page number printed on the report.
+source_pdf_page is the 1-based page index in a PDF viewer; append #page=N to URL.
+All rows carry their official source URL, page numbers and extraction method.
+Exact membership snapshot dates are not specified in the membership panels.
+
+VALIDATION AND COMPARABILITY
+Membership-type counts reconcile to reported totals in all three years:
+2022-23: 5424 + 1452 + 2442 = 9318.
+2023-24: 5433 + 1467 + 2228 = 9128.
+2024-25: 4969 + 1461 + 2018 = 8448.
+Published membership-type shares in 2023-24 are 59, 16, 24 (sum 99).
+These are preserved, not silently rounded or corrected. Calculated shares are
+provided independently for percentage visualisations and sum to approximately 100.
+
+2022-23 PARC gender shares are 29% male and 70% female. The report uses the
+heading Demographics under PARC Members, without specifying a membership subtype.
+The 1-point remainder is not assigned to any invented category.
+2023-24 explicitly labels gender counts as Full Access members: Male 3757,
+Female 1467, Non-binary 3. These sum to 5227, not the Full Access total of 5433.
+The drawn bar proportions also disagree with the printed values. All values and
+labels are preserved; do not swap gender labels or force a reconciliation.
+2024-25 Full Access gender shares are 40%, 59%, 1%. Counts are not supplied.
+Avoid a three-year gender trend without clarification from the publisher.
+
+Annual joins are not net growth; referrals are not an additional group of joins.
+Attendance counts are repeat visits, not unique members or people.
+PINES member/visit-pass attendances include PARC and PINES membership visits.
+Do not combine PARC membership counts with PINES attendances as one denominator.
+PINES 2022-23 free community access (3491) includes Free Family Fridays (1862).
+Only the narrower Free Family Friday metric is comparable in name across years.
+PINES 2022-23 visit reasons are overlapping responses (total 145%), not shares
+of a mutually exclusive whole. Survey sample size is not stated on the panel.
+The later PINES panels report attendance categories instead of these percentages.
+The three attendance categories sum to the PINES total in 2023-24 and 2024-25.
+
+Membership type shows service choice; gender composition describes members.
+Neither alone measures disability inclusion, financial barriers or health outcomes.
+
+SOURCES
+2022-23: printed pp.3,6,7; PDF pp.6,9,10.
+https://peninsulaleisure.com.au/wp-content/uploads/2023/10/Annual_Report_FY22-23.pdf
+2023-24: printed p.7; PDF p.8.
+https://peninsulaleisure.com.au/wp-content/uploads/2024/10/PL_AUG_Annual-Report-23-24-1.pdf
+2024-25: printed pp.7,8,14; PDF pp.8,9,15.
+https://peninsulaleisure.com.au/wp-content/uploads/2025/10/PL_SEP_PL-Annual-Report-FY24-25.pdf
+Official report index: https://peninsulaleisure.com.au/about/annual-reports/

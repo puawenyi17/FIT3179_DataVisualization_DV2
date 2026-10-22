@@ -1,0 +1,24 @@
+2024 Pan Pacific Masters Games: overseas country-labelled swimming teams
+
+Source: https://mastersswimmingqld.org.au/wp-content/uploads/sites/15/2024/11/2024-ppmg-full-meet-statistics.pdf
+Page: 1. Accessed 2026-10-22. Manual transcription checked against the PDF.
+Event venue verified by organiser: https://mastersswimmingqld.org.au/ppmg24-celebrating-the-spirit-of-masters-swimming/
+Venue address: https://mastersswimmingqld.org.au/venue/gold-coast-aquatic-centre/
+
+Includes all 12 overseas country-labelled rows (107 listed athletes).
+Excludes Australia Non-Masters, all named swimming clubs (including Swim Fort Lauderdale),
+and Composite Relay Teams. This is not a census of overseas participants.
+Country labels and team codes are retained exactly as published. Counts use Athletes,
+not Entries (one athlete may enter multiple events). Female + Male = Athletes in each row.
+Rows are ordered by athlete count descending, then team label alphabetically for ties.
+
+Map links represent team affiliation with the competition, not recorded journeys,
+residential origins or measured routes. Country points are manually selected approximate
+cartographic anchors; destination is an approximate Southport venue position.
+They must not be used to calculate travel distances or emissions.
+Line width is linear in athletes (0.4 SVG pixels per athlete), fixed across filters.
+All country labels and counts are available in a visible HTML table beside the map.
+
+Basemap: world-atlas 2.0.2 countries-110m.json, derived from Natural Earth (public domain).
+Download: https://cdn.jsdelivr.net/npm/world-atlas@2.0.2/countries-110m.json
+Project: https://github.com/topojson/world-atlas (ISC licence).

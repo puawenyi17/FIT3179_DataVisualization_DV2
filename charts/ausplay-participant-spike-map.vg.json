@@ -326,13 +326,11 @@
         "color": "#276e86"
       },
       "encoding": {
-        "longitude": {
-          "field": "Longitude",
-          "type": "quantitative"
+        "x": {
+          "value": 720
         },
-        "latitude": {
-          "field": "Latitude",
-          "type": "quantitative"
+        "y": {
+          "value": 125
         },
         "shape": {
           "field": "Shape",
@@ -348,26 +346,23 @@
           {
             "Longitude": 115,
             "Latitude": -40,
-            "Label": "1,000,000 participants"
+            "Label": "1,000,000\nparticipants"
           }
         ]
       },
       "mark": {
         "type": "text",
-        "align": "left",
-        "dx": 12,
-        "dy": -40,
-        "fontSize": 12,
+        "align": "center",
+        "fontSize": 14,
+        "lineBreak": "\n",
         "color": "#233c48"
       },
       "encoding": {
-        "longitude": {
-          "field": "Longitude",
-          "type": "quantitative"
+        "x": {
+          "value": 720
         },
-        "latitude": {
-          "field": "Latitude",
-          "type": "quantitative"
+        "y": {
+          "value": 150
         },
         "text": {
           "field": "Label"
@@ -380,6 +375,14 @@
     "background": "white",
     "view": {
       "stroke": null
+    },
+    "axis": {
+      "labelFontSize": 13,
+      "titleFontSize": 14
+    },
+    "legend": {
+      "labelFontSize": 13,
+      "titleFontSize": 13
     }
   }
 }

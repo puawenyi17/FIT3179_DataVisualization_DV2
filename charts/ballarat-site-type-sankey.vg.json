@@ -1,0 +1,650 @@
+{
+  "$schema": "https://vega.github.io/schema/vega/v5.json",
+  "description": "Ballarat site-to-ground-type Sankey of recorded feature counts, not participant movements. Ranks are fixed across all 36 sites by total features, with alphabetical ties. The selector displays non-overlapping rank groups.",
+  "width": 1160,
+  "height": 540,
+  "padding": {
+    "top": 34,
+    "bottom": 12,
+    "left": 0,
+    "right": 0
+  },
+  "background": "white",
+  "signals": [
+    {
+      "name": "pageStart",
+      "value": 0,
+      "bind": {
+        "input": "select",
+        "options": [
+          0,
+          10,
+          20,
+          30
+        ],
+        "labels": [
+          "Sites ranked 1\u201310",
+          "Sites ranked 11\u201320",
+          "Sites ranked 21\u201330",
+          "Sites ranked 31\u201336"
+        ],
+        "name": "Site ranks: "
+      }
+    },
+    {
+      "name": "gapUnits",
+      "value": 3
+    },
+    {
+      "name": "leftX",
+      "value": 350
+    },
+    {
+      "name": "rightX",
+      "value": 760
+    },
+    {
+      "name": "layoutTotal",
+      "update": "max(extent(pluck(data('sites'),'NodeEnd'))[1], extent(pluck(data('types'),'NodeEnd'))[1])"
+    },
+    {
+      "name": "hoverType",
+      "value": null,
+      "on": [
+        {
+          "events": "@ribbons:mouseover",
+          "update": "datum.GroundType"
+        },
+        {
+          "events": "@ribbons:mouseout",
+          "update": "null"
+        },
+        {
+          "events": "@typeNodes:mouseover",
+          "update": "datum.GroundType"
+        },
+        {
+          "events": "@typeNodes:mouseout",
+          "update": "null"
+        }
+      ]
+    }
+  ],
+  "data": [
+    {
+      "name": "features",
+      "url": "data/raw/Ballarat Sports Grounds.json",
+      "format": {
+        "type": "json",
+        "property": "features"
+      },
+      "transform": [
+        {
+          "type": "formula",
+          "expr": "datum.properties.Site",
+          "as": "Site"
+        },
+        {
+          "type": "formula",
+          "expr": "replace(datum.properties.Feat_Type, 'SG-', '')",
+          "as": "GroundType"
+        }
+      ]
+    },
+    {
+      "name": "ranked",
+      "source": "features",
+      "transform": [
+        {
+          "type": "aggregate",
+          "groupby": [
+            "Site"
+          ],
+          "ops": [
+            "count"
+          ],
+          "as": [
+            "SiteTotal"
+          ]
+        },
+        {
+          "type": "window",
+          "sort": {
+            "field": [
+              "SiteTotal",
+              "Site"
+            ],
+            "order": [
+              "descending",
+              "ascending"
+            ]
+          },
+          "ops": [
+            "row_number"
+          ],
+          "as": [
+            "SiteRank"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "links",
+      "source": "features",
+      "transform": [
+        {
+          "type": "aggregate",
+          "groupby": [
+            "Site",
+            "GroundType"
+          ],
+          "ops": [
+            "count"
+          ],
+          "as": [
+            "Features"
+          ]
+        },
+        {
+          "type": "lookup",
+          "from": "ranked",
+          "key": "Site",
+          "fields": [
+            "Site"
+          ],
+          "values": [
+            "SiteRank",
+            "SiteTotal"
+          ]
+        },
+        {
+          "type": "filter",
+          "expr": "datum.SiteRank > pageStart && datum.SiteRank <= pageStart + 10"
+        }
+      ]
+    },
+    {
+      "name": "sites",
+      "source": "links",
+      "transform": [
+        {
+          "type": "aggregate",
+          "groupby": [
+            "Site",
+            "SiteRank"
+          ],
+          "fields": [
+            "Features"
+          ],
+          "ops": [
+            "sum"
+          ],
+          "as": [
+            "Total"
+          ]
+        },
+        {
+          "type": "stack",
+          "field": "Total",
+          "sort": {
+            "field": "SiteRank",
+            "order": "ascending"
+          },
+          "as": [
+            "Start",
+            "End"
+          ]
+        },
+        {
+          "type": "window",
+          "sort": {
+            "field": "SiteRank",
+            "order": "ascending"
+          },
+          "ops": [
+            "row_number"
+          ],
+          "as": [
+            "Position"
+          ]
+        },
+        {
+          "type": "formula",
+          "expr": "datum.Start + (datum.Position-1)*gapUnits",
+          "as": "NodeStart"
+        },
+        {
+          "type": "formula",
+          "expr": "datum.End + (datum.Position-1)*gapUnits",
+          "as": "NodeEnd"
+        }
+      ]
+    },
+    {
+      "name": "types",
+      "source": "links",
+      "transform": [
+        {
+          "type": "aggregate",
+          "groupby": [
+            "GroundType"
+          ],
+          "fields": [
+            "Features"
+          ],
+          "ops": [
+            "sum"
+          ],
+          "as": [
+            "Total"
+          ]
+        },
+        {
+          "type": "stack",
+          "field": "Total",
+          "sort": {
+            "field": "GroundType",
+            "order": "ascending"
+          },
+          "as": [
+            "Start",
+            "End"
+          ]
+        },
+        {
+          "type": "window",
+          "sort": {
+            "field": "GroundType",
+            "order": "ascending"
+          },
+          "ops": [
+            "row_number"
+          ],
+          "as": [
+            "Position"
+          ]
+        },
+        {
+          "type": "formula",
+          "expr": "datum.Start + (datum.Position-1)*gapUnits",
+          "as": "NodeStart"
+        },
+        {
+          "type": "formula",
+          "expr": "datum.End + (datum.Position-1)*gapUnits",
+          "as": "NodeEnd"
+        }
+      ]
+    },
+    {
+      "name": "paths",
+      "source": "links",
+      "transform": [
+        {
+          "type": "lookup",
+          "from": "sites",
+          "key": "Site",
+          "fields": [
+            "Site"
+          ],
+          "values": [
+            "NodeStart"
+          ],
+          "as": [
+            "SiteStart"
+          ]
+        },
+        {
+          "type": "lookup",
+          "from": "types",
+          "key": "GroundType",
+          "fields": [
+            "GroundType"
+          ],
+          "values": [
+            "NodeStart"
+          ],
+          "as": [
+            "TypeStart"
+          ]
+        },
+        {
+          "type": "stack",
+          "field": "Features",
+          "groupby": [
+            "Site"
+          ],
+          "sort": {
+            "field": "GroundType",
+            "order": "ascending"
+          },
+          "as": [
+            "sy0",
+            "sy1"
+          ]
+        },
+        {
+          "type": "stack",
+          "field": "Features",
+          "groupby": [
+            "GroundType"
+          ],
+          "sort": {
+            "field": "SiteRank",
+            "order": "ascending"
+          },
+          "as": [
+            "ty0",
+            "ty1"
+          ]
+        },
+        {
+          "type": "linkpath",
+          "orient": "horizontal",
+          "shape": "diagonal",
+          "sourceX": {
+            "expr": "leftX + 12"
+          },
+          "targetX": {
+            "expr": "rightX"
+          },
+          "sourceY": {
+            "expr": "scale('y', datum.SiteStart + (datum.sy0+datum.sy1)/2)"
+          },
+          "targetY": {
+            "expr": "scale('y', datum.TypeStart + (datum.ty0+datum.ty1)/2)"
+          }
+        }
+      ]
+    }
+  ],
+  "scales": [
+    {
+      "name": "y",
+      "type": "linear",
+      "domain": [
+        0,
+        {
+          "signal": "layoutTotal"
+        }
+      ],
+      "range": [
+        0,
+        {
+          "signal": "height"
+        }
+      ],
+      "zero": true
+    },
+    {
+      "name": "color",
+      "type": "ordinal",
+      "domain": [
+        "Athletics",
+        "Baseball/Softball",
+        "Cricket Pitch",
+        "Cricket/Football",
+        "Cricket/Football/Soccer",
+        "Equestrian",
+        "Football",
+        "Greyhound Slipping Track",
+        "Hockey",
+        "Soccer"
+      ],
+      "range": [
+        "#187f83",
+        "#5877a2",
+        "#c48d34",
+        "#8a679c",
+        "#bb634f",
+        "#7b8750",
+        "#3e7089",
+        "#9b6f58",
+        "#70788f",
+        "#418f80"
+      ]
+    }
+  ],
+  "marks": [
+    {
+      "name": "ribbons",
+      "type": "path",
+      "from": {
+        "data": "paths"
+      },
+      "encode": {
+        "update": {
+          "path": {
+            "field": "path"
+          },
+          "stroke": {
+            "scale": "color",
+            "field": "GroundType"
+          },
+          "strokeWidth": {
+            "signal": "scale('y', datum.Features)"
+          },
+          "strokeOpacity": {
+            "signal": "hoverType === null || hoverType === datum.GroundType ? 0.65 : 0.08"
+          },
+          "fill": {
+            "value": null
+          },
+          "tooltip": {
+            "signal": "{'Site':datum.Site,'Recorded type':datum.GroundType,'Features':datum.Features,'Site rank':datum.SiteRank}"
+          }
+        }
+      }
+    },
+    {
+      "name": "siteNodes",
+      "type": "rect",
+      "from": {
+        "data": "sites"
+      },
+      "encode": {
+        "update": {
+          "x": {
+            "signal": "leftX"
+          },
+          "width": {
+            "value": 12
+          },
+          "y": {
+            "scale": "y",
+            "field": "NodeStart"
+          },
+          "y2": {
+            "scale": "y",
+            "field": "NodeEnd"
+          },
+          "fill": {
+            "value": "#254955"
+          },
+          "tooltip": {
+            "signal": "{'Site':datum.Site,'Recorded features':datum.Total}"
+          }
+        }
+      }
+    },
+    {
+      "type": "text",
+      "from": {
+        "data": "sites"
+      },
+      "interactive": false,
+      "encode": {
+        "update": {
+          "x": {
+            "signal": "leftX - 10"
+          },
+          "y": {
+            "signal": "scale('y',(datum.NodeStart+datum.NodeEnd)/2)"
+          },
+          "align": {
+            "value": "right"
+          },
+          "baseline": {
+            "value": "middle"
+          },
+          "fontSize": {
+            "value": 17
+          },
+          "fill": {
+            "value": "#25404d"
+          },
+          "limit": {
+            "value": 0
+          },
+          "text": {
+            "signal": "datum.SiteRank + \". \" + datum.Site + \" \u00b7 \" + datum.Total"
+          },
+          "font": {
+            "value": "Arial"
+          }
+        }
+      }
+    },
+    {
+      "name": "typeNodes",
+      "type": "rect",
+      "from": {
+        "data": "types"
+      },
+      "encode": {
+        "update": {
+          "x": {
+            "signal": "rightX"
+          },
+          "width": {
+            "value": 12
+          },
+          "y": {
+            "scale": "y",
+            "field": "NodeStart"
+          },
+          "y2": {
+            "scale": "y",
+            "field": "NodeEnd"
+          },
+          "fill": {
+            "scale": "color",
+            "field": "GroundType"
+          },
+          "tooltip": {
+            "signal": "{'GroundType':datum.GroundType,'Recorded features':datum.Total}"
+          }
+        }
+      }
+    },
+    {
+      "type": "text",
+      "from": {
+        "data": "types"
+      },
+      "interactive": false,
+      "encode": {
+        "update": {
+          "x": {
+            "signal": "rightX + 22"
+          },
+          "y": {
+            "signal": "scale('y',(datum.NodeStart+datum.NodeEnd)/2)"
+          },
+          "align": {
+            "value": "left"
+          },
+          "baseline": {
+            "value": "middle"
+          },
+          "fontSize": {
+            "value": 17
+          },
+          "fill": {
+            "value": "#25404d"
+          },
+          "limit": {
+            "value": 0
+          },
+          "text": {
+            "signal": "datum.GroundType + \" \u00b7 \" + datum.Total"
+          },
+          "font": {
+            "value": "Arial"
+          }
+        }
+      }
+    },
+    {
+      "type": "text",
+      "interactive": false,
+      "encode": {
+        "enter": {
+          "x": {
+            "signal": "leftX - 30"
+          },
+          "y": {
+            "value": -16
+          },
+          "align": {
+            "value": "right"
+          },
+          "fontSize": {
+            "value": 14
+          },
+          "fontWeight": {
+            "value": "bold"
+          },
+          "fill": {
+            "value": "#25404d"
+          },
+          "text": {
+            "value": "SITES \u00b7 ranked by all recorded features"
+          },
+          "font": {
+            "value": "Arial"
+          }
+        }
+      }
+    },
+    {
+      "type": "text",
+      "interactive": false,
+      "encode": {
+        "enter": {
+          "x": {
+            "signal": "rightX"
+          },
+          "y": {
+            "value": -16
+          },
+          "align": {
+            "value": "left"
+          },
+          "fontSize": {
+            "value": 14
+          },
+          "fontWeight": {
+            "value": "bold"
+          },
+          "fill": {
+            "value": "#25404d"
+          },
+          "text": {
+            "value": "RECORDED GROUND TYPES"
+          },
+          "font": {
+            "value": "Arial"
+          }
+        }
+      }
+    }
+  ],
+  "config": {
+    "font": "Arial"
+  },
+  "autosize": {
+    "type": "none",
+    "contains": "content"
+  }
+}

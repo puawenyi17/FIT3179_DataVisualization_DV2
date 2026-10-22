@@ -1,8 +1,8 @@
 {
   "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
   "description": "One equal-sized dot per council with funding records in the selected year. Dot colour represents record count on a fixed yellow-to-dark-red square-root scale; positions represent council areas, not club addresses.",
-  "width": "container",
-  "height": 510,
+  "width": 420,
+  "height": 540,
   "params": [
     {
       "name": "selectedYear",
@@ -183,8 +183,8 @@
           },
           "legend": {
             "title": "Funding records",
-            "orient": "bottom",
-            "gradientLength": 220,
+            "orient": "right",
+            "gradientLength": 150,
             "titleLimit": 400,
             "values": [
               0,
@@ -193,7 +193,9 @@
               150,
               250,
               350
-            ]
+            ],
+            "direction": "vertical",
+            "offset": 16
           }
         }
       }
@@ -206,8 +208,8 @@
       "stroke": null
     },
     "axis": {
-      "labelFontSize": 12,
-      "titleFontSize": 13,
+      "labelFontSize": 13,
+      "titleFontSize": 14,
       "titlePadding": 12,
       "labelColor": "#354d58",
       "titleColor": "#354d58",
@@ -216,8 +218,11 @@
       "tickColor": "#cbd8de"
     },
     "legend": {
-      "labelFontSize": 12,
-      "titleFontSize": 12
+      "labelFontSize": 13,
+      "titleFontSize": 13,
+      "orient": "right",
+      "direction": "vertical",
+      "offset": 16
     }
   }
 }

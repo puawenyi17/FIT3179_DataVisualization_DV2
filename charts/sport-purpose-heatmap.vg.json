@@ -1,6 +1,6 @@
 {
   "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
-  "description": "Original funding-record counts by activity and purpose, with a square-root colour scale adapting to the selected year.",
+  "description": "Purpose mix within leading funded activities: each bar contains all records for that activity in the selected year. Four leading original purposes remain separate; all remaining purposes form Other purposes. Shares are of records, not dollars or participants.",
   "data": {
     "url": "data/raw/active-clubs-records.csv",
     "format": {
@@ -11,8 +11,10 @@
       }
     }
   },
-  "width": "container",
-  "height": 310,
+  "width": 350,
+  "height": {
+    "step": 48
+  },
   "params": [
     {
       "name": "selectedYear",
@@ -25,6 +27,18 @@
           2024
         ],
         "name": "Approval year: "
+      }
+    },
+    {
+      "name": "topActivities",
+      "value": 5,
+      "bind": {
+        "input": "select",
+        "options": [
+          5,
+          10
+        ],
+        "name": "Leading activities: "
       }
     }
   ],
@@ -121,122 +135,43 @@
       ]
     },
     {
-      "filter": "datum.ActivityRank <= 5 && datum.PurposeRank <= 5"
+      "filter": "datum.ActivityRank <= topActivities"
     },
     {
-      "impute": "Records",
-      "key": "Purpose",
-      "groupby": [
-        "Activity"
-      ],
-      "value": 0
+      "calculate": "datum.PurposeRank <= 4 ? replace(datum.Purpose, /^(Deliver safe experiences|Supporting Volunteers|Provide flexible participation opportunities) - /, '') : 'Other purposes'",
+      "as": "PurposeGroup"
     },
     {
-      "joinaggregate": [
+      "calculate": "datum.PurposeRank <= 4 ? datum.Purpose : 'Other recorded purposes'",
+      "as": "OriginalPurpose"
+    },
+    {
+      "aggregate": [
+        {
+          "op": "sum",
+          "field": "Records",
+          "as": "Records"
+        },
         {
           "op": "max",
-          "field": "Records",
-          "as": "MaxCellRecords"
-        }
-      ]
-    }
-  ],
-  "encoding": {
-    "x": {
-      "field": "Activity",
-      "type": "nominal",
-      "title": null,
-      "sort": {
-        "field": "ActivityTotal",
-        "op": "max",
-        "order": "descending"
-      },
-      "axis": {
-        "labelAngle": -20,
-        "labelLimit": 140
-      }
-    },
-    "y": {
-      "field": "Purpose",
-      "type": "nominal",
-      "title": null,
-      "sort": {
-        "field": "PurposeTotal",
-        "op": "max",
-        "order": "descending"
-      },
-      "axis": {
-        "labelLimit": 315,
-        "labelExpr": "replace(datum.label, /^(Deliver safe experiences|Supporting Volunteers|Provide flexible participation opportunities) - /, \"\")"
-      }
-    },
-    "tooltip": [
-      {
-        "field": "Activity",
-        "type": "nominal"
-      },
-      {
-        "field": "Purpose",
-        "type": "nominal",
-        "title": "Original source purpose"
-      },
-      {
-        "field": "Records",
-        "type": "quantitative",
-        "title": "Funding records",
-        "format": ","
-      }
-    ]
-  },
-  "layer": [
-    {
-      "mark": {
-        "type": "rect",
-        "stroke": "white",
-        "strokeWidth": 2
-      },
-      "encoding": {
-        "color": {
-          "field": "Records",
-          "type": "quantitative",
-          "scale": {
-            "type": "sqrt",
-            "zero": true,
-            "nice": false,
-            "range": [
-              "#eff6f5",
-              "#07585d"
-            ]
-          },
-          "legend": {
-            "title": "Funding records (square-root scale)",
-            "orient": "bottom",
-            "format": ",.0f",
-            "titleLimit": 350,
-            "gradientLength": 300
-          }
-        }
-      }
-    },
-    {
-      "mark": {
-        "type": "text",
-        "fontSize": 15
-      },
-      "encoding": {
-        "text": {
-          "field": "Records",
-          "type": "quantitative",
-          "format": ","
+          "field": "ActivityTotal",
+          "as": "ActivityTotal"
         },
-        "color": {
-          "condition": {
-            "test": "datum.MaxCellRecords > 0 && sqrt(datum.Records / datum.MaxCellRecords) > 0.65",
-            "value": "white"
-          },
-          "value": "#132f3a"
+        {
+          "op": "min",
+          "field": "PurposeRank",
+          "as": "PurposeOrder"
         }
-      }
+      ],
+      "groupby": [
+        "Activity",
+        "PurposeGroup",
+        "OriginalPurpose"
+      ]
+    },
+    {
+      "calculate": "datum.Records / datum.ActivityTotal",
+      "as": "Share"
     }
   ],
   "config": {
@@ -246,8 +181,8 @@
       "stroke": null
     },
     "axis": {
-      "labelFontSize": 12,
-      "titleFontSize": 13,
+      "labelFontSize": 13,
+      "titleFontSize": 14,
       "titlePadding": 12,
       "labelColor": "#354d58",
       "titleColor": "#354d58",
@@ -256,8 +191,101 @@
       "tickColor": "#cbd8de"
     },
     "legend": {
-      "labelFontSize": 12,
-      "titleFontSize": 12
+      "labelFontSize": 13,
+      "titleFontSize": 13,
+      "orient": "right",
+      "direction": "vertical",
+      "offset": 16
     }
+  },
+  "mark": {
+    "type": "bar",
+    "stroke": "white",
+    "strokeWidth": 1
+  },
+  "encoding": {
+    "y": {
+      "field": "Activity",
+      "type": "nominal",
+      "sort": {
+        "field": "ActivityTotal",
+        "order": "descending",
+        "op": "max"
+      },
+      "title": null,
+      "axis": {
+        "labelLimit": 200,
+        "labelPadding": 10
+      }
+    },
+    "x": {
+      "field": "Share",
+      "type": "quantitative",
+      "stack": "zero",
+      "title": "Share of activity records",
+      "scale": {
+        "domain": [
+          0,
+          1
+        ]
+      },
+      "axis": {
+        "format": ".0%",
+        "tickCount": 5
+      }
+    },
+    "color": {
+      "field": "PurposeGroup",
+      "type": "nominal",
+      "scale": {
+        "range": [
+          "#187f83",
+          "#e3aa45",
+          "#5476a6",
+          "#b86c46",
+          "#abb8bf"
+        ]
+      },
+      "legend": {
+        "title": [
+          "Purpose",
+          "(four leading + other)"
+        ],
+        "orient": "right",
+        "labelLimit": 0,
+        "titleLimit": 0,
+        "offset": 16,
+        "labelExpr": "datum.label === \"Education and training for volunteers\" ? \"Volunteer training\" : datum.label === \"Participation activities and events\" ? \"Activities and events\" : datum.label === \"Resources for participation opportunities\" ? \"Participation resources\" : datum.label === \"Equipment - on field\" ? \"On-field equipment\" : datum.label === \"Equipment - off field\" ? \"Off-field equipment\" : datum.label"
+      }
+    },
+    "order": {
+      "field": "PurposeOrder",
+      "type": "quantitative"
+    },
+    "tooltip": [
+      {
+        "field": "Activity"
+      },
+      {
+        "field": "OriginalPurpose",
+        "title": "Original source purpose"
+      },
+      {
+        "field": "Records",
+        "type": "quantitative",
+        "format": ",.0f"
+      },
+      {
+        "field": "ActivityTotal",
+        "title": "All records for activity",
+        "type": "quantitative",
+        "format": ",.0f"
+      },
+      {
+        "field": "Share",
+        "type": "quantitative",
+        "format": ".1%"
+      }
+    ]
   }
 }

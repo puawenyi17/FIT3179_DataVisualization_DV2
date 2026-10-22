@@ -1,147 +1,957 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Community sport | Funding and club survey</title>
-  <meta name="description" content="Explore Queensland Active Clubs funding records, activity rankings and project purposes across the 2022, 2023 and 2024 approval rounds.">
-  <link rel="stylesheet" href="css/styles.css">
-  <!-- Only the three libraries used in the Week 9 lecture examples. -->
-  <script src="https://cdn.jsdelivr.net/npm/vega@5.20.2"></script>
-  <script src="https://cdn.jsdelivr.net/npm/vega-lite@5.1.0"></script>
-  <script src="https://cdn.jsdelivr.net/npm/vega-embed@6.17.0"></script>
-</head>
-<body>
-  <a class="skip-link" href="#main">Skip to visualisations</a>
-  <header class="masthead"><span>COMMUNITY SPORT</span><span>QUEENSLAND FUNDING · NATIONAL CLUB SURVEY</span></header>
-  <main id="main">
-    <div class="intro">
-      <p class="eyebrow">THE ACTIVE CLUBS PROGRAM</p>
-      <h1>Three rounds of community sport.</h1>
-      <p class="lead">Where funding goes, which activities lead, and what support pays for.</p>
-      <p>Local clubs need equipment, volunteers and opportunities to take part. Three funding releases offer a view of how Queensland directed support across places and activities.</p>
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Australian Sports Clubs | Community Sport in Focus</title>
+    <meta name="description" content="Explore Australian sports clubs and community sport through funding, participation and facilities, with national insights and state and local case studies.">
+    <link rel="stylesheet" href="css/styles.css?v=20261022-swimming">
+    <!-- Only the three libraries used in the Week 9 lecture examples. -->
+    <script src="https://cdn.jsdelivr.net/npm/vega@5.20.2">
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/vega-lite@5.1.0">
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/vega-embed@6.17.0">
+    </script>
+  </head>
+  <body>
+    <div class="page-shell">
+      <header class="masthead">
+        <span>AUSTRALIAN SPORTS CLUBS</span>
+        <span>SUPPORT · PARTICIPATION · COMMUNITY</span>
+      </header>
+      <main id="main">
+        <div class="intro">
+          <div class="hero-title">
+            <p class="eyebrow">COMMUNITY SPORT ACROSS AUSTRALIA</p>
+            <h1>Australia’s sports clubs, in focus.</h1>
+          </div>
+          <div class="hero-copy">
+            <p class="lead">
+              <span class="prose-line">Explore the support, people and</span>
+              <span class="prose-line">places behind community sport.</span>
+            </p>
+            <p>
+              <span class="prose-line">Local sporting clubs bring people</span>
+              <span class="prose-line">together to play,  contribute and</span>
+              <span class="prose-line">connect. Explore how support is</span>
+              <span class="prose-line">distributed,  who participates in football</span>
+              <span class="prose-line">and which sports-ground features are</span>
+              <span class="prose-line">recorded  in a local community.</span>
+            </p>
+          </div>
+        </div>
+        <nav class="stats" aria-label="Story chapters">
+          <a href="#support">
+            <span class="stat-value">Support</span>
+            <span>Funding, activities and project purposes</span>
+          </a>
+          <a href="#participation">
+            <span class="stat-value">Participation</span>
+            <span>Club survey insights and football participation</span>
+          </a>
+          <a href="#places">
+            <span class="stat-value">Facilities</span>
+            <span>Recorded sports-ground features at local sites</span>
+          </a>
+        </nav>
+        <div class="chapter-divider" id="support">
+          <span class="chapter">01 / SUPPORT</span>
+          <h2>Supporting community sport</h2>
+          <p class="caption">
+            <span class="prose-line">Queensland funding approvals · 2022–2024</span>
+          </p>
+        </div>
+        <section aria-labelledby="map-title" class="story-section story-split" id="story-map">
+          <div class="section-heading">
+            <span class="chapter">01 / PLACE</span>
+            <h2 id="map-title">Where does support reach?</h2>
+          </div>
+          <div class="story-grid">
+            <div class="story-copy">
+              <p class="lead">
+                <span class="prose-line">Queensland’s Active Clubs program</span>
+                <span class="prose-line">supports local sporting activities.</span>
+              </p>
+              <p>
+                <span class="prose-line">Explore where funding was approved in</span>
+                <span class="prose-line">2022, 2023 and 2024. Select a year,</span>
+                <span class="prose-line">then hover over a council to inspect its</span>
+                <span class="prose-line">records and funding.</span>
+              </p>
+              <p class="takeaway">
+                <span class="prose-line">Each record is a funding approval. An</span>
+                <span class="prose-line">organisation can appear more than</span>
+                <span class="prose-line">once; these figures do not count</span>
+                <span class="prose-line">members or participants.</span>
+              </p>
+              <div class="map-reading-notes">
+                <div class="visible-note reading-guide">
+                  <h3 class="note-heading">Explore the map</h3>
+                  <p class="caption">
+                    <span class="prose-line">Choose a year, then hover over a council to</span>
+                    <span class="prose-line">see its funding records and approved amount.</span>
+                  </p>
+                  <p class="caption">
+                    <span class="prose-line">Dots mark council reference positions. Nearby councils can overlap.</span>
+                  </p>
+                </div>
+                <div class="visible-note reading-guide">
+                  <h3 class="note-heading">Chart notes and sources</h3>
+                  <p class="caption">
+                    <span class="prose-line">Colour shows funding-record counts on a fixed 0?350 square-root</span>
+                    <span class="prose-line">scale. Boundaries are from 2024; dots are not club</span>
+                    <span class="prose-line">addresses.</span>
+                  </p>
+                  <p class="caption">
+                    <span class="prose-line">One 2022 record has no council value. It remains</span>
+                    <span class="prose-line">in annual totals but cannot appear on the map.</span>
+                  </p>
+                  <p class="caption">
+                    <span class="prose-line">Comparing access also requires population or eligible-club counts.</span>
+                  </p>
+                </div>
+              </div>
+            </div>
+            <div class="chart-column">
+              <div id="funding-map" class="vis-container" aria-label="Equal-sized dot map coloured by funding-record count by council area">
+              </div>
+              <div class="chart-notes">
+              </div>
+            </div>
+          </div>
+        </section>
+        <section aria-labelledby="funding-title" class="story-section story-split" id="story-funding">
+          <div class="section-heading">
+            <span class="chapter">02 / OVER TIME</span>
+            <h2 id="funding-title">How much funding was approved each year?</h2>
+          </div>
+          <div class="story-grid">
+            <div class="story-copy">
+              <aside class="story-context">
+                <h3>The people behind the game</h3>
+                <p>
+                  <span class="prose-line">Sport volunteers contribute as coaches, officials and administrators. Supporting</span>
+                  <span class="prose-line">a club means thinking about the people who make</span>
+                  <span class="prose-line">each session possible, alongside equipment and facilities.</span>
+                </p>
+                <p>
+                  <span class="prose-line">The annual funding totals offer a starting point.</span>
+                  <span class="prose-line">The purpose chart below asks how that support is directed.</span>
+                </p>
+                <p class="context-source">
+                  <a href="https://www.ausport.gov.au/clearinghouse/research/volunteer-dashboard">Australian Sports Commission: sport volunteering</a>
+                </p>
+              </aside>
+              <p>
+                <span class="prose-line">Compare the total approved funding</span>
+                <span class="prose-line">across the three annual releases.</span>
+              </p>
+              <div class="funding-reading-notes">
+                <div class="visible-note reading-guide">
+                  <h3 class="note-heading">Chart notes and sources</h3>
+                  <p class="caption">
+                    <span class="prose-line">Amounts are in Australian dollars, GST</span>
+                    <span class="prose-line">exclusive.  Each bar represents one</span>
+                    <span class="prose-line">funding approval round.</span>
+                  </p>
+                </div>
+              </div>
+            </div>
+            <div class="chart-column">
+              <div id="annual-funding" class="vis-container" aria-label="Bar chart of total approved funding by year">
+              </div>
+              <div class="chart-notes">
+              </div>
+            </div>
+          </div>
+        </section>
+        <div class="paired-charts">
+          <section aria-labelledby="bump-title" class="story-section story-wide" id="story-bump">
+            <div class="section-heading">
+              <span class="chapter">03 / ACTIVITY RANKINGS</span>
+              <h2 id="bump-title">Which activities move up the ranking?</h2>
+            </div>
+            <div class="story-grid">
+              <div class="story-copy">
+                <p>
+                  <span class="prose-line">Follow leading activities across three funding rounds.</span>
+                  <span class="prose-line">Their changing ranks reveal shifts in local sporting support.</span>
+                </p>
+                <p>
+                  <span class="prose-line">Select five or ten; click a legend to highlight.</span>
+                </p>
+              </div>
+              <div class="chart-column">
+                <div id="sport-bump" class="vis-container" aria-label="Bump chart of annual activity ranks">
+                </div>
+                <div class="chart-notes">
+                  <p class="caption">
+                    <span class="prose-line">Annual ranks are calculated among all activity</span>
+                    <span class="prose-line">categories before selecting  the leading five or</span>
+                    <span class="prose-line">ten. Equal counts are ordered alphabetically.</span>
+                    <span class="prose-line">Rank measures relative position; hover to see</span>
+                    <span class="prose-line">the actual funding-record  count.</span>
+                  </p>
+                </div>
+              </div>
+            </div>
+          </section>
+          <section aria-labelledby="heatmap-title" class="story-section story-wide" id="story-heatmap">
+            <div class="section-heading">
+              <span class="chapter">04 / PURPOSE MIX</span>
+              <h2 id="heatmap-title">What does each activity’s support focus on?</h2>
+            </div>
+            <div class="story-grid">
+              <div class="story-copy">
+                <p>
+                  <span class="prose-line">Compare how support is used within leading activities.</span>
+                  <span class="prose-line">Each bar represents all records for that activity.</span>
+                </p>
+                <p>
+                  <span class="prose-line">Select a year; hover for counts and purpose details.</span>
+                </p>
+              </div>
+              <div class="chart-column">
+                <div id="sport-purpose" class="vis-container" aria-label="100% stacked bars comparing funding purposes within leading activities">
+                </div>
+                <div class="chart-notes">
+                  <p class="caption">
+                    <span class="prose-line">Choose an approval year and five or ten</span>
+                    <span class="prose-line">activities.  The four most frequent purposes</span>
+                    <span class="prose-line">across that year remain separate;  other</span>
+                    <span class="prose-line">purposes share one segment.  Hover for original</span>
+                    <span class="prose-line">counts, purpose wording and shares.</span>
+                  </p>
+                </div>
+              </div>
+            </div>
+            <div class="section-notes">
+              <div class="visible-note scope-details">
+                <h3 class="note-heading">What these figures measure</h3>
+                <p class="scope-note">
+                  <span class="prose-line">Shares describe funding records, not funding</span>
+                  <span class="prose-line">dollars or participants.  All purposes remain in</span>
+                  <span class="prose-line">each activity’s denominator.  Source labels and</span>
+                  <span class="prose-line">the leading purposes can differ between years;</span>
+                  <span class="prose-line">combined purposes are not split</span>
+                  <span class="prose-line">or counted twice.</span>
+                </p>
+              </div>
+            </div>
+          </section>
+        </div>
+        <div class="chapter-divider" id="participation">
+          <span class="chapter">02 / PARTICIPATION</span>
+          <h2>Understanding who takes part</h2>
+          <p class="caption">
+            <span class="prose-line">National surveys and Football Australia reports</span>
+          </p>
+        </div>
+        <section aria-labelledby="survey-map-title" class="story-section story-split" id="story-survey-map">
+          <div class="section-heading">
+            <span class="chapter">05 / NATIONAL SURVEY</span>
+            <h2 id="survey-map-title">Which sports are represented among surveyed clubs?</h2>
+          </div>
+          <div class="story-grid">
+            <div class="story-copy">
+              <aside class="story-context">
+                <h3>An invitation to belong</h3>
+                <p>
+                  <span class="prose-line">Football Australia’s MiniRoos Settlement Program supports children from refugee</span>
+                  <span class="prose-line">and migrant families. It shows how community sport can</span>
+                  <span class="prose-line">be designed around welcoming newcomers.</span>
+                </p>
+                <p>
+                  <span class="prose-line">Which sports are represented is one question. Who feels</span>
+                  <span class="prose-line">welcome to join is another.</span>
+                </p>
+                <p class="context-source">
+                  <a href="https://footballaustralia.com.au/culturally-and-linguistically-diverse-populations-cald">Football Australia: CALD Play</a>
+                </p>
+              </aside>
+              <p>
+                <span class="prose-line">Switch sports to compare their</span>
+                <span class="prose-line">representation among club respondents</span>
+                <span class="prose-line">in  each state and territory.  For example,</span>
+                <span class="prose-line">44% of NSW respondents reported</span>
+                <span class="prose-line">football/soccer,  compared with</span>
+                <span class="prose-line">10% in Victoria.</span>
+              </p>
+            </div>
+            <div class="chart-column">
+              <div id="asf-state-map" class="vis-container" aria-label="Australian state choropleth of sport representation among ASF club survey respondents">
+              </div>
+              <div class="chart-notes">
+              </div>
+            </div>
+          </div>
+          <div class="section-notes">
+            <div class="visible-note scope-details">
+              <h3 class="note-heading">What these figures measure</h3>
+              <p class="scope-note">
+                <span class="prose-line">These are published percentages of club</span>
+                <span class="prose-line">respondents, not membership counts,</span>
+                <span class="prose-line">population participation rates or a census of</span>
+                <span class="prose-line">Australian clubs.  Sport percentages within a</span>
+                <span class="prose-line">state exceed 100%;  categories should not be</span>
+                <span class="prose-line">treated as exclusive.  A displayed 0% can reflect</span>
+                <span class="prose-line">rounding.  The source repeats “Skateboarding”</span>
+                <span class="prose-line">in two rows;  both are preserved separately</span>
+                <span class="prose-line">in the selector.</span>
+              </p>
+            </div>
+            <div class="visible-note reading-guide">
+              <h3 class="note-heading">Chart notes and sources</h3>
+              <p class="caption">
+                <span class="prose-line">
+                  Source: ASF,
+                  <em>Clubs Under Pressure</em>
+                  , May 2023,
+                </span>
+                <span class="prose-line">page 28;  survey conducted February–March</span>
+                <span class="prose-line">2023.  Colours use the same 0–50% scale for</span>
+                <span class="prose-line">every sport.  Hover for the state response base.</span>
+                <span class="prose-line">ACT and NT have only 39 and 32 responses</span>
+                <span class="prose-line">respectively;  the ACT label is connected to its</span>
+                <span class="prose-line">location by a  line.</span>
+              </p>
+            </div>
+          </div>
+        </section>
+        <section aria-labelledby="ausplay-spike-map-title" class="story-section story-split participation-story" id="story-ausplay-spike-map">
+          <div class="story-grid">
+            <div class="story-copy">
+              <div class="section-heading">
+                <span class="chapter">06 / ORGANISED PARTICIPATION</span>
+                <h2 id="ausplay-spike-map-title">Where do more adults participate through organisations?</h2>
+              </div>
+              <p>
+                <span class="prose-line">Compare adult participation across states and territories.</span>
+                <span class="prose-line">Taller spikes mean more participants through organisations.</span>
+                <span class="prose-line">Hover for counts and participation rates.</span>
+              </p>
+              <div class="visible-note">
+                <h3 class="note-heading">Reading the map</h3>
+                <p>
+                  <span class="prose-line">Spike height represents counts; base width stays constant.</span>
+                  <span class="prose-line">The reference spike represents one million participants.</span>
+                  <span class="prose-line">Labels sit below each spike; ACT is offset.</span>
+                  <span class="prose-line">Locations represent states and territories, not participant addresses.</span>
+                </p>
+              </div>
+              <div class="visible-note">
+                <h3 class="note-heading">What these figures measure</h3>
+                <p>
+                  <span class="prose-line">These survey estimates cover adults participating through organisations,</span>
+                  <span class="prose-line">including providers beyond sports clubs. They are not</span>
+                  <span class="prose-line">population or club membership totals. Larger populations affect counts;</span>
+                  <span class="prose-line">compare the participation rates in the tooltips too.</span>
+                </p>
+                <p>
+                  <span class="prose-line">Source filters: Period All; Adult; Gender All; Age All.</span>
+                  <span class="prose-line">Exact reporting dates are unavailable, so no year is assigned.</span>
+                </p>
+                <p class="context-source">
+                  <a href="data/raw/ausplay-state-organisation-participation.csv" download>Download the transcribed state totals</a>
+                </p>
+              </div>
+            </div>
+            <div class="chart-column">
+              <div id="ausplay-spike-map" class="vis-container" aria-label="Australian spike map of estimated adult participants through organisations">
+              </div>
+            </div>
+          </div>
+        </section>
+        <section aria-labelledby="football-growth-title" class="story-section story-split participation-story" id="story-football-growth">
+          <div class="story-grid">
+            <div class="story-copy">
+              <div class="section-heading">
+                <span class="chapter">07 / FOOTBALL PARTICIPATION</span>
+                <h2 id="football-growth-title">Where has football participation grown since 2022?</h2>
+              </div>
+              <aside class="story-context">
+                <h3>Fourth on home soil</h3>
+                <p>
+                  <span class="prose-line">The Matildas finished fourth at the 2023 Women’s</span>
+                  <span class="prose-line">World Cup, their best finish at that tournament.</span>
+                  <span class="prose-line">These participation figures cannot establish a World Cup effect.</span>
+                </p>
+                <p class="context-source">
+                  <a href="https://matildas.com.au/news/2023-year-review">Matildas: 2023 Year in Review</a>
+                </p>
+              </aside>
+              <p>
+                <span class="prose-line">Compare each region with its own 2022 baseline.</span>
+                <span class="prose-line">Select an age group and comparison year.</span>
+              </p>
+              <div class="visible-note">
+                <h3 class="note-heading">Reading the chart</h3>
+                <p>
+                  <span class="prose-line">Right means growth; left means decline. Circle area</span>
+                  <span class="prose-line">shows participants for the selected year, region and age group.</span>
+                  <span class="prose-line">Paired rows compare male (teal) and female (orange) participants.</span>
+                  <span class="prose-line">Both use the same circle-size and growth scales.</span>
+                  <span class="prose-line">Growth scales stay fixed across years but change between ages.</span>
+                  <span class="prose-line">Hover for counts and source pages.</span>
+                </p>
+              </div>
+              <div class="visible-note">
+                <h3 class="note-heading">What these figures measure</h3>
+                <p>
+                  <span class="prose-line">Change = (selected-year count ÷ 2022 count − 1)×100.</span>
+                  <span class="prose-line">This measures relative growth, not participation rates or percentage points.</span>
+                  <span class="prose-line">Small baselines can produce large changes. NSW and Northern</span>
+                  <span class="prose-line">NSW remain separate regions. Only published male and female</span>
+                  <span class="prose-line">counts are included; unspecified gender is excluded.</span>
+                  <span class="prose-line">Age categories follow the source reports.</span>
+                </p>
+              </div>
+            </div>
+            <div class="chart-column">
+              <div id="football-lollipop" class="vis-container" aria-label="Grouped lollipop chart: percentage change since 2022, gender colours and circle area proportional to selected-year participant counts">
+              </div>
+            </div>
+          </div>
+        </section>
+        <section aria-labelledby="football-sunburst-title" class="story-section story-split" id="story-football-sunburst">
+          <div class="section-heading">
+            <span class="chapter">08 / PARTICIPATION BREAKDOWN</span>
+            <h2 id="football-sunburst-title">How does football participation divide by age, gender and year?</h2>
+          </div>
+          <div class="story-grid">
+            <div class="story-copy">
+              <aside class="story-context">
+                <h3>From local pitches to the world stage</h3>
+                <p>
+                  <span class="prose-line">At the 2022 World Cup, the Socceroos reached the</span>
+                  <span class="prose-line">round of 16 and won two group-stage matches for</span>
+                  <span class="prose-line">the first time.</span>
+                </p>
+                <p>
+                  <span class="prose-line">Behind the national-team spotlight is football at every age.</span>
+                  <span class="prose-line">Explore the balance between children, youth and seniors, and</span>
+                  <span class="prose-line">consider where clubs need opportunities for people to begin</span>
+                  <span class="prose-line">and continue playing.</span>
+                </p>
+                <p class="context-source">
+                  <a href="https://socceroos.com.au/news/football-australia-celebrates-socceroos-historic-fifa-world-cup-campaign">Socceroos: the 2022 World Cup campaign</a>
+                </p>
+              </aside>
+              <p>
+                <span class="prose-line">Read from the centre outwards:</span>
+                <span class="prose-line">
+                  <strong>MiniRoos,</strong>
+                  <strong>Youth and Senior → Male</strong>
+                </span>
+                <span class="prose-line">
+                  <strong>and Female → 2022, 2023,</strong>
+                  <strong>2024 and</strong>
+                </span>
+                <span class="prose-line">
+                  <strong>2025</strong>
+                  . Larger angular spans represent
+                </span>
+                <span class="prose-line">larger reported participant  counts.</span>
+                <span class="prose-line">Choose all reporting regions or one</span>
+                <span class="prose-line">region,  and hover for exact counts.</span>
+              </p>
+            </div>
+            <div class="chart-column">
+              <div id="football-sunburst" class="vis-container" aria-label="Three-ring sunburst of football participant counts by age group, gender and year">
+              </div>
+              <div class="chart-notes">
+              </div>
+            </div>
+          </div>
+          <div class="section-notes">
+            <div class="visible-note scope-details">
+              <h3 class="note-heading">What these figures measure</h3>
+              <p class="scope-note">
+                <span class="prose-line">The four-year sum is not a count of unique</span>
+                <span class="prose-line">people:  someone can participate in several</span>
+                <span class="prose-line">years.  Only published male and female counts</span>
+                <span class="prose-line">are included;  gender-unspecified participants</span>
+                <span class="prose-line">are excluded.  These are outdoor affiliated</span>
+                <span class="prose-line">football participants, not the general population.</span>
+                <span class="prose-line">MiniRoos, Youth and Senior follow the report</span>
+                <span class="prose-line">categories.  NSW and Northern NSW remain</span>
+                <span class="prose-line">separate reporting regions.</span>
+              </p>
+            </div>
+            <div class="visible-note reading-guide">
+              <h3 class="note-heading">Chart notes and sources</h3>
+              <p class="caption">
+                <span class="prose-line">Colours identify age group; darker and lighter</span>
+                <span class="prose-line">branches identify male  and female participants.</span>
+                <span class="prose-line">The outer ring separates annual counts in</span>
+                <span class="prose-line">chronological order within each gender.  The</span>
+                <span class="prose-line">inner two rings sum annual counts across</span>
+                <span class="prose-line">2022–2025.  Small segments may omit their text;</span>
+                <span class="prose-line">hover to read them.</span>
+              </p>
+              <p class="caption">
+                <span class="prose-line">
+                  <a href="data/raw/football-sunburst-counts-2022-2025.csv" download>Download the published counts used in the</a>
+                </span>
+                <span class="prose-line">
+                  <a href="data/raw/football-sunburst-counts-2022-2025.csv" download>sunburst</a>
+                  .  Each row includes its report filename
+                </span>
+                <span class="prose-line">and source page.</span>
+              </p>
+            </div>
+          </div>
+        </section>
+        <div class="chapter-divider" id="places">
+          <span class="chapter">03 / PLACES</span>
+          <h2>Making room to play</h2>
+          <p class="caption">
+            <span class="prose-line">PARC membership and Ballarat sports grounds:</span>
+            <span class="prose-line">local facilities, membership and sporting connections.</span>
+          </p>
+        </div>
+        <section id="story-parc-membership" class="story-section membership-story" aria-labelledby="parc-membership-title">
+          <div class="section-heading">
+            <span class="chapter">09 / FACILITY MEMBERSHIP</span>
+            <h2 id="parc-membership-title">Who uses a local aquatic centre?</h2>
+          </div>
+          <p>
+            <span class="prose-line">Membership choices show how people use PARC in Frankston.</span>
+            <span class="prose-line">Gender shares describe Full Access members in 2024–25.</span>
+          </p>
+          <div class="membership-grid">
+            <article class="membership-panel" aria-labelledby="parc-types-title">
+              <h3 id="parc-types-title">Membership choices</h3>
+              <div id="parc-types-waffle" class="vis-container" aria-label="Interactive 100-square waffle of PARC membership types by financial year">
+              </div>
+              <p class="caption">
+                <span class="prose-line">Choose a financial year to compare membership choices.</span>
+                <span class="prose-line">Shares use member counts; squares approximate those percentages.</span>
+              </p>
+              <p class="context-source">
+                <a href="data/processed/parc-membership-types.csv" download>Download membership counts and shares</a>
+              </p>
+            </article>
+            <article class="membership-panel" aria-labelledby="parc-gender-title">
+              <h3 id="parc-gender-title">Gender of Full Access members</h3>
+              <div id="parc-demographics-waffle" class="vis-container" aria-label="100-square waffle: Full Access members in 2024–25, male 40%, female 59%, non-binary 1%">
+              </div>
+              <p class="caption">
+                <span class="prose-line">These published shares apply only to Full Access members.</span>
+                <span class="prose-line">They do not measure disability inclusion or financial access.</span>
+              </p>
+              <p class="caption">
+                <span class="prose-line">Earlier gender figures have different scopes or inconsistent totals.</span>
+                <span class="prose-line">Only the complete 2024–25 percentage breakdown appears here.</span>
+              </p>
+            </article>
+          </div>
+          <p class="membership-source">
+            <a href="https://peninsulaleisure.com.au/about/annual-reports/">Source: Peninsula Leisure annual reports, 2022–23 to 2024–25</a>
+            <br>
+            <a href="data/processed/parc-pines-data-notes.txt">Read source pages and data qualifications</a>
+          </p>
+        </section>
+        <section id="story-ballarat-features" class="story-section story-split features-story" aria-labelledby="ballarat-features-title">
+          <div class="story-grid">
+            <div class="story-copy">
+              <div class="section-heading">
+                <span class="chapter">10 / FACILITY MIX</span>
+                <h2 id="ballarat-features-title">Which ground types dominate the mix?</h2>
+              </div>
+              <p class="takeaway">
+                <span class="prose-line">Cricket pitches account for 55.5% of recorded features.</span>
+                <span class="prose-line">That is 81 of 146 features in Ballarat’s dataset.</span>
+              </p>
+              <p>
+                <span class="prose-line">Compare all ten ground types on a common baseline.</span>
+                <span class="prose-line">Explore their connections to individual sites in the Sankey below.</span>
+              </p>
+              <div class="visible-note">
+                <h3 class="note-heading">What these figures measure</h3>
+                <p class="caption">
+                  <span class="prose-line">Bars count recorded features, not sites, clubs or people.</span>
+                  <span class="prose-line">One site can contain several features of the same type.</span>
+                  <span class="prose-line">Combined ground types remain intact as recorded.</span>
+                </p>
+                <p class="context-source">
+                  <a href="data/raw/Ballarat Sports Grounds.json" download>Download the City of Ballarat source records</a>
+                </p>
+              </div>
+            </div>
+            <div class="chart-column">
+              <div id="ballarat-features-bar" class="vis-container" aria-label="Horizontal bar chart comparing all ten Ballarat ground types by feature count and percentage">
+              </div>
+            </div>
+          </div>
+        </section>
+        <section aria-labelledby="ballarat-matrix-title" class="story-section connections-story" id="story-ballarat-matrix">
+          <div class="section-heading">
+            <span class="chapter">11 / SITE CONNECTIONS</span>
+            <h2 id="ballarat-matrix-title">Which ground types connect Ballarat’s sporting sites?</h2>
+          </div>
+          <div class="story-grid">
+            <div class="story-copy">
+              <p>
+                <span class="prose-line">A sporting site can support several activities.</span>
+                <span class="prose-line">Follow the connections from sites to ground types.</span>
+                <span class="prose-line">Wider links represent more recorded features at each site.</span>
+              </p>
+              <div class="visible-note">
+                <h3 class="note-heading">Explore the connections</h3>
+                <p class="caption">
+                  <span class="prose-line">Choose site ranks 1–10, 11–20, 21–30 or 31–36.</span>
+                  <span class="prose-line">Hover over a link to highlight its ground type.</span>
+                  <span class="prose-line">Ranks use total features, with alphabetical ties.</span>
+                </p>
+              </div>
+              <div class="visible-note">
+                <h3 class="note-heading">What these figures measure</h3>
+                <p class="caption">
+                  <span class="prose-line">The dataset contains 146 features across 36 sites.</span>
+                  <span class="prose-line">These are features, not people or participant journeys.</span>
+                  <span class="prose-line">Unshown links have no matching source record.</span>
+                  <span class="prose-line">Combined ground types remain intact.</span>
+                  <span class="prose-line">Link thickness rescales within each rank group.</span>
+                  <span class="prose-line">Use tooltip counts when comparing different groups.</span>
+                </p>
+              </div>
+              <p class="context-source">
+                <a href="https://ballaratopendata.org.au/dataset/ballarat-sports-grounds">Source: City of Ballarat Sports Grounds</a>
+              </p>
+              <p class="context-source">
+                <a href="data/raw/Ballarat Sports Grounds.json">Download source records</a>
+              </p>
+            </div>
+            <div class="chart-column">
+              <div id="ballarat-matrix" class="vis-container" aria-label="Sankey connecting Ballarat sites with ground types by feature count">
+              </div>
+            </div>
+          </div>
+        </section>
+        <section id="story-swimming-connections" class="story-section connections-story" aria-labelledby="swimming-title">
+          <div class="section-heading">
+            <span class="chapter">12 / BEYOND THE LOCAL POOL</span>
+            <h2 id="swimming-title">One aquatic centre, an international meeting point</h2>
+          </div>
+          <div class="story-grid">
+            <div class="story-copy">
+              <p class="takeaway">
+                <span class="prose-line">Local facilities can also host international sporting events.</span>
+                <span class="prose-line">Gold Coast Aquatic Centre hosted Masters swimming in 2024.</span>
+                <span class="prose-line">The table lists 107 athletes across 12 overseas country</span>
+                <span class="prose-line">teams.</span>
+              </p>
+              <p>
+                <span class="prose-line">Trace each team’s connection to the competition venue.</span>
+                <span class="prose-line">Line width shows athlete count on a fixed scale.</span>
+                <span class="prose-line">Hover to highlight a team, or reduce the selection.</span>
+              </p>
+              <div class="visible-note">
+                <h3 class="note-heading">Read this as representation</h3>
+                <p class="caption">
+                  <span class="prose-line">Country labels identify teams, not swimmers’ home addresses.</span>
+                  <span class="prose-line">Lines show affiliations, not measured journeys.</span>
+                  <span class="prose-line">Named clubs and the Australian team are excluded.</span>
+                  <span class="prose-line">This subset does not include every overseas swimmer.</span>
+                </p>
+              </div>
+              <p class="context-source">
+                <a href="https://mastersswimmingqld.org.au/wp-content/uploads/sites/15/2024/11/2024-ppmg-full-meet-statistics.pdf">Source: 2024 full meet statistics, page 1</a>
+              </p>
+              <p class="context-source">
+                <a href="data/processed/ppmg-2024-country-teams.csv">Download the 12 team records</a>
+                ·
+                <a href="data/processed/ppmg-2024-data-notes.txt">Data notes</a>
+              </p>
+              <table class="team-counts">
+                <caption>All 12 country teams · listed athletes</caption>
+                <thead>
+                  <tr>
+                    <th scope="col">Team</th>
+                    <th scope="col">Count</th>
+                    <th scope="col">Team</th>
+                    <th scope="col">Count</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>India</td>
+                    <td>36</td>
+                    <td>Chile</td>
+                    <td>1</td>
+                  </tr>
+                  <tr>
+                    <td>New Zealand</td>
+                    <td>30</td>
+                    <td>China</td>
+                    <td>1</td>
+                  </tr>
+                  <tr>
+                    <td>Mongolia</td>
+                    <td>23</td>
+                    <td>France</td>
+                    <td>1</td>
+                  </tr>
+                  <tr>
+                    <td>Canada</td>
+                    <td>4</td>
+                    <td>Germany</td>
+                    <td>1</td>
+                  </tr>
+                  <tr>
+                    <td>Japan</td>
+                    <td>4</td>
+                    <td>Great Britain</td>
+                    <td>1</td>
+                  </tr>
+                  <tr>
+                    <td>USA</td>
+                    <td>4</td>
+                    <td>Mexico</td>
+                    <td>1</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <div class="chart-column">
+              <div id="swimming-connections" class="vis-container" aria-label="Interactive map of 12 overseas country teams connected to Gold Coast Aquatic Centre; team affiliations, not travel routes">
+              </div>
+              <p class="caption map-attribution">
+                <span class="prose-line">Country points and the venue position are approximate.</span>
+                <span class="prose-line">Basemap: Natural Earth, via world-atlas.</span>
+              </p>
+            </div>
+          </div>
+        </section>
+        <footer class="sources-footer" id="sources" aria-labelledby="sources-title">
+          <div class="sources-heading">
+            <span class="chapter">SOURCES / METHODS</span>
+            <h2 id="sources-title">Sources and reading notes</h2>
+            <p>
+              <span class="prose-line">Each source supports its own section.</span>
+              <span class="prose-line">These datasets describe different populations and reporting periods.</span>
+            </p>
+          </div>
+          <div class="sources-grid">
+            <article class="source-card">
+              <span class="source-section">01–04 · Place and support</span>
+              <h3>Queensland club funding</h3>
+              <p>
+                <span class="prose-line">Active Clubs rounds 2, 3 and 4.</span>
+                <span class="prose-line">Approvals: June 2022, April 2023 and June 2024.</span>
+                <span class="prose-line">Funding amounts exclude GST. Source: CC BY 4.0.</span>
+              </p>
+              <ul class="source-links">
+                <li>
+                  <a href="https://www.data.qld.gov.au/dataset/active-clubs">Dataset catalogue</a>
+                </li>
+                <li>
+                  <a href="data/raw/active-clubs-records.csv">Combined source rows</a>
+                </li>
+                <li>
+                  <a href="data/raw/active-clubs-round-2.xlsx">Round 2 workbook</a>
+                </li>
+                <li>
+                  <a href="data/raw/active-clubs-round-3.xlsx">Round 3 workbook</a>
+                </li>
+                <li>
+                  <a href="data/raw/active-clubs-round-4.xlsx">Round 4 workbook</a>
+                </li>
+              </ul>
+            </article>
+            <article class="source-card">
+              <span class="source-section">05 · National club survey</span>
+              <h3>Clubs under pressure</h3>
+              <p>
+                <span class="prose-line">Australian Sports Foundation, May 2023, page 28.</span>
+                <span class="prose-line">Published state percentages retain their original response bases.</span>
+              </p>
+              <ul class="source-links">
+                <li>
+                  <a href="https://asf.org.au/resources/clubs-under-pressure">Report and methodology</a>
+                </li>
+                <li>
+                  <a href="data/raw/asf-sports-by-state-2023.csv">Transcribed survey table</a>
+                </li>
+              </ul>
+            </article>
+            <article class="source-card">
+              <span class="source-section">06 · AusPlay</span>
+              <h3>Organised participation</h3>
+              <p>
+                <span class="prose-line">Australian Sports Commission dashboard: supplied state totals.</span>
+                <span class="prose-line">Transcribed screenshot filters: all periods; adults; all genders.</span>
+                <span class="prose-line">Exact reporting dates were not visible.</span>
+              </p>
+              <ul class="source-links">
+                <li>
+                  <a href="https://www.ausport.gov.au/ausplay">AusPlay information</a>
+                </li>
+                <li>
+                  <a href="data/raw/ausplay-state-organisation-participation.csv">Transcribed state totals</a>
+                </li>
+              </ul>
+            </article>
+            <article class="source-card">
+              <span class="source-section">07–08 · Participation and growth</span>
+              <h3>Football participation</h3>
+              <p>
+                <span class="prose-line">Football Australia National Participation Reports, 2022–2025.</span>
+                <span class="prose-line">The extract identifies each report filename and source page.</span>
+              </p>
+              <ul class="source-links">
+                <li>
+                  <a href="data/raw/football-sunburst-counts-2022-2025.csv">Published age and gender counts</a>
+                </li>
+              </ul>
+            </article>
+            <article class="source-card">
+              <span class="source-section">09 · PARC, Frankston</span>
+              <h3>Aquatic centre membership</h3>
+              <p>
+                <span class="prose-line">Peninsula Leisure annual reports, 2022–23 to 2024–25.</span>
+                <span class="prose-line">Membership types and gender use different population scopes.</span>
+                <span class="prose-line">Extraction notes record source pages and data qualifications.</span>
+              </p>
+              <ul class="source-links">
+                <li>
+                  <a href="https://peninsulaleisure.com.au/about/annual-reports/">Annual reports</a>
+                </li>
+                <li>
+                  <a href="data/processed/parc-membership-types.csv">Membership types</a>
+                </li>
+                <li>
+                  <a href="data/processed/parc-membership-demographics.csv">Demographic shares</a>
+                </li>
+                <li>
+                  <a href="data/processed/parc-pines-data-notes.txt">Source pages and qualifications</a>
+                </li>
+              </ul>
+            </article>
+            <article class="source-card">
+              <span class="source-section">10–11 · Features and connections</span>
+              <h3>Ballarat sporting sites</h3>
+              <p>
+                <span class="prose-line">City of Ballarat Sports Grounds, catalogue updated April 2022.</span>
+                <span class="prose-line">Counts describe recorded features rather than unique facilities.</span>
+                <span class="prose-line">Source licence: CC BY 3.0 Australia.</span>
+              </p>
+              <ul class="source-links">
+                <li>
+                  <a href="https://ballaratopendata.org.au/dataset/ballarat-sports-grounds">Dataset catalogue</a>
+                </li>
+                <li>
+                  <a href="data/raw/Ballarat Sports Grounds.json">Original feature records</a>
+                </li>
+                <li>
+                  <a href="data/raw/ballarat-sports-grounds-wgs84.geojson">Geographic point data</a>
+                </li>
+              </ul>
+            </article>
+            <article class="source-card">
+              <span class="source-section">12 · International connections</span>
+              <h3>Masters swimming teams</h3>
+              <p>
+                <span class="prose-line">Masters Swimming Queensland, 2024 full meet statistics, page 1.</span>
+                <span class="prose-line">Only overseas country-labelled teams are mapped.</span>
+                <span class="prose-line">The organiser’s report identifies the competition venue.</span>
+              </p>
+              <ul class="source-links">
+                <li>
+                  <a href="https://mastersswimmingqld.org.au/wp-content/uploads/sites/15/2024/11/2024-ppmg-full-meet-statistics.pdf">Official team statistics</a>
+                </li>
+                <li>
+                  <a href="https://mastersswimmingqld.org.au/ppmg24-celebrating-the-spirit-of-masters-swimming/">Event and venue report</a>
+                </li>
+                <li>
+                  <a href="data/processed/ppmg-2024-country-teams.csv">Country-team extract</a>
+                </li>
+                <li>
+                  <a href="data/processed/ppmg-2024-data-notes.txt">Selection and mapping notes</a>
+                </li>
+              </ul>
+            </article>
+            <article class="source-card">
+              <span class="source-section">Geographic reference layers</span>
+              <h3>Map geography</h3>
+              <p>
+                <span class="prose-line">ABS 2024 council and 2021 state boundaries: CC BY</span>
+                <span class="prose-line">4.0.</span>
+                <span class="prose-line">Geography is simplified for web display.</span>
+                <span class="prose-line">World basemap: Natural Earth public-domain geography via world-atlas.</span>
+              </p>
+              <ul class="source-links">
+                <li>
+                  <a href="https://geo.abs.gov.au/arcgis/rest/services/ASGS2024/LGA/MapServer">ABS council boundaries</a>
+                </li>
+                <li>
+                  <a href="https://geo.abs.gov.au/arcgis/rest/services/ASGS2021/STE/MapServer">ABS state boundaries</a>
+                </li>
+                <li>
+                  <a href="https://github.com/topojson/world-atlas">world-atlas source and licence</a>
+                </li>
+              </ul>
+            </article>
+          </div>
+          <div class="source-methods">
+            <h3 class="note-heading">How the funding records are used</h3>
+            <div class="method-grid">
+              <p>
+                <span class="prose-line">The CSV combines original rows from three workbooks.</span>
+                <span class="prose-line">Repeated-looking records remain because no project identifier resolves duplicates.</span>
+                <span class="prose-line">Program Round standardises the original Program Name column.</span>
+                <span class="prose-line">Dates use day/month/year; other source values are preserved.</span>
+              </p>
+              <p>
+                <span class="prose-line">Charts calculate counts, shares and ranks from source rows.</span>
+                <span class="prose-line">Council spelling variants are matched inside the map specification.</span>
+                <span class="prose-line">Purpose shares are calculated separately for each approval year.</span>
+                <span class="prose-line">Different purpose labels are not treated as identical.</span>
+              </p>
+            </div>
+          </div>
+        </footer>
+      </main>
     </div>
-    <div class="stats">
-      <div><span class="stat-value">3 rounds</span><span>2022, 2023 and 2024 approvals</span></div>
-      <div><span class="stat-value">$2,000</span><span>per record in Round 2 · 2022</span></div>
-      <div><span class="stat-value">$2,500</span><span>per record in Rounds 3 and 4</span></div>
-    </div>
-    <p class="scope-note">Each row is a funding record. An organisation can appear more than once. The data identifies funded activities, but does not count events held, club members or participants.</p>
+    <a class="skip-link" href="#main">Skip to visualisations</a>
+    <noscript>
+      <p class="noscript">
+        <span class="prose-line">Enable JavaScript to display the charts.</span>
+        <span class="prose-line">The source files can</span>
+        <span class="prose-line">be downloaded above.</span>
+      </p>
+    </noscript>
+    <script type="text/javascript">
+      // Each specification loads its own CSV or GeoJSON.
+      var specVis1 = "./charts/funding-map.vg.json";
+      var specVis2 = "./charts/annual-funding.vg.json";
+      var specVis3 = "./charts/sport-bump.vg.json";
+      var specVis4 = "./charts/sport-purpose-heatmap.vg.json";
+      var specVis5 = "./charts/asf-sport-state-map.vg.json";
+      var specVis6 = "./charts/football-growth-lollipop.vg.json";
+      var specVis7 = "./charts/ballarat-site-type-sankey.vg.json";
+      var specVis8 = "./charts/football-sunburst.vg.json";
+      var specVis10 = "./charts/parc-membership-types-waffle.vg.json";
+      var specVis11 = "./charts/parc-demographics-waffle.vg.json";
+      var specVis12 = "./charts/ballarat-ground-types-bar.vg.json";
+      var specVis9 = "./charts/ausplay-participant-spike-map.vg.json";
 
-    <section aria-labelledby="map-title">
-      <div class="section-heading"><span class="chapter">01 / PLACE</span><h2 id="map-title">Where does support reach?</h2></div>
-      <div class="map-layout">
-        <div><div id="funding-map" class="vis-container" aria-label="Equal-sized dot map coloured by funding-record count by council area"></div>
-          <p class="caption">One equal-sized dot represents a council with funding records in the selected year. Dots progress from yellow through orange to dark red as record counts increase. All years use the same 0–350 square-root colour scale and 2024 council boundaries. Dot positions represent council areas, not club addresses.</p></div>
-        <aside><h3>Explore a year</h3><p>Use the selector below the map to switch approval years. Hover over a dot to see its council, record count and approved funding.</p>
-          <p>Small, fixed-size dots reduce crowding between neighbouring councils. Some can still overlap where representative positions are close together. Comparing access would also require population or eligible-club data.</p>
-          <p class="caption">One 2022 record has no council value in the source. It remains in the annual totals but cannot be placed on this map.</p></aside>
-      </div>
-    </section>
+      vegaEmbed('#swimming-connections', './charts/ppmg-team-connections.vg.json', {actions:false, renderer:'svg'}).catch(console.error);
+      vegaEmbed('#funding-map', specVis1, { "actions": false, "renderer": "svg" }).catch(console.error);
+      vegaEmbed('#annual-funding', specVis2, { "actions": false, "renderer": "svg" }).catch(console.error);
+      vegaEmbed('#sport-bump', specVis3, { "actions": false, "renderer": "svg" }).catch(console.error);
+      vegaEmbed('#sport-purpose', specVis4, { "actions": false, "renderer": "svg" }).catch(console.error);
+      vegaEmbed('#asf-state-map', specVis5, { "actions": false, "renderer": "svg" }).catch(console.error);
+      vegaEmbed('#football-lollipop', specVis6, { "actions": false, "renderer": "svg" }).catch(console.error);
+      vegaEmbed('#ballarat-matrix', specVis7, { "actions": false, "renderer": "svg" }).catch(console.error);
+      vegaEmbed('#football-sunburst', specVis8, { "actions": false, "renderer": "svg" }).catch(console.error);
+      vegaEmbed('#parc-types-waffle', specVis10, { "actions": false, "renderer": "svg" }).catch(console.error);
+      vegaEmbed('#parc-demographics-waffle', specVis11, { "actions": false, "renderer": "svg" }).catch(console.error);
+      vegaEmbed('#ballarat-features-bar', specVis12, { "actions": false, "renderer": "svg" }).catch(console.error);
+      vegaEmbed('#ausplay-spike-map', specVis9, { "actions": false, "renderer": "svg" }).catch(console.error);
 
-    <section aria-labelledby="funding-title">
-      <div class="section-heading"><span class="chapter">02 / OVER TIME</span><h2 id="funding-title">How much funding was approved each year?</h2></div>
-      <p>Compare the total approved funding across the three annual releases.</p>
-      <div id="annual-funding" class="vis-container" aria-label="Bar chart of total approved funding by year"></div>
-      <p class="caption">Amounts are in Australian dollars, GST exclusive. Each bar represents one funding approval round.</p>
-    </section>
-
-    <section aria-labelledby="bump-title">
-      <div class="section-heading"><span class="chapter">03 / ACTIVITY RANKINGS</span><h2 id="bump-title">Which activities move up the ranking?</h2></div>
-      <p>Follow the top five or ten activities by their combined record count across all three rounds. Rank 1 appears at the top. Click an activity in the legend to follow its line; click again to clear.</p>
-      <div id="sport-bump" class="vis-container" aria-label="Bump chart of annual activity ranks"></div>
-      <p class="caption">Annual ranks are calculated among all activity categories before selecting the leading five or ten. Equal counts are ordered alphabetically. Rank measures relative position; hover to see the actual funding-record count.</p>
-    </section>
-
-    <section aria-labelledby="heatmap-title">
-      <div class="section-heading"><span class="chapter">04 / PURPOSE</span><h2 id="heatmap-title">What does support fund within the leading activities?</h2></div>
-      <p>For each selected year, compare its five leading activities with its five most frequently recorded project purposes. Darker cells indicate more funding records; labels show the original counts. A square-root colour scale makes differences among smaller counts more visible.</p>
-      <div id="sport-purpose" class="vis-container" aria-label="Heatmap of the top five activities and top five purposes in the selected year"></div>
-      <p class="caption">The five activities and purposes can change with the year. Source purpose labels are kept separate, including combined purposes; introductory prefixes are shortened on the axis. Hover to read the original wording. The colour scale runs from zero to the largest displayed count in the selected year. Colours emphasise differences within a year; use labels or tooltips to compare exact counts across years.</p>
-      <div class="closing"><h3>Funding intentions are a starting point.</h3><p>These records describe the activities and purposes supported. Measuring improvements in health, inclusion or participation would require evidence about who took part and what changed afterwards.</p></div>
-    </section>
-
-    <section aria-labelledby="survey-map-title">
-      <div class="section-heading"><span class="chapter">05 / NATIONAL SURVEY</span><h2 id="survey-map-title">Which sports are represented among surveyed clubs?</h2></div>
-      <p>Switch sports to compare their representation among club respondents in each state and territory. For example, 44% of NSW respondents reported football/soccer, compared with 10% in Victoria.</p>
-      <div id="asf-state-map" class="vis-container" aria-label="Australian state choropleth of sport representation among ASF club survey respondents"></div>
-      <p class="caption">Source: ASF, <em>Clubs Under Pressure</em>, May 2023, page 28; survey conducted February–March 2023. Colours use the same 0–50% scale for every sport. Hover for the state response base. ACT and NT have only 39 and 32 responses respectively; the ACT label is connected to its location by a line.</p>
-      <p class="scope-note">These are published percentages of club respondents, not membership counts, population participation rates or a census of Australian clubs. Sport percentages within a state exceed 100%; categories should not be treated as exclusive. A displayed 0% can reflect rounding. The source repeats “Skateboarding” in two rows; both are preserved separately in the selector.</p>
-    </section>
-
-    <section aria-labelledby="football-growth-title">
-      <div class="section-heading"><span class="chapter">06 / FOOTBALL PARTICIPATION</span><h2 id="football-growth-title">Where has football participation grown since 2022?</h2></div>
-      <p>Compare each region's percentage change in reported participants from its own 2022 baseline. Each lollipop extends from zero to the selected year's change: right means growth, left means decline. Male and female participants appear in separate panels.</p>
-      <div id="football-lollipop" class="vis-container" aria-label="Diverging lollipop chart of percentage change in football participant counts since 2022 by region and gender"></div>
-      <p class="caption">Select MiniRoos, Youth or Senior, then a comparison year. Teal indicates growth or no change; orange indicates decline. Both gender panels share a scale. The scale stays fixed when switching years within an age category, and changes when switching age categories to accommodate their different growth ranges. Hover for the original counts and source page.</p>
-      <p class="scope-note">Percentage change is (selected-year count / 2022 count − 1) × 100. It is not a population participation rate or a percentage-point change. Growth from a small baseline can look large, so read the counts in the tooltip. NSW and Northern NSW are separate reporting regions. The chart includes published male and female counts only; gender-unspecified participants are excluded. Categories follow the reports' definitions.</p>
-    </section>
-
-    <section aria-labelledby="ballarat-matrix-title">
-      <div class="section-heading"><span class="chapter">07 / PLACES TO PLAY</span><h2 id="ballarat-matrix-title">Which sports-ground features are recorded at each site?</h2></div>
-      <p>Rows represent sites and columns represent recorded ground types. Darker cells and their numbers show more features of that type at a site. Select the top 10, top 20 or all 36 sites, ranked by their total recorded feature count.</p>
-      <div id="ballarat-matrix" class="vis-container" aria-label="Site-by-ground-type matrix of recorded Ballarat sports-ground feature counts"></div>
-      <p class="caption">The dataset contains 146 features across 36 sites and 10 source ground types. Sites with equal total counts are ordered alphabetically. All selections use the same 0–20 square-root colour scale. Combined types such as Cricket/Football remain separate source categories. Hover for a cell count, site total and full site name. The matrix can scroll horizontally on small screens.</p>
-      <p class="scope-note">A blank pale cell means no matching feature is recorded in this dataset; it does not establish that the facility is absent. These are feature counts, not club numbers, participants, availability or usage. The matrix groups the original source attributes directly and does not use or change geographical coordinates.</p>
-    </section>
-
-    <section aria-labelledby="football-sunburst-title">
-      <div class="section-heading"><span class="chapter">08 / PARTICIPATION BREAKDOWN</span><h2 id="football-sunburst-title">How does football participation divide by age, gender and year?</h2></div>
-      <p>Read from the centre outwards: <strong>MiniRoos, Youth and Senior → Male and Female → 2022, 2023, 2024 and 2025</strong>. Larger angular spans represent larger reported participant counts. Choose all reporting regions or one region, and hover for exact counts.</p>
-      <div id="football-sunburst" class="vis-container" aria-label="Three-ring sunburst of football participant counts by age group, gender and year"></div>
-      <p class="caption">Colours identify age group; darker and lighter branches identify male and female participants. The outer ring separates annual counts in chronological order within each gender. The inner two rings sum annual counts across 2022–2025. Small segments may omit their text; hover to read them.</p>
-      <p class="scope-note">The four-year sum is not a count of unique people: someone can participate in several years. Only published male and female counts are included; gender-unspecified participants are excluded. These are outdoor affiliated football participants, not the general population. MiniRoos, Youth and Senior follow the report categories. NSW and Northern NSW remain separate reporting regions.</p>
-      <p class="caption"><a href="data/raw/football-sunburst-counts-2022-2025.csv" download>Download the published counts used in the sunburst</a>. Each row includes its report filename and source page.</p>
-    </section>
-
-    <section aria-labelledby="ausplay-spike-map-title">
-      <div class="section-heading"><span class="chapter">09 / ORGANISED PARTICIPATION</span><h2 id="ausplay-spike-map-title">Where do more adults participate through organisations?</h2></div>
-      <p>Spike height shows the estimated number of adults participating in sport-related activities through an organisation. Each upward-pointing spike has a fixed base width and uses the same height scale starting at zero. Hover to compare participant counts and participation rates.</p>
-      <div id="ausplay-spike-map" class="vis-container" aria-label="Australian spike map of estimated adult participants through organisations"></div>
-      <p class="caption">The reference spike represents 1,000,000 participants. Numbers appear below each spike base. Spike bases identify states and territories, not participant addresses. ACT is offset with a connector for readability. The map uses a fixed width and can scroll on narrow screens.</p>
-      <p class="scope-note">These are survey estimates of participants, not total population or club membership. Larger state populations affect absolute counts; the tooltip provides rates for context. The supplied screenshot uses Period: All, Adult/Child: Adult, Gender: All and Age: All. Exact reporting dates are not visible, so no year is assigned.</p>
-      <p class="caption"><a href="data/raw/ausplay-state-organisation-participation.csv" download>Download the transcribed state totals</a>. Organisations include a wider range of providers than sports clubs alone.</p>
-    </section>
-
-    <footer>
-      <h2>Sources and reading notes</h2>
-      <p><a href="https://www.data.qld.gov.au/dataset/active-clubs">Queensland Government · Active Clubs</a> — Round 2, Round 3 and Round 4 workbooks, with approvals dated 1 June 2022, 21 April 2023 and 3 June 2024. <a href="https://geo.abs.gov.au/arcgis/rest/services/ASGS2024/LGA/MapServer">ABS · 2024 council boundaries</a> — simplified for web display. Sources are attributed under CC BY 4.0.</p>
-      <p><a href="https://asf.org.au/resources/clubs-under-pressure">Australian Sports Foundation · Clubs Under Pressure</a> — May 2023, page 28. <a href="data/raw/asf-sports-by-state-2023.csv" download>Download transcribed survey table</a>. ABS · 2021 state boundaries, CC BY 4.0.</p>
-      <p>Football Australia · National Participation Reports, 2022–2025, regional summaries. <a href="data/raw/football-sunburst-counts-2022-2025.csv" download>Download published age and gender counts</a>. Each row identifies its report and page.</p>
-      <p><a href="https://ballaratopendata.org.au/dataset/ballarat-sports-grounds">City of Ballarat · Sports Grounds</a> — CC BY 3.0 Australia. <a href="data/raw/ballarat-sports-grounds-wgs84.geojson" download>Download geographic point data</a>. Source catalogue update: April 2022. ABS · 2024 Ballarat council boundary, CC BY 4.0.</p>
-      <p>Australian Sports Commission · AusPlay dashboard — state totals transcribed from the supplied screenshot, Period: All. <a href="data/raw/ausplay-state-organisation-participation.csv" download>Download transcribed state totals</a>.</p>
-      <details><summary>How the original records are used</summary><ul>
-        <li>The CSV combines the original rows from the three supplied workbooks. It contains no precomputed counts, shares or ranks. Vega-Lite calculates those when each chart loads.</li>
-        <li>The first column is consistently named “Program Round”; Round 3 originally names this column “Program Name”. Excel dates are written as day/month/year. Other source fields and record values are preserved.</li>
-        <li>Repeated-looking source records are retained. There is no project identifier establishing which repetitions are errors.</li>
-        <li>The map matches council spelling and suffix variants inside its chart code. Its geographical reference file supplies boundaries and representative coordinates.</li>
-        <li>Purpose labels differ across releases. The heatmap compares the original categories within a selected year rather than treating different labels as identical across years.</li>
-      </ul></details>
-      <p><a href="data/raw/active-clubs-records.csv" download>Download original rows as CSV</a> · <a href="data/raw/active-clubs-round-2.xlsx">Round 2 workbook</a> · <a href="data/raw/active-clubs-round-3.xlsx">Round 3 workbook</a> · <a href="data/raw/active-clubs-round-4.xlsx">Round 4 workbook</a> · <a href="README.md">Code guide</a></p>
-    </footer>
-  </main>
-  <noscript><p class="noscript">Enable JavaScript to display the charts. The source files can be downloaded above.</p></noscript>
-  <script type="text/javascript">
-    // Each specification loads its own CSV or GeoJSON.
-    var specVis1 = "./charts/funding-map.vg.json";
-    var specVis2 = "./charts/annual-funding.vg.json";
-    var specVis3 = "./charts/sport-bump.vg.json";
-    var specVis4 = "./charts/sport-purpose-heatmap.vg.json";
-    var specVis5 = "./charts/asf-sport-state-map.vg.json";
-    var specVis6 = "./charts/football-growth-lollipop.vg.json";
-    var specVis7 = "./charts/ballarat-site-type-matrix.vg.json";
-    var specVis8 = "./charts/football-sunburst.vg.json";
-    var specVis9 = "./charts/ausplay-participant-spike-map.vg.json";
-
-    vegaEmbed('#funding-map', specVis1, { "actions": false }).catch(console.error);
-    vegaEmbed('#annual-funding', specVis2, { "actions": false }).catch(console.error);
-    vegaEmbed('#sport-bump', specVis3, { "actions": false }).catch(console.error);
-    vegaEmbed('#sport-purpose', specVis4, { "actions": false }).catch(console.error);
-    vegaEmbed('#asf-state-map', specVis5, { "actions": false }).catch(console.error);
-    vegaEmbed('#football-lollipop', specVis6, { "actions": false }).catch(console.error);
-    vegaEmbed('#ballarat-matrix', specVis7, { "actions": false }).catch(console.error);
-    vegaEmbed('#football-sunburst', specVis8, { "actions": false }).catch(console.error);
-    vegaEmbed('#ausplay-spike-map', specVis9, { "actions": false }).catch(console.error);
-  </script>
-</body>
+    </script>
+  </body>
 </html>
