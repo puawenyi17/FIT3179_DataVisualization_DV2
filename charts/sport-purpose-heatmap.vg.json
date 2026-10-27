@@ -166,7 +166,7 @@
   ],
   "config": {
     "font": "Arial",
-    "background": "white",
+    "background": "transparent",
     "view": {
       "stroke": null
     },
@@ -240,7 +240,7 @@
           1
         ],
         "range": [
-          "#eef6f5",
+          "#dce8e6",
           "#78b2ad",
           "#087e83"
         ]

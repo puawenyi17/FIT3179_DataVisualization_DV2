@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Australian Sports Clubs | Community Sport in Focus</title>
     <meta name="description" content="Explore Australian sports clubs and community sport through funding, participation and facilities, with national insights and state and local case studies.">
-    <link rel="stylesheet" href="css/styles.css?v=20261022-swimming">
+    <link rel="stylesheet" href="css/styles.css?v=20261027-reference-nav">
     <!-- Only the three libraries used in the Week 9 lecture examples. -->
     <script src="https://cdn.jsdelivr.net/npm/vega@5.20.2">
     </script>
@@ -21,7 +21,7 @@
         <span>SUPPORT · PARTICIPATION · COMMUNITY</span>
       </header>
       <main id="main">
-        <div class="intro">
+        <div class="intro" id="top">
           <div class="hero-title">
             <p class="eyebrow">COMMUNITY SPORT ACROSS AUSTRALIA</p>
             <h1>Australia’s sports clubs, in focus.</h1>
@@ -47,7 +47,7 @@
             <strong class="insight-value">AUD 4.35m</strong>
             <p>
               <span class="prose-line">Average annual approvals, 2022 to 2024.</span>
-              <span class="prose-line">13 activities exceeded AUD 70,000 each year.</span>
+              <span class="prose-line"><strong>13 activities</strong> exceeded <strong>AUD 70,000</strong> yearly.</span>
               <span class="prose-line">Amounts exclude GST.</span>
             </p>
           </div>
@@ -55,8 +55,8 @@
             <span class="insight-label">02 / PARTICIPATION</span>
             <strong class="insight-value">+26.8%</strong>
             <p>
-              <span class="prose-line">Female football counts rose from 73,859 to 93,664.</span>
-              <span class="prose-line">Male counts grew 14.3% over the same period.</span>
+              <span class="prose-line">Female football counts rose from <strong>73,859</strong> to <strong>93,664</strong>.</span>
+              <span class="prose-line">Male counts grew <strong>14.3%</strong> over the same period.</span>
               <span class="prose-line">Published totals span nine regions and two age groups.</span>
             </p>
           </div>
@@ -64,13 +64,17 @@
             <span class="insight-label">03 / FACILITIES</span>
             <strong class="insight-value">48.9-point gap</strong>
             <p>
-              <span class="prose-line">Cricket pitches form 55.5% of features, but 6.6% of area.</span>
-              <span class="prose-line">Cricket/football features contribute 51.6% of recorded area.</span>
+              <span class="prose-line">Cricket pitches form <strong>55.5%</strong> of features, but <strong>6.6%</strong> of area.</span>
+              <span class="prose-line">Cricket/football features contribute <strong>51.6%</strong> of area.</span>
               <span class="prose-line">Area sums may include overlapping multi-use spaces.</span>
             </p>
           </div>
         </section>
-        <nav class="stats" aria-label="Story chapters">
+        <nav class="stats" aria-label="Page navigation">
+          <button type="button" class="chapter-button utility-button" data-target="#top">
+            <span class="stat-value">Top</span>
+            <span>Return to the page introduction</span>
+          </button>
           <button type="button" class="chapter-button" data-target="#support">
             <span class="stat-value">Support</span>
             <span>Funding, activities and project purposes</span>
@@ -82,6 +86,10 @@
           <button type="button" class="chapter-button" data-target="#places">
             <span class="stat-value">Facilities</span>
             <span>Recorded sports-ground features at local sites</span>
+          </button>
+          <button type="button" class="chapter-button utility-button" data-target="#sources">
+            <span class="stat-value">Reference sources</span>
+            <span>View cited sources and notes</span>
           </button>
         </nav>
         <div class="chapter-divider" id="support">
@@ -99,7 +107,7 @@
           <div class="story-grid">
             <div class="story-copy">
               <p class="lead">
-                <span class="prose-line">Queensland?s Active Clubs program</span>
+                <span class="prose-line">Queensland's Active Clubs program</span>
                 <span class="prose-line">supports local sporting activities.</span>
               </p>
               <p>
@@ -129,11 +137,11 @@
                   <h3 class="note-heading">A steady south-east lead</h3>
                   <p class="caption">
                     <span class="prose-line">South-east Queensland leads the approval-record rankings.</span>
-                    <span class="prose-line">Brisbane ranks first every year: 272, 304 and 254.</span>
-                    <span class="prose-line">Sunshine Coast and Gold Coast stay among top three.</span>
+                    <span class="prose-line">Brisbane ranks first every year: <strong>272, 304 and 254</strong>.</span>
+                    <span class="prose-line">Sunshine Coast and Gold Coast stay among <strong>top three</strong>.</span>
                     <span class="prose-line">Moreton Bay ranks fourth in 2022-23, then eighth.</span>
                     <span class="prose-line">Far-north councils still rank strongly.</span>
-                    <span class="prose-line">Cairns and Townsville stay within the top six.</span>
+                    <span class="prose-line">Cairns and Townsville stay within the <strong>top six</strong>.</span>
                     <span class="prose-line">This is a Queensland council map, not Australia's state map.</span>
                     <span class="prose-line">Counts show approvals, not funding values or access.</span>
                   </p>
@@ -160,34 +168,34 @@
                 <ul class="funding-insights">
                   <li>
                     <div>
-                      <strong>Annual funding</strong>
+                      <strong class="funding-insight-heading">Annual funding</strong>
                       <p>
-                        <span class="prose-line">Funding rose from AUD 3.38m in 2022 to AUD 5.29m.</span>
-                        <span class="prose-line">It then eased to AUD 4.39m in 2024.</span>
+                        <span class="prose-line">Funding grew from <strong>AUD 3.38m</strong> (2022) to <strong>AUD 5.29m</strong>.</span>
+                        <span class="prose-line">It then eased to <strong>AUD 4.39m</strong> in 2024.</span>
                       </p>
                     </div>
                   </li>
                   <li>
                     <div>
-                      <strong>Largest activity areas</strong>
+                      <strong class="funding-insight-heading">Largest activity areas</strong>
                       <p>
-                        <span class="prose-line">Active Recreation received AUD 1.793m overall.</span>
-                        <span class="prose-line">Rugby League followed with AUD 1.121m.</span>
+                        <span class="prose-line">Active Recreation received <strong>AUD 1.793m</strong> overall.</span>
+                        <span class="prose-line">Rugby League followed with <strong>AUD 1.121m</strong>.</span>
                       </p>
                     </div>
                   </li>
                   <li>
                     <div>
-                      <strong>Largest named recipients</strong>
+                      <strong class="funding-insight-heading">Largest named recipients</strong>
                       <p>
-                        <span class="prose-line">Guides Queensland received AUD 664,000 across all three rounds.</span>
-                        <span class="prose-line">Parkrun Australia Ltd followed with AUD 614,000 overall.</span>
+                        <span class="prose-line">Guides Queensland received <strong>AUD 664,000</strong> across all three rounds.</span>
+                        <span class="prose-line">Parkrun Australia Ltd followed with <strong>AUD 614,000</strong>.</span>
                       </p>
                     </div>
                   </li>
                   <li>
                     <div>
-                      <strong>How to read this</strong>
+                      <strong class="funding-insight-heading">How to read this</strong>
                       <p>
                         <span class="prose-line">These figures show allocations, not causes.</span>
                         <span class="prose-line">Amounts exclude GST.</span>
@@ -230,25 +238,26 @@
               </div>
             </div>
           </section>
+          <h3 class="paired-insight-title">Did you know?</h3>
           <aside class="paired-insight">
-            <h3>Did you know?</h3>
             <div class="paired-insight-grid">
               <div class="paired-insight-column">
-                <h4>Rankings show a clear leader</h4>
+                <h4>Rugby League alone holds its rank</h4>
                 <p>
-                  <span class="prose-line">Active Recreation climbed from sixth to first between</span>
-                  <span class="prose-line">2022 and 2023, then stayed first in 2024.</span>
-                  <span class="prose-line">The remaining top activities shifted positions over time.</span>
+                  <span class="prose-line">Rugby League ranked <strong>second</strong> in all three years.</span>
+                  <span class="prose-line">Active Recreation climbed from <strong>sixth to first</strong></span>
+                  <span class="prose-line">in 2023, then held first place in 2024.</span>
+                  <span class="prose-line">Most other leading activities changed positions.</span>
                 </p>
               </div>
               <div class="paired-insight-column">
                 <h4>Support priorities vary by activity</h4>
                 <p>
-                  <span class="prose-line">Volunteer training made up 58% of Active Recreation</span>
-                  <span class="prose-line">records in 2024. On-field equipment led in six</span>
-                  <span class="prose-line">of the other nine leading activities.</span>
-                  <span class="prose-line">These are record shares, not funding-dollar shares;</span>
-                  <span class="prose-line">they do not explain ranking changes.</span>
+                  <span class="prose-line">Training made up <strong>58%</strong> of Active Recreation</span>
+                  <span class="prose-line">records in 2024. On-field equipment led in</span>
+                  <span class="prose-line"><strong>six of nine</strong> other leading activities.</span>
+                  <span class="prose-line">The leading purpose differs across activities.</span>
+                  <span class="prose-line">Shares count records, not funding dollars.</span>
                 </p>
               </div>
             </div>
@@ -269,28 +278,18 @@
           <div class="story-grid">
             <div class="story-copy">
               <aside class="story-context">
-                <h3>An invitation to belong</h3>
+                <h3>Football responses vary by state</h3>
                 <p>
-                  <span class="prose-line">Football Australia’s MiniRoos Settlement Program supports children from refugee</span>
-                  <span class="prose-line">and migrant families. It shows how community sport can</span>
-                  <span class="prose-line">be designed around welcoming newcomers.</span>
+                  <span class="prose-line"><strong>44%</strong> of NSW club respondents named football/soccer.</span>
+                  <span class="prose-line">In Victoria, <strong>10%</strong> reported the same sport.</span>
+                  <span class="prose-line">That is a <strong>34-point gap</strong> in survey responses.</span>
                 </p>
                 <p>
-                  <span class="prose-line">Which sports are represented is one question. Who feels</span>
-                  <span class="prose-line">welcome to join is another.</span>
-                </p>
-                <p class="context-source">
-                  Football Australia: CALD Play
+                  <span class="prose-line">It describes respondents, not all state residents.</span>
+                  <span class="prose-line">The map lets you compare other sports too.</span>
                 </p>
               </aside>
-              <p>
-                <span class="prose-line">Switch sports to compare their</span>
-                <span class="prose-line">representation among club respondents</span>
-                <span class="prose-line">in  each state and territory.  For example,</span>
-                <span class="prose-line">44% of NSW respondents reported</span>
-                <span class="prose-line">football/soccer,  compared with</span>
-                <span class="prose-line">10% in Victoria.</span>
-              </p>
+              <p><span class="prose-line">Hover over states to compare sport representation.</span><span class="prose-line">Check respondent bases in the state tooltips.</span></p>
               <div class="visible-note scope-details">
                 <h3 class="note-heading">What these figures measure</h3>
                 <p class="scope-note">
@@ -318,19 +317,19 @@
             <h2 id="ausplay-spike-map-title">Who takes part through organised sport and activity?</h2>
           </div>
           <p class="pair-intro">
-            Compare estimated participation across states and territories.
-            Hover over a spike for its estimate and participation rate.
+            <span class="prose-line">Compare estimated participation across states and territories.</span>
+            <span class="prose-line">Hover over a spike for its estimate and participation rate.</span>
           </p>
           <div class="participation-map-pair">
             <figure class="participation-map-card">
               <h3>Adults</h3>
-              <p class="caption">Participation through organisations or venues ? source period: All</p>
+              <p class="caption"><span class="prose-line">Participation through organisations or venues.</span><span class="prose-line">Source period: All.</span></p>
               <div id="ausplay-spike-map" class="vis-container" aria-label="Australian spike map of estimated adult participants through organisations">
               </div>
             </figure>
             <figure class="participation-map-card">
               <h3>Children aged 0 to 14</h3>
-              <p class="caption">Organised activity outside school hours ? at least once per year ? July 2022 to June 2023</p>
+              <p class="caption"><span class="prose-line">Organised activity outside school hours.</span><span class="prose-line">At least once yearly, July 2022 to June 2023.</span></p>
               <div id="ausplay-children-spike-map" class="vis-container" aria-label="Australian spike map of estimated children aged 0 to 14 participating in organised sport or physical activity outside school hours in 2022 to 2023">
               </div>
             </figure>
@@ -354,21 +353,22 @@
             <article>
               <h3>Smallest by area, not by population</h3>
               <p>
-                <span class="prose-line">In 2023, ACT had 466,800 residents; NT had 252,500.</span>
+                <span class="prose-line">In 2023, ACT had <strong>466,800</strong> residents; NT had <strong>252,500</strong>.</span>
                 <span class="prose-line">ACT's larger population helps explain higher raw counts:</span>
-                <span class="prose-line">120,222 adults versus 65,641; 68,200 children versus 40,800.</span>
-                <span class="prose-line">But NT's adult participation rate was higher: 32.2%</span>
-                <span class="prose-line">versus ACT's 30.8%. For children, ACT led 77.3%</span>
-                <span class="prose-line">to 71.0%. These maps cannot test why rates differ.</span>
+                <span class="prose-line"><strong>120,222</strong> adults versus <strong>65,641</strong>; <strong>68,200</strong> children versus <strong>40,800</strong>.</span>
+                <span class="prose-line">NT's adult participation rate was higher: <strong>32.2%</strong></span>
+                <span class="prose-line">versus ACT's <strong>30.8%</strong>. For children, ACT led <strong>77.3%</strong></span>
+                <span class="prose-line">to <strong>71.0%</strong>. The maps cannot explain rate differences.</span>
               </p>
             </article>
             <article>
               <h3>Which activities lead?</h3>
               <p>
                 <span class="prose-line">In 2022-23 adult tables, ACT's top sport-related activity</span>
-                <span class="prose-line">was running/athletics (81,000); NT's was swimming (47,000).</span>
-                <span class="prose-line">Swimming led the children's tables in both: 34,000</span>
-                <span class="prose-line">in ACT and 20,000 in NT. These are separate</span>
+                <span class="prose-line">SA's leading sport was running/athletics (<strong>81,000</strong>).</span>
+                <span class="prose-line">NT's leading sport was swimming (<strong>47,000</strong>).</span>
+                <span class="prose-line">Swimming led the children's tables in both: <strong>34,000</strong></span>
+                <span class="prose-line">in ACT and <strong>20,000</strong> in NT. These are separate</span>
                 <span class="prose-line">activity estimates, not components of the map totals.</span>
                 <span class="prose-line">Treat small child estimates cautiously.</span>
               </p>
@@ -439,20 +439,36 @@
                   <article class="football-insight">
                     <span class="football-stat">0.7%</span>
                     <h4>Population-scale comparison</h4>
-                    <p>152,925 Senior participants were reported in 2023, against 21.86 million Australian residents aged 15 and over.</p>
+                    <p>
+                      <span class="prose-line">Football Australia reported 152,925 Senior participants in 2023.</span>
+                      <span class="prose-line">Australia had 21.86 million residents aged 15 and over.</span>
+                      <span class="prose-line">The count-to-population comparison is about 0.7%.</span>
+                    </p>
                   </article>
                   <article class="football-insight">
                     <span class="football-stat">23 selected</span>
                     <h4>Young Matildas, under 20</h4>
-                    <p>Close to 100 players took part in the 2024 selection process, drawing on youth competitions, NTC, NPL, A-League and national camps.</p>
+                    <p>
+                      <span class="prose-line">Close to 100 players entered selection in 2024.</span>
+                      <span class="prose-line">Assessments drew on youth competitions, NTC and NPL.</span>
+                      <span class="prose-line">A-League and national-team camps also informed selection.</span>
+                    </p>
                   </article>
                 </div>
-                <p class="football-caveat">The 0.7% is not a participation rate: affiliated counts are not verified unique people. The squad cannot be matched to this dataset.</p>
+                <p class="football-caveat">
+                  <span class="prose-line">This is not a participation rate.</span>
+                  <span class="prose-line">Affiliated counts are not verified unique people.</span>
+                  <span class="prose-line">Selected players cannot be matched to these counts.</span>
+                </p>
               </aside>
-              <p class="sunburst-guide">Read from the centre outward: age group, gender, then year. Larger arcs mean more reported participants. Filter by region and hover for exact counts.</p>
+              <p class="sunburst-guide">
+                <span class="prose-line">Read from the centre outward: age group, gender, then year.</span>
+                <span class="prose-line">Larger arcs mean more reported participants.</span>
+                <span class="prose-line">Filter by region, then hover for exact counts.</span>
+              </p>
               <div class="sunburst-notes">
                 <p>
-                  <span class="prose-line">The four-year sum is not a count of unique people:</span>
+                  <span class="prose-line">The four-year sum is <strong>not unique people</strong>:</span>
                   <span class="prose-line">someone can participate in several years.</span>
                   <span class="prose-line">Only published male and female counts are included;</span>
                   <span class="prose-line">gender-unspecified participants are excluded.</span>
@@ -499,8 +515,8 @@
             <p>
               <span class="prose-line">These charts show membership types and one member-group profile.</span>
               <span class="prose-line">They describe enrolment, not every visitor or visit frequency.</span>
-              <span class="prose-line">PARC recorded 708,716 member attendances in 2024–25,</span>
-              <span class="prose-line">about 1.1% more than the previous year.</span>
+              <span class="prose-line">PARC recorded <strong>708,716</strong> member attendances in 2024–25,</span>
+              <span class="prose-line">about <strong>1.1% more</strong> than the previous year.</span>
               <span class="prose-line">Attendance counts visits; they are not unique people.</span>
             </p>
           </div>
@@ -508,8 +524,8 @@
             <h3 id="swimming-context-title">Swimming skills matter</h3>
             <p>
               <span class="prose-line">PARC’s lessons teach swimming and water-safety skills.</span>
-              <span class="prose-line">Nationally, 357 people drowned during 2024–25,</span>
-              <span class="prose-line">27% above Australia’s ten-year average.</span>
+              <span class="prose-line">Nationally, <strong>357 people</strong> drowned during 2024–25,</span>
+              <span class="prose-line"><strong>27% above average</strong> for the past ten years.</span>
               <span class="prose-line">That figure shows why water-safety education matters;</span>
               <span class="prose-line">it does not measure PARC’s local impact.</span>
             </p>
@@ -521,7 +537,7 @@
               </div>
               <p class="caption">
                 <strong>How to read this waffle</strong>
-                <span class="prose-line">Each of its 100 squares approximates one percentage point.</span>
+                <span class="prose-line">Each of its <strong>100 squares</strong> approximates one point.</span>
                 <span class="prose-line">Shares come from reported member counts for each year.</span>
                 <span class="prose-line">Square totals are rounded, so they are visual estimates.</span>
                 <span class="prose-line">Membership type is not the same as visit frequency.</span>
@@ -533,7 +549,7 @@
               </div>
               <p class="caption">
                 <strong>Read this profile within its scope</strong>
-                <span class="prose-line">The 40%, 59% and 1% shares cover</span>
+                <span class="prose-line">The <strong>40%, 59% and 1%</strong> shares cover</span>
                 <span class="prose-line">Full Access members only, not every PARC member.</span>
                 <span class="prose-line">They do not measure inclusion or affordability.</span>
                 <span class="prose-line">Earlier reports use different scopes or unreconciled totals,</span>
@@ -550,48 +566,49 @@
                 <h2 id="ballarat-features-title">Record counts and area tell different stories.</h2>
               </div>
               <p class="takeaway">
-                <span class="prose-line">Cricket pitches form 55.5% of all records.</span>
-                <span class="prose-line">They contribute just 6.6% of measured area.</span>
+                <span class="prose-line">Cricket pitches form <strong>55.5%</strong> of all records.</span>
+                <span class="prose-line">They contribute just <strong>6.6%</strong> of measured area.</span>
                 <span class="prose-line">Cricket/football features reverse that pattern:</span>
-                <span class="prose-line">13% of records, but 51.6% of recorded area.</span>
+                <span class="prose-line"><strong>13%</strong> of records, but <strong>51.6%</strong> of area.</span>
               </p>
+              <div class="features-analysis">
+                <article class="features-analysis-card">
+                  <span class="feature-kicker">The area leaders</span>
+                  <h3>Two categories account for most recorded area</h3>
+                  <div class="feature-stat-row">
+                    <p><strong class="feature-stat">51.6%</strong><span>Cricket/Football</span></p>
+                    <p><strong class="feature-stat">18.4%</strong><span>Soccer</span></p>
+                  </div>
+                  <p>
+                    <span class="prose-line">Together, they represent about <strong>70% of area</strong>,</span>
+                    <span class="prose-line">from <strong>27% of mapped records</strong>.</span>
+                    <span class="prose-line">Combined fields cover <strong>296,541 square metres</strong>.</span>
+                  </p>
+                </article>
+                <article class="features-analysis-card">
+                  <span class="feature-kicker">Why the count and area differ</span>
+                  <h3>The mapped unit changes the comparison</h3>
+                  <p>
+                    <span class="prose-line">Cricket pitches are the most frequent feature:</span>
+                    <span class="prose-line"><strong>81 records</strong>, or <strong>55.5%</strong> of the total.</span>
+                    <span class="prose-line">Yet they make up only <strong>6.6%</strong> of recorded area.</span>
+                  </p>
+                  <p>
+                    <span class="prose-line">Combined fields average about <strong>15,600 m²</strong> each;</span>
+                    <span class="prose-line">cricket-pitch records average about <strong>470 m²</strong>.</span>
+                    <span class="prose-line">This may reflect whole shared ovals versus pitch features.</span>
+                    <span class="prose-line">The source does not confirm its mapping intent;</span>
+                    <span class="prose-line">overlapping features mean these are not exclusive parcels.</span>
+                  </p>
+                </article>
+              </div>
             </div>
             <div class="chart-column">
               <div id="ballarat-area-share-dumbbell" class="vis-container" aria-label="Dumbbell chart comparing each Ballarat ground type's share of feature records with its share of recorded area">
               </div>
             </div>
           </div>
-          <div class="features-analysis">
-            <article class="features-analysis-card">
-              <span class="feature-kicker">The area leaders</span>
-              <h3>Two categories account for most recorded area</h3>
-              <div class="feature-stat-row">
-                <p><strong class="feature-stat">51.6%</strong><span>Cricket/Football</span></p>
-                <p><strong class="feature-stat">18.4%</strong><span>Soccer</span></p>
-              </div>
-              <p>
-                <span class="prose-line">Together, they represent about 70% of recorded area,</span>
-                <span class="prose-line">from 27% of the mapped feature records.</span>
-                <span class="prose-line">The combined fields alone cover 296,541 square metres.</span>
-              </p>
-            </article>
-            <article class="features-analysis-card">
-              <span class="feature-kicker">Why the count and area differ</span>
-              <h3>The mapped unit changes the comparison</h3>
-              <p>
-                <span class="prose-line">Cricket pitches are the most frequent feature:</span>
-                <span class="prose-line">81 records, or 55.5% of the total.</span>
-                <span class="prose-line">Yet they make up only 6.6% of recorded area.</span>
-              </p>
-              <p>
-                <span class="prose-line">Combined fields average about <strong>15,600 m²</strong> each;</span>
-                <span class="prose-line">cricket-pitch records average about <strong>470 m²</strong>.</span>
-                <span class="prose-line">This may reflect whole shared ovals versus pitch features.</span>
-                <span class="prose-line">The source does not confirm its mapping intent;</span>
-                <span class="prose-line">overlapping features mean these are not exclusive parcels.</span>
-              </p>
-            </article>
-          </div>
+
         </section>
         <section aria-labelledby="ballarat-matrix-title" class="story-section connections-story" id="story-ballarat-matrix">
           <div class="section-heading">
@@ -614,13 +631,13 @@
                 </p>
               </div>
               <div class="visible-note">
-                <h3 class="note-heading">Place names can repeat</h3>
+                <h3 class="note-heading">A few sites anchor the network</h3>
                 <p class="caption">
-                  <span class="prose-line">Both Victoria Park and Russell Square are Ballarat sites.</span>
-                  <span class="prose-line">Victoria Park has sports ovals; Russell Square includes</span>
-                  <span class="prose-line">north and south ovals and a netball court.</span>
-                  <span class="prose-line">Auckland’s Victoria Park is a different place, home to</span>
-                  <span class="prose-line">Grafton United Cricket Club.</span>
+                  <span class="prose-line">Victoria Park leads Ballarat sites with <strong>28 features</strong>.</span>
+                  <span class="prose-line">Cricket pitches lead overall, with <strong>81 of 146</strong>.</span>
+                  <span class="prose-line">Russell Square contributes <strong>11 features</strong>.</span>
+                  <span class="prose-line">Auckland’s Victoria Park is a separate place.</span>
+                  <span class="prose-line">It is home to Grafton United Cricket Club.</span>
                 </p>
               </div>
             </div>
@@ -640,8 +657,7 @@
               <p class="takeaway">
                 <span class="prose-line">Local facilities can also host international sporting events.</span>
                 <span class="prose-line">Gold Coast Aquatic Centre hosted Masters swimming in 2024.</span>
-                <span class="prose-line">The map connects 107 athletes across 12 overseas country</span>
-                <span class="prose-line">teams.</span>
+                <span class="prose-line">The map connects <strong>107 athletes</strong> across <strong>12 teams</strong>.</span>
               </p>
               <p>
                 <span class="prose-line">Trace each team’s connection to the competition venue.</span>
@@ -657,6 +673,14 @@
                   <span class="prose-line">This subset does not include every overseas swimmer.</span>
                 </p>
               </div>
+              <div class="visible-note">
+                <h3 class="note-heading">Three teams account for most entries</h3>
+                <p class="caption">
+                  <span class="prose-line">India, New Zealand and Mongolia total <strong>89 of 107</strong> athletes.</span>
+                  <span class="prose-line">Together, they represent about <strong>83%</strong> of mapped athletes.</span>
+                  <span class="prose-line">The map shows team representation, not journeys.</span>
+                </p>
+              </div>
             </div>
             <div class="chart-column">
               <div id="swimming-connections" class="vis-container" aria-label="Interactive map of 12 overseas country teams connected to Gold Coast Aquatic Centre; team affiliations, not travel routes">
@@ -665,7 +689,7 @@
           </div>
         </section>
         <footer class="sources-footer" id="sources" aria-labelledby="sources-title">
-          <div class="sources-heading">
+          <div class="sources-heading chapter-divider">
             <span class="chapter">SOURCES / METHODS</span>
             <h2 id="sources-title">Sources and reading notes</h2>
             <p>
@@ -686,21 +710,6 @@
                 <li>
                   <a href="https://www.data.qld.gov.au/dataset/active-clubs">Dataset catalogue</a>
                 </li>
-                <li>
-                  <a href="https://www.qld.gov.au/__data/assets/pdf_file/0036/457794/activeclubs-round4-guidelines.pdf">Round 4 program guidelines (pp. 2-4)</a>
-                </li>
-                <li>
-                  <a href="data/raw/active-clubs-records.csv">Combined source rows</a>
-                </li>
-                <li>
-                  <a href="data/raw/active-clubs-round-2.xlsx">Round 2 workbook</a>
-                </li>
-                <li>
-                  <a href="data/raw/active-clubs-round-3.xlsx">Round 3 workbook</a>
-                </li>
-                <li>
-                  <a href="data/raw/active-clubs-round-4.xlsx">Round 4 workbook</a>
-                </li>
               </ul>
             </article>
             <article class="source-card">
@@ -720,26 +729,20 @@
                 <li>
                   <a href="https://asf.org.au/resources/clubs-under-pressure">Report and methodology</a>
                 </li>
-                <li>
-                  <a href="data/raw/asf-sports-by-state-2023.csv">Transcribed survey table</a>
-                </li>
               </ul>
             </article>
             <article class="source-card">
               <span class="source-section">06 · AusPlay</span>
               <h3>Organised participation</h3>
               <p>
-                <span class="prose-line">Australian Sports Commission dashboard: supplied state totals.</span>
-                <span class="prose-line">Transcribed screenshot filters: all periods; adults; all genders.</span>
+                <span class="prose-line">Supplied Power BI dashboard transcribed for adult totals.</span>
+                <span class="prose-line">Filters: all periods, adults and all genders.</span>
                 <span class="prose-line">Exact reporting dates were not visible.</span>
               </p>
+              <p class="source-citation">
+                <a href="https://app.powerbi.com/view?r=eyJrIjoiMzg2NTFmZGEtNGRhZC00Yzg2LWFjMjktNTViZTc2NDYwN2RiIiwidCI6IjhkMmUwZjRjLTU1ZjItNGNiMS04ZWU3LWRhNWRkM2ZmMzYwMCJ9">AusPlay adult participation dashboard (Power BI)</a>
+              </p>
               <ul class="source-links">
-                <li>
-                  <a href="https://www.ausport.gov.au/ausplay">AusPlay information</a>
-                </li>
-                <li>
-                  <a href="data/raw/ausplay-state-organisation-participation.csv">Transcribed state totals</a>
-                </li>
                 <li>
                   <a href="https://www.ausport.gov.au/clearinghouse/research/ausplay/2015-2023/data-tables">AusPlay 2022-23 state and sport tables</a>
                 </li>
@@ -758,9 +761,6 @@
                 <span class="prose-line">June 2023 estimated residents; it is not a participation rate.</span>
               </p>
               <ul class="source-links">
-                <li>
-                  <a href="data/raw/football-sunburst-counts-2022-2025.csv">Published age and gender counts</a>
-                </li>
                 <li>
                   <a href="https://www.abs.gov.au/statistics/people/population/national-state-and-territory-population/jun-2023">ABS estimated resident population, June 2023</a>
                 </li>
@@ -785,18 +785,6 @@
                   <a href="https://peninsulaleisure.com.au/about/annual-reports/">Annual reports</a>
                 </li>
                 <li>
-                  <a href="data/processed/parc-membership-types.csv">Membership types</a>
-                </li>
-                <li>
-                  <a href="data/processed/parc-membership-demographics.csv">Demographic shares</a>
-                </li>
-                <li>
-                  <a href="data/processed/parc-pines-data-notes.txt">Source pages and qualifications</a>
-                </li>
-                <li>
-                  <a href="https://parc.peninsulaleisure.com.au/our-centre/">PARC facilities and learn-to-swim pool</a>
-                </li>
-                <li>
                   <a href="https://www.royallifesaving.com.au/library/national-drowning-report/national-drowning-report-2025">Royal Life Saving, National Drowning Report 2025</a>
                 </li>
               </ul>
@@ -805,9 +793,12 @@
               <span class="source-section">10–11 · Features and connections</span>
               <h3>Ballarat sporting sites</h3>
               <p>
-                <span class="prose-line">City of Ballarat Sports Grounds, catalogue updated April 2022.</span>
-                <span class="prose-line">Counts describe recorded features rather than unique facilities.</span>
-                <span class="prose-line">Source licence: CC BY 3.0 Australia.</span>
+                <span class="prose-line">The dataset records Ballarat sports-ground features.</span>
+                <span class="prose-line">Counts describe features, not unique facilities.</span>
+                <span class="prose-line">The data uses a CC BY 3.0 Australia licence.</span>
+              </p>
+              <p class="source-citation">
+                <a href="https://data.gov.au/geoserver/ballarat-sports-grounds/wfs?request=GetFeature&amp;typeName=ckan_6f254063_19fa_4e5e_90f6_6934d263d70e&amp;outputFormat=json">Ballarat Sports Grounds dataset (GeoJSON via WFS)</a>
               </p>
               <ul class="source-links">
                 <li>
@@ -818,15 +809,6 @@
                 </li>
                 <li>
                   <a href="https://www.ballarat.vic.gov.au/news/sporting-facility-upgrade-unveiled-russell-square">City of Ballarat: Russell Square</a>
-                </li>
-                <li>
-                  <a href="https://www.aucklandcouncil.govt.nz/en/parks-recreation/find-park-beach/park-detail/70.html">Auckland Council: Victoria Park</a>
-                </li>
-                <li>
-                  <a href="data/raw/Ballarat Sports Grounds.json">Original feature records</a>
-                </li>
-                <li>
-                  <a href="data/raw/ballarat-sports-grounds-wgs84.geojson">Geographic point data</a>
                 </li>
               </ul>
             </article>
@@ -845,20 +827,13 @@
                 <li>
                   <a href="https://mastersswimmingqld.org.au/ppmg24-celebrating-the-spirit-of-masters-swimming/">Event and venue report</a>
                 </li>
-                <li>
-                  <a href="data/processed/ppmg-2024-country-teams.csv">Country-team extract</a>
-                </li>
-                <li>
-                  <a href="data/processed/ppmg-2024-data-notes.txt">Selection and mapping notes</a>
-                </li>
               </ul>
             </article>
             <article class="source-card">
               <span class="source-section">Geographic reference layers</span>
               <h3>Map geography</h3>
               <p>
-                <span class="prose-line">ABS 2024 council and 2021 state boundaries: CC BY</span>
-                <span class="prose-line">4.0.</span>
+                <span class="prose-line">ABS 2024 council and 2021 state boundaries: CC BY 4.0.</span>
                 <span class="prose-line">Geography is simplified for web display.</span>
                 <span class="prose-line">World basemap: Natural Earth public-domain geography via world-atlas.</span>
               </p>
@@ -874,23 +849,19 @@
                 </li>
               </ul>
             </article>
-          </div>
-          <div class="source-methods">
-            <h3 class="note-heading">How the funding records are used</h3>
-            <div class="method-grid">
-              <p>
-                <span class="prose-line">The CSV combines original rows from three workbooks.</span>
-                <span class="prose-line">Repeated-looking records remain because no project identifier resolves duplicates.</span>
-                <span class="prose-line">Program Round standardises the original Program Name column.</span>
-                <span class="prose-line">Dates use day/month/year; other source values are preserved.</span>
+            <aside class="ai-acknowledgement" aria-label="Author and AI acknowledgement">
+              <p class="acknowledgement-meta">
+                <span class="prose-line">Created by Pua Wen Yi (34091890)</span>
+                <span class="prose-line">FIT3179 Data Visualisation, Monash University</span>
+                <span class="prose-line">Semester 2, 2026· Assignment 2 · October 2026</span>
               </p>
-              <p>
-                <span class="prose-line">Charts calculate counts, shares and ranks from source rows.</span>
-                <span class="prose-line">Council spelling variants are matched inside the map specification.</span>
-                <span class="prose-line">Purpose shares are calculated separately for each approval year.</span>
-                <span class="prose-line">Different purpose labels are not treated as identical.</span>
+              <p class="acknowledgement-ai">
+                <span class="prose-line"><strong>Use of AI.</strong> ChatGPT supported story planning, code</span>
+                <span class="prose-line">and drafting, plus extracting data from source files.</span>
+                <span class="prose-line">I chose the story, colour and design, then</span>
+                <span class="prose-line">verified figures against cited sources and edited wording.</span>
               </p>
-            </div>
+            </aside>
           </div>
         </footer>
       </main>

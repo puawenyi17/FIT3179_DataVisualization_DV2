@@ -196,7 +196,7 @@
               0.5
             ],
             "range": [
-              "#eff6f5",
+              "#d8e4ea",
               "#07585d"
             ],
             "clamp": true
@@ -281,7 +281,7 @@
   ],
   "config": {
     "font": "Arial",
-    "background": "white",
+    "background": "transparent",
     "view": {
       "stroke": null
     },

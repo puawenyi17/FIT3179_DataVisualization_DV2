@@ -13,7 +13,7 @@
     "type": "none",
     "contains": "content"
   },
-  "background": "white",
+  "background": "transparent",
   "signals": [
     {
       "name": "firstBoundary",
@@ -354,8 +354,8 @@
         "Non-binary"
       ],
       "range": [
-        "#4267a5",
-        "#087f87",
+        "#187f83",
+        "#c56329",
         "#99629f"
       ]
     }

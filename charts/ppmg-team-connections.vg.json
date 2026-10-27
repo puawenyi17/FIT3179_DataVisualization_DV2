@@ -5,7 +5,7 @@
   "height": 530,
   "padding": 8,
   "autosize": "none",
-  "background": "white",
+  "background": "transparent",
   "config": {
     "text": {
       "font": "Arial"

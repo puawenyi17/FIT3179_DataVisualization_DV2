@@ -9,7 +9,7 @@
     "bottom": 8,
     "left": 10
   },
-  "background": "white",
+  "background": "transparent",
   "signals": [
     {
       "name": "groundType",

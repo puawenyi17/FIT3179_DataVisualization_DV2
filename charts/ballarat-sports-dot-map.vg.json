@@ -53,8 +53,8 @@
       },
       "mark": {
         "type": "geoshape",
-        "fill": "#eef3ef",
-        "stroke": "#92a79a",
+        "fill": "#d8e3dc",
+        "stroke": "#748b7f",
         "strokeWidth": 1.2
       }
     },
@@ -167,7 +167,7 @@
   ],
   "config": {
     "font": "Arial",
-    "background": "white",
+    "background": "transparent",
     "view": {
       "stroke": null
     },

@@ -149,13 +149,13 @@
         "range": [
           "#0072b2",
           "#e69f00",
-          "#56b4e9",
-          "#009e73",
-          "#b79f00",
+          "#2c7fb8",
+          "#d55e00",
+          "#cc79a7",
           "#332288",
-          "#88ccee",
-          "#44aa99",
-          "#9467bd",
+          "#a87900",
+          "#aa3377",
+          "#8c564b",
           "#666666"
         ]
       },
@@ -203,7 +203,7 @@
   },
   "config": {
     "font": "Arial",
-    "background": "white",
+    "background": "transparent",
     "view": {
       "stroke": null
     },

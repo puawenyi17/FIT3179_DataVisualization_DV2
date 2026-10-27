@@ -3,7 +3,7 @@
   "description": "Dumbbell chart comparing each Ballarat ground type's share of recorded features with its share of summed recorded feature area in square metres.",
   "width": 1000,
   "height": 520,
-  "background": "white",
+  "background": "transparent",
   "data": {
     "url": "data/raw/Ballarat Sports Grounds.json",
     "format": {

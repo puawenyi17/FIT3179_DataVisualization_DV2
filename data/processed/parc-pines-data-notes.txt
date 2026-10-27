@@ -1,18 +1,14 @@
-PARC and PINES annual-report transcriptions, 2022-23 to 2024-25
+PARC annual-report transcriptions, 2022-23 to 2024-25
 
 Prepared 2026-10-22 for the FIT3179 visualisation project.
 Source: Peninsula Leisure annual reports. These CSVs are manually transcribed
 from the official PDFs and visually checked. They are not official CSV releases.
-They cover membership and the accompanying PINES user/participation panels,
-plus directly related attendance figures; they are not the full reports.
+This cleaned extract retains only the membership datasets used in the webpage.
 
 FILES
-parc-membership-summary.csv: 13 reported membership-related metrics, in long form.
 parc-membership-types.csv: 9 membership-type rows, with counts, reported shares
   where available, and separately calculated shares (members / total * 100).
 parc-membership-demographics.csv: 8 gender rows with population scopes and flags.
-pines-participation.csv: 15 attendance/programme metrics; PINES is a separate facility.
-pines-user-profile.csv: 6 published PINES profile percentages from 2022-23 only.
 
 FIELD CONVENTIONS
 UTF-8 comma-separated files, one header row, numeric values without separators.
@@ -43,17 +39,6 @@ The drawn bar proportions also disagree with the printed values. All values and
 labels are preserved; do not swap gender labels or force a reconciliation.
 2024-25 Full Access gender shares are 40%, 59%, 1%. Counts are not supplied.
 Avoid a three-year gender trend without clarification from the publisher.
-
-Annual joins are not net growth; referrals are not an additional group of joins.
-Attendance counts are repeat visits, not unique members or people.
-PINES member/visit-pass attendances include PARC and PINES membership visits.
-Do not combine PARC membership counts with PINES attendances as one denominator.
-PINES 2022-23 free community access (3491) includes Free Family Fridays (1862).
-Only the narrower Free Family Friday metric is comparable in name across years.
-PINES 2022-23 visit reasons are overlapping responses (total 145%), not shares
-of a mutually exclusive whole. Survey sample size is not stated on the panel.
-The later PINES panels report attendance categories instead of these percentages.
-The three attendance categories sum to the PINES total in 2023-24 and 2024-25.
 
 Membership type shows service choice; gender composition describes members.
 Neither alone measures disability inclusion, financial barriers or health outcomes.

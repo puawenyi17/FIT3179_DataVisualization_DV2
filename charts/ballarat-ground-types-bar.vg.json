@@ -13,7 +13,7 @@
     "type": "none",
     "contains": "content"
   },
-  "background": "white",
+  "background": "transparent",
   "data": [
     {
       "name": "features",
