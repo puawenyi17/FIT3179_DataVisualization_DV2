@@ -366,6 +366,87 @@ footer > .visible-note { grid-column:1 / -1; }
  .participation-story .vis-container svg { min-width:680px; max-width:none; }
 }
 
+/* Football growth story: context first, full-width chart, notes beneath. */
+#story-football-growth .section-heading { margin-bottom:24px; }
+#story-football-growth .football-pre-chart,
+#story-football-growth .football-post-chart {
+  display:grid;
+  grid-template-columns:repeat(2,minmax(0,1fr));
+  gap:24px 40px;
+  align-items:stretch;
+}
+#story-football-growth .football-pre-chart { margin-bottom:20px; }
+#story-football-growth .story-context,
+#story-football-growth .football-compare-context {
+  min-width:0;
+  margin:0;
+  padding:20px 24px;
+  border-left:4px solid var(--teal);
+  background:#e7f1ef;
+}
+#story-football-growth .story-context h3,
+#story-football-growth .football-compare-context h3 {
+  margin:0 0 10px;
+  color:var(--ink);
+  font-family:var(--title-font);
+  font-size:23px;
+  line-height:1.25;
+}
+#story-football-growth .story-context p,
+#story-football-growth .football-compare-context p {
+  max-width:unset;
+  margin:0 0 10px;
+  font-size:var(--reading-size,20px);
+  line-height:1.5;
+}
+#story-football-growth .story-context .context-source {
+  margin:12px 0 0;
+  color:var(--muted);
+  font-size:15px;
+}
+#story-football-growth .football-chart-row .chart-column {
+  width:100%;
+  max-width:none;
+  justify-self:stretch;
+}
+#story-football-growth .football-chart-row .vis-container {
+  width:100%;
+  padding:8px 0;
+}
+#story-football-growth .football-chart-row .vis-container .vega-embed {
+  width:100%;
+}
+#story-football-growth .football-chart-row .vis-container svg {
+  width:100%;
+  max-width:100%;
+  height:auto;
+}
+#story-football-growth .football-post-chart { margin-top:20px; }
+#story-football-growth .football-post-chart .visible-note {
+  margin:0;
+  padding:18px 22px;
+  border-top:2px solid var(--teal);
+  background:rgb(255 255 255 / 42%);
+}
+#story-football-growth .football-post-chart .note-heading {
+  margin-bottom:8px;
+  color:var(--ink);
+  font-family:var(--title-font);
+  font-size:21px;
+}
+#story-football-growth .football-post-chart p {
+  max-width:unset;
+  margin:0;
+  font-size:var(--reading-size,20px);
+  line-height:1.5;
+}
+@media (max-width:760px) {
+  #story-football-growth .football-pre-chart,
+  #story-football-growth .football-post-chart { grid-template-columns:1fr; gap:16px; }
+  #story-football-growth .football-chart-row .vis-container { overflow-x:auto; }
+  #story-football-growth .football-chart-row .vis-container svg { min-width:680px; max-width:none; }
+}
+
 /* Two compact PARC waffles share a row, with their populations stated locally. */
 .membership-story .section-heading { margin-bottom:18px; }
 .membership-intro { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:24px 40px; margin-bottom:20px; align-items:start; }
@@ -1076,4 +1157,106 @@ figcaption,
 @media (max-width: 650px) {
   .football-insight-grid { grid-template-columns: 1fr; }
   .football-context { padding: 18px; }
+}
+
+/* Give the sunburst insight cards more breathing room, then explain it below. */
+#story-football-sunburst .football-insight {
+  padding:26px 20px 30px;
+}
+#story-football-sunburst .football-stat { margin-bottom:9px; }
+#story-football-sunburst .football-insight h4 { margin-bottom:13px; }
+#story-football-sunburst .football-insight p { line-height:1.62; }
+#story-football-sunburst .sunburst-notes {
+  grid-template-columns:repeat(2,minmax(0,1fr));
+  gap:28px 44px;
+  margin-top:30px;
+  padding-top:22px;
+  border-top:1px solid var(--line);
+}
+#story-football-sunburst .sunburst-notes article {
+  min-width:0;
+  padding-top:14px;
+  border-top:3px solid var(--teal);
+}
+#story-football-sunburst .sunburst-notes .note-heading {
+  margin:0 0 10px;
+  font-family:var(--title-font);
+  font-size:22px;
+  line-height:1.25;
+}
+#story-football-sunburst .sunburst-notes p {
+  color:var(--ink);
+  font-size:var(--reading-size,19px);
+  line-height:1.55;
+}
+@media (max-width:700px) {
+  #story-football-sunburst .sunburst-notes { grid-template-columns:1fr; gap:20px; }
+}
+
+/* Use the facility chart row and its findings to fill the section width. */
+#story-ballarat-features .section-heading { margin-bottom:20px; }
+#story-ballarat-features .takeaway { max-width:none; margin:0 0 20px; }
+#story-ballarat-features .features-chart-row { width:100%; }
+#story-ballarat-features .features-chart-row .chart-column { width:100%; max-width:none; }
+#story-ballarat-features .features-chart-row .vis-container { min-height:0; padding:8px 0; }
+#story-ballarat-features .features-chart-row .vis-container svg { width:100%; max-width:100%; height:auto; }
+#story-ballarat-features .features-analysis {
+  grid-template-columns:repeat(2,minmax(0,1fr));
+  gap:24px;
+  margin:26px 0 0;
+}
+#story-ballarat-features .features-analysis-card { padding:24px 28px; }
+@media (max-width:700px) {
+  #story-ballarat-features .features-analysis { grid-template-columns:1fr; }
+  #story-ballarat-features .features-chart-row .vis-container { overflow-x:auto; }
+  #story-ballarat-features .features-chart-row .vis-container svg { min-width:900px; max-width:none; }
+}
+
+/* Add clear separation around the paired sunburst insight cards. */
+#story-football-sunburst .football-context > h3 { margin-bottom:25px; }
+#story-football-sunburst .football-insight-grid { margin:8px 0 24px; }
+#story-football-sunburst .football-context .football-caveat { margin-top:24px; }
+
+/* Use a distinct serif face for the facility types named in the takeaway. */
+.features-story .takeaway .feature-term {
+  color:var(--ink);
+  font-family:var(--title-font);
+  font-size:1.08em;
+  font-style:italic;
+  font-weight:700;
+}
+/* Let the international team map use more of its chart column. */
+#story-swimming-connections .vis-container svg { max-width:1250px; }
+
+/* Put event context beneath the international connections map. */
+#story-swimming-connections .swimming-insight-row {
+  display:grid;
+  grid-template-columns:repeat(3,minmax(0,1fr));
+  gap:28px;
+  margin-top:28px;
+}
+#story-swimming-connections .swimming-insight-row article {
+  min-width:0;
+  padding:16px 18px 0;
+  border-top:3px solid var(--teal);
+}
+#story-swimming-connections .swimming-insight-row h3 {
+  margin:0 0 10px;
+  font-family:var(--title-font);
+  font-size:23px;
+  line-height:1.25;
+}
+#story-swimming-connections .swimming-insight-row p {
+  max-width:none;
+  margin:0 0 12px;
+  font-size:17px;
+  line-height:1.5;
+}
+#story-swimming-connections .swimming-insight-row a {
+  display:inline-block;
+  margin-top:4px;
+  font-size:15px;
+}
+@media (max-width:900px) {
+  #story-swimming-connections .swimming-insight-row { grid-template-columns:1fr; gap:22px; }
 }

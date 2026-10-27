@@ -2,7 +2,7 @@
   "$schema": "https://vega.github.io/schema/vega/v5.json",
   "description": "Overseas country-labelled swimming teams connected to the 2024 Pan Pacific Masters Games venue. Affiliation links, not observed travel.",
   "width": 1000,
-  "height": 530,
+  "height": 550,
   "padding": 8,
   "autosize": "none",
   "background": "transparent",
@@ -63,7 +63,7 @@
       "scale": 150,
       "translate": [
         500,
-        265
+        285
       ]
     }
   ],
@@ -221,13 +221,13 @@
       "encode": {
         "update": {
           "fill": {
-            "value": "#edf2f3"
+            "value": "#e8eff0"
           },
           "stroke": {
-            "value": "#c5d2d6"
+            "value": "#9aadb2"
           },
           "strokeWidth": {
-            "value": 0.6
+            "value": 0.85
           }
         }
       }
@@ -251,14 +251,14 @@
             "value": null
           },
           "stroke": {
-            "value": "#087e83"
+            "value": "#006f75"
           },
           "strokeWidth": {
             "scale": "lineWidth",
             "field": "athletes"
           },
           "strokeOpacity": {
-            "signal": "hoverTeam === null ? 0.30 : hoverTeam === datum.team ? 0.95 : 0.05"
+            "signal": "hoverTeam === null ? 0.58 : hoverTeam === datum.team ? 1 : 0.07"
           },
           "zindex": {
             "signal": "hoverTeam === datum.team ? 1 : 0"
@@ -287,16 +287,16 @@
             "field": "y"
           },
           "size": {
-            "value": 65
+            "value": 90
           },
           "fill": {
-            "value": "#087e83"
+            "value": "#00777e"
           },
           "stroke": {
             "value": "white"
           },
           "strokeWidth": {
-            "value": 1.4
+            "value": 1.8
           },
           "opacity": {
             "signal": "hoverTeam === null || hoverTeam === datum.team ? 1 : 0.25"
@@ -349,7 +349,7 @@
             "value": "round"
           },
           "text": {
-            "signal": "datum.team + ' \u00b7 ' + datum.athletes"
+            "signal": "datum.team + ' · ' + datum.athletes"
           },
           "opacity": {
             "signal": "hoverTeam === datum.team || (hoverTeam === null && datum.rank <= 3) ? 1 : 0"
@@ -387,7 +387,7 @@
             "value": "#173c4a"
           },
           "text": {
-            "signal": "datum.team + ' \u00b7 ' + datum.athletes"
+            "signal": "datum.team + ' · ' + datum.athletes"
           },
           "opacity": {
             "signal": "hoverTeam === datum.team || (hoverTeam === null && datum.rank <= 3) ? 1 : 0"
@@ -496,10 +496,10 @@
             "value": 18
           },
           "y": {
-            "value": 26
+            "value": 18
           },
           "text": {
-            "value": "Swimming connections \u00b7 2024"
+            "value": "Swimming connections · 2024"
           },
           "fontSize": {
             "value": 22
@@ -522,7 +522,7 @@
             "value": 18
           },
           "y": {
-            "value": 51
+            "value": 43
           },
           "text": {
             "signal": "length(data('shown')) + ' of 12 overseas country-labelled teams'"
@@ -606,10 +606,10 @@
             "field": "y"
           },
           "stroke": {
-            "value": "#087e83"
+            "value": "#006f75"
           },
           "strokeOpacity": {
-            "value": 0.6
+            "value": 0.82
           },
           "strokeWidth": {
             "scale": "lineWidth",
@@ -643,52 +643,6 @@
           },
           "fill": {
             "value": "#173c4a"
-          }
-        }
-      }
-    },
-    {
-      "type": "text",
-      "interactive": false,
-      "encode": {
-        "update": {
-          "x": {
-            "value": 18
-          },
-          "y": {
-            "value": 498
-          },
-          "text": {
-            "value": "Hover over a dot or connection to isolate a team."
-          },
-          "fontSize": {
-            "value": 16
-          },
-          "fill": {
-            "value": "#4d6068"
-          }
-        }
-      }
-    },
-    {
-      "type": "text",
-      "interactive": false,
-      "encode": {
-        "update": {
-          "x": {
-            "value": 18
-          },
-          "y": {
-            "value": 522
-          },
-          "text": {
-            "value": "Connections show team representation, not recorded travel routes."
-          },
-          "fontSize": {
-            "value": 15
-          },
-          "fill": {
-            "value": "#4d6068"
           }
         }
       }
