@@ -178,23 +178,23 @@
             "scale": "x",
             "value": 0
           },
-          "x2": {
-            "scale": "x",
-            "field": "Count"
-          },
           "y": {
             "scale": "y",
             "field": "GroundType"
-          },
-          "height": {
-            "scale": "y",
-            "band": 1
           },
           "fill": {
             "value": "#087f87"
           },
           "tooltip": {
             "signal": "{'Ground type': datum.GroundType, 'Recorded features': datum.Count, 'Share of all features': format(datum.Share, '.1%'), 'Total features': datum.Total}"
+          },
+          "x2": {
+            "scale": "x",
+            "field": "Count"
+          },
+          "height": {
+            "scale": "y",
+            "band": 1
           }
         }
       }
@@ -242,7 +242,7 @@
             "value": 396
           },
           "text": {
-            "value": "Feature count · bars start at zero"
+            "value": "Feature count - bars start at zero"
           },
           "fontSize": {
             "value": 14

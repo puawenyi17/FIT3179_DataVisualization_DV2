@@ -1,6 +1,6 @@
 {
   "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
-  "description": "Spike map of estimated adult participants through organisations. Fixed-width triangle height is proportional to count; Period All from supplied screenshot.",
+  "description": "Spike map of estimated adult participants. Triangle height is proportional to count using the shared scale shown beside both maps.",
   "width": 820,
   "height": 560,
   "projection": {
@@ -17,7 +17,7 @@
       },
       "mark": {
         "type": "geoshape",
-        "fill": "#edf1f2",
+        "fill": "#d8e2e6",
         "stroke": "white",
         "strokeWidth": 1.5
       }
@@ -89,8 +89,8 @@
                 },
                 {
                   "state": "QLD",
-                  "Longitude": 140,
-                  "Latitude": -27
+                  "Longitude": 145.5,
+                  "Latitude": -22.5
                 },
                 {
                   "state": "NSW",
@@ -130,7 +130,7 @@
           "as": "SpikePath"
         },
         {
-          "calculate": "datum.state + ' \u00b7 ' + format(datum.estimate, ',')",
+          "calculate": "datum.state + ' · ' + format(datum.estimate, ',')",
           "as": "SpikeLabel"
         }
       ],
@@ -216,8 +216,8 @@
                 },
                 {
                   "state": "QLD",
-                  "Longitude": 140,
-                  "Latitude": -27
+                  "Longitude": 145.5,
+                  "Latitude": -22.5
                 },
                 {
                   "state": "NSW",
@@ -257,7 +257,7 @@
           "as": "SpikePath"
         },
         {
-          "calculate": "datum.state + ' \u00b7 ' + format(datum.estimate, ',')",
+          "calculate": "datum.state + ' · ' + format(datum.estimate, ',')",
           "as": "SpikeLabel"
         }
       ],
@@ -306,67 +306,6 @@
             "title": "Source period filter"
           }
         ]
-      }
-    },
-    {
-      "data": {
-        "values": [
-          {
-            "Longitude": 115,
-            "Latitude": -40,
-            "Shape": "M -5,0 L 0,-80 L 5,0 Z"
-          }
-        ]
-      },
-      "mark": {
-        "type": "point",
-        "filled": true,
-        "size": 4,
-        "opacity": 0.9,
-        "color": "#276e86"
-      },
-      "encoding": {
-        "x": {
-          "value": 720
-        },
-        "y": {
-          "value": 125
-        },
-        "shape": {
-          "field": "Shape",
-          "type": "nominal",
-          "scale": null,
-          "legend": null
-        }
-      }
-    },
-    {
-      "data": {
-        "values": [
-          {
-            "Longitude": 115,
-            "Latitude": -40,
-            "Label": "1,000,000\nparticipants"
-          }
-        ]
-      },
-      "mark": {
-        "type": "text",
-        "align": "center",
-        "fontSize": 14,
-        "lineBreak": "\n",
-        "color": "#233c48"
-      },
-      "encoding": {
-        "x": {
-          "value": 720
-        },
-        "y": {
-          "value": 150
-        },
-        "text": {
-          "field": "Label"
-        }
       }
     }
   ],

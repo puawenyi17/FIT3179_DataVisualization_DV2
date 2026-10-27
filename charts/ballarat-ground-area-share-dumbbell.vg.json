@@ -1,0 +1,278 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "description": "Dumbbell chart comparing each Ballarat ground type's share of recorded features with its share of summed recorded feature area in square metres.",
+  "width": 1000,
+  "height": 520,
+  "background": "white",
+  "data": {
+    "url": "data/raw/Ballarat Sports Grounds.json",
+    "format": {
+      "type": "json",
+      "property": "features"
+    }
+  },
+  "transform": [
+    {
+      "calculate": "isValid(datum.properties.Feat_Type) ? replace(datum.properties.Feat_Type, 'SG-', '') : 'Unspecified'",
+      "as": "GroundType"
+    },
+    {
+      "calculate": "toNumber(datum.properties.Measure)",
+      "as": "RecordedArea"
+    },
+    {
+      "aggregate": [
+        {
+          "op": "count",
+          "as": "FeatureCount"
+        },
+        {
+          "op": "sum",
+          "field": "RecordedArea",
+          "as": "RecordedArea"
+        }
+      ],
+      "groupby": [
+        "GroundType"
+      ]
+    },
+    {
+      "joinaggregate": [
+        {
+          "op": "sum",
+          "field": "FeatureCount",
+          "as": "TotalFeatures"
+        },
+        {
+          "op": "sum",
+          "field": "RecordedArea",
+          "as": "TotalRecordedArea"
+        }
+      ]
+    },
+    {
+      "calculate": "datum.FeatureCount / datum.TotalFeatures",
+      "as": "record_share"
+    },
+    {
+      "calculate": "datum.RecordedArea / datum.TotalRecordedArea",
+      "as": "area_share"
+    }
+  ],
+  "layer": [
+    {
+      "mark": {
+        "type": "rule",
+        "strokeWidth": 3,
+        "color": "#bcc8ca"
+      },
+      "encoding": {
+        "y": {
+          "field": "GroundType",
+          "type": "nominal",
+          "sort": {
+            "field": "area_share",
+            "order": "descending"
+          },
+          "axis": {
+            "title": null,
+            "labelLimit": 260,
+            "labelPadding": 8
+          }
+        },
+        "x": {
+          "field": "record_share",
+          "type": "quantitative",
+          "scale": {
+            "domain": [
+              0,
+              0.6
+            ]
+          },
+          "axis": {
+            "title": "Share of all records or recorded area",
+            "format": ".0%",
+            "values": [
+              0,
+              0.1,
+              0.2,
+              0.3,
+              0.4,
+              0.5,
+              0.6
+            ],
+            "grid": true
+          }
+        },
+        "x2": {
+          "field": "area_share"
+        },
+        "tooltip": [
+          {
+            "field": "GroundType",
+            "type": "nominal",
+            "title": "Ground type"
+          },
+          {
+            "field": "FeatureCount",
+            "type": "quantitative",
+            "format": ",",
+            "title": "Feature records"
+          },
+          {
+            "field": "record_share",
+            "type": "quantitative",
+            "format": ".1%",
+            "title": "Share of records"
+          },
+          {
+            "field": "RecordedArea",
+            "type": "quantitative",
+            "format": ",.1f",
+            "title": "Summed recorded area (square metres)"
+          },
+          {
+            "field": "area_share",
+            "type": "quantitative",
+            "format": ".1%",
+            "title": "Share of recorded area"
+          }
+        ]
+      }
+    },
+    {
+      "transform": [
+        {
+          "fold": [
+            "record_share",
+            "area_share"
+          ],
+          "as": [
+            "ShareField",
+            "Share"
+          ]
+        },
+        {
+          "calculate": "datum.ShareField === 'record_share' ? 'Share of records' : 'Share of recorded area'",
+          "as": "ShareType"
+        }
+      ],
+      "mark": {
+        "type": "point",
+        "filled": true,
+        "size": 150,
+        "stroke": "white",
+        "strokeWidth": 1.2
+      },
+      "encoding": {
+        "y": {
+          "field": "GroundType",
+          "type": "nominal",
+          "sort": {
+            "field": "area_share",
+            "order": "descending"
+          },
+          "axis": {
+            "title": null,
+            "labelLimit": 260,
+            "labelPadding": 8
+          }
+        },
+        "x": {
+          "field": "Share",
+          "type": "quantitative",
+          "scale": {
+            "domain": [
+              0,
+              0.6
+            ]
+          },
+          "axis": {
+            "title": "Share of all records or recorded area",
+            "format": ".0%",
+            "values": [
+              0,
+              0.1,
+              0.2,
+              0.3,
+              0.4,
+              0.5,
+              0.6
+            ],
+            "grid": true
+          }
+        },
+        "color": {
+          "field": "ShareType",
+          "type": "nominal",
+          "scale": {
+            "domain": [
+              "Share of records",
+              "Share of recorded area"
+            ],
+            "range": [
+              "#087e83",
+              "#d66b38"
+            ]
+          },
+          "legend": {
+            "title": null,
+            "orient": "top",
+            "direction": "horizontal",
+            "labelFontSize": 13,
+            "columns": 2,
+            "labelLimit": 300
+          }
+        },
+        "tooltip": [
+          {
+            "field": "GroundType",
+            "type": "nominal",
+            "title": "Ground type"
+          },
+          {
+            "field": "FeatureCount",
+            "type": "quantitative",
+            "format": ",",
+            "title": "Feature records"
+          },
+          {
+            "field": "record_share",
+            "type": "quantitative",
+            "format": ".1%",
+            "title": "Share of records"
+          },
+          {
+            "field": "RecordedArea",
+            "type": "quantitative",
+            "format": ",.1f",
+            "title": "Summed recorded area (square metres)"
+          },
+          {
+            "field": "area_share",
+            "type": "quantitative",
+            "format": ".1%",
+            "title": "Share of recorded area"
+          }
+        ]
+      }
+    }
+  ],
+  "config": {
+    "font": "Arial",
+    "view": {
+      "stroke": null
+    },
+    "axis": {
+      "labelFontSize": 13,
+      "titleFontSize": 14,
+      "labelColor": "#4d6068",
+      "titleColor": "#173c4a",
+      "gridColor": "#e3e9ea",
+      "tickColor": "#b6c5c9"
+    },
+    "legend": {
+      "labelColor": "#173c4a"
+    }
+  }
+}

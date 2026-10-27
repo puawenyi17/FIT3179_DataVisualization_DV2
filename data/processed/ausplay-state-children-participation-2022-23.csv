@@ -1,0 +1,9 @@
+state,state_name,state_code,estimate,participation_rate,age_group,participation_frequency,period
+ACT,Australian Capital Territory,8,68200,0.773051752167,0-14,1+ per year,July 2022 to June 2023
+NSW,New South Wales,1,1233800,0.769561518636,0-14,1+ per year,July 2022 to June 2023
+NT,Northern Territory,7,40800,0.709969756798,0-14,1+ per year,July 2022 to June 2023
+QLD,Queensland,3,765500,0.734174557858,0-14,1+ per year,July 2022 to June 2023
+SA,South Australia,4,244800,0.775298650859,0-14,1+ per year,July 2022 to June 2023
+TAS,Tasmania,6,60300,0.631430010179,0-14,1+ per year,July 2022 to June 2023
+VIC,Victoria,2,931100,0.705736047421,0-14,1+ per year,July 2022 to June 2023
+WA,Western Australia,5,391900,0.732800297938,0-14,1+ per year,July 2022 to June 2023

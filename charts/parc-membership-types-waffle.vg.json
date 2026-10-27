@@ -1,8 +1,8 @@
 {
   "$schema": "https://vega.github.io/schema/vega/v5.json",
   "description": "PARC membership types by financial year. Shares calculated from counts; cumulative rounding allocates exactly 100 squares.",
-  "width": 520,
-  "height": 335,
+  "width": 760,
+  "height": 420,
   "padding": {
     "top": 8,
     "left": 8,
@@ -111,6 +111,33 @@
             "Share",
             "Members"
           ]
+        },
+        {
+          "type": "formula",
+          "expr": "(datum.Cell % 10) * 29 + 13",
+          "as": "CenterX"
+        },
+        {
+          "type": "formula",
+          "expr": "80 + (9 - floor(datum.Cell / 10)) * 29 + 13",
+          "as": "CenterY"
+        }
+      ]
+    },
+    {
+      "name": "categoryLabels",
+      "source": "cells",
+      "transform": [
+        {
+          "type": "aggregate",
+          "groupby": ["Category", "Order"],
+          "fields": ["CenterX", "CenterY", "Share"],
+          "ops": ["mean", "mean", "max"],
+          "as": ["CenterX", "CenterY", "Share"]
+        },
+        {
+          "type": "filter",
+          "expr": "datum.Share >= 0.05"
         }
       ]
     }
@@ -172,16 +199,16 @@
       "encode": {
         "update": {
           "x": {
-            "signal": "(datum.Cell % 10) * 24"
+            "signal": "(datum.Cell % 10) * 29"
           },
           "y": {
-            "signal": "78 + (9 - floor(datum.Cell / 10)) * 24"
+            "signal": "80 + (9 - floor(datum.Cell / 10)) * 29"
           },
           "width": {
-            "value": 21
+            "value": 26
           },
           "height": {
-            "value": 21
+            "value": 26
           },
           "cornerRadius": {
             "value": 2
@@ -198,22 +225,56 @@
     },
     {
       "type": "rect",
+      "from": {"data": "categoryLabels"},
+      "encode": {
+        "update": {
+          "x": {"signal": "datum.CenterX - 26"},
+          "y": {"signal": "datum.CenterY - 13"},
+          "width": {"value": 52},
+          "height": {"value": 26},
+          "cornerRadius": {"value": 6},
+          "fill": {"value": "#ffffff"},
+          "fillOpacity": {"value": 0.96},
+          "stroke": {"value": "#173c4a"},
+          "strokeOpacity": {"value": 0.18},
+          "strokeWidth": {"value": 1}
+        }
+      }
+    },
+    {
+      "type": "text",
+      "from": {"data": "categoryLabels"},
+      "encode": {
+        "update": {
+          "x": {"field": "CenterX"},
+          "y": {"field": "CenterY"},
+          "text": {"signal": "format(datum.Share, '.0%')"},
+          "align": {"value": "center"},
+          "baseline": {"value": "middle"},
+          "fontSize": {"value": 16},
+          "fontWeight": {"value": "bold"},
+          "fill": {"value": "#173c4a"}
+        }
+      }
+    },
+    {
+      "type": "rect",
       "from": {
         "data": "source"
       },
       "encode": {
         "update": {
           "x": {
-            "value": 265
+          "value": 420
           },
           "y": {
-            "signal": "87 + datum.Order * 76"
+            "signal": "87 + datum.Order * 84"
           },
           "width": {
-            "value": 13
+            "value": 16
           },
           "height": {
-            "value": 13
+            "value": 16
           },
           "fill": {
             "scale": "colour",
@@ -227,16 +288,16 @@
       "encode": {
         "update": {
           "x": {
-            "value": 288
+            "value": 445
           },
           "y": {
-            "signal": "100 + datum.Order * 76 + 0"
+            "signal": "100 + datum.Order * 84"
           },
           "text": {
             "signal": "datum.Category"
           },
           "fontSize": {
-            "value": 17
+            "value": 19
           },
           "fill": {
             "value": "#173c4a"
@@ -255,16 +316,16 @@
       "encode": {
         "update": {
           "x": {
-            "value": 288
+            "value": 445
           },
           "y": {
-            "signal": "100 + datum.Order * 76 + 27"
+            "signal": "100 + datum.Order * 84 + 30"
           },
           "text": {
             "signal": "format(datum.Share, '.1%') + ' · ' + format(datum.members, ',') + ' members'"
           },
           "fontSize": {
-            "value": 16
+            "value": 17
           },
           "fill": {
             "value": "#173c4a"
@@ -283,7 +344,7 @@
             "value": 0
           },
           "y": {
-            "value": 333
+          "value": 395
           },
           "text": {
             "value": "100 squares; category areas rounded to whole squares."

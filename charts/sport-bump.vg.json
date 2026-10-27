@@ -11,21 +11,9 @@
       }
     }
   },
-  "width": 420,
-  "height": 300,
+  "width": "container",
+  "height": 400,
   "params": [
-    {
-      "name": "topN",
-      "value": 5,
-      "bind": {
-        "input": "select",
-        "options": [
-          5,
-          10
-        ],
-        "name": "Leading activities: "
-      }
-    },
     {
       "name": "highlight",
       "select": {
@@ -114,7 +102,7 @@
       ]
     },
     {
-      "filter": "datum.OverallRank <= topN"
+      "filter": "datum.OverallRank <= 10"
     }
   ],
   "mark": {
@@ -159,16 +147,16 @@
       "title": null,
       "scale": {
         "range": [
-          "#087e83",
-          "#d16b37",
-          "#4266a8",
-          "#9d5788",
-          "#748c35",
-          "#a76439",
-          "#625eaa",
-          "#278b65",
-          "#b54d5d",
-          "#5b7a8b"
+          "#0072b2",
+          "#e69f00",
+          "#56b4e9",
+          "#009e73",
+          "#b79f00",
+          "#332288",
+          "#88ccee",
+          "#44aa99",
+          "#9467bd",
+          "#666666"
         ]
       },
       "legend": {

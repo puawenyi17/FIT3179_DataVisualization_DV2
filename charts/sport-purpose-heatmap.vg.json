@@ -1,6 +1,6 @@
 {
   "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
-  "description": "Purpose mix within leading funded activities: each bar contains all records for that activity in the selected year. Four leading original purposes remain separate; all remaining purposes form Other purposes. Shares are of records, not dollars or participants.",
+  "description": "Heatmap of funding-purpose shares within leading activities. Each cell's colour represents its share of that activity's funding records. The four most frequent purposes across all years remain separate; all other purposes are grouped. Hover for counts and source labels. Shares are of records, not dollars or participants.",
   "data": {
     "url": "data/raw/active-clubs-records.csv",
     "format": {
@@ -11,9 +11,9 @@
       }
     }
   },
-  "width": 350,
+  "width": "container",
   "height": {
-    "step": 48
+    "step": 40
   },
   "params": [
     {
@@ -27,18 +27,6 @@
           2024
         ],
         "name": "Approval year: "
-      }
-    },
-    {
-      "name": "topActivities",
-      "value": 5,
-      "bind": {
-        "input": "select",
-        "options": [
-          5,
-          10
-        ],
-        "name": "Leading activities: "
       }
     }
   ],
@@ -56,9 +44,6 @@
       "as": "Funding"
     },
     {
-      "filter": "datum.Year == selectedYear"
-    },
-    {
       "calculate": "datum[\"Project Description\"]",
       "as": "Purpose"
     },
@@ -70,6 +55,7 @@
         }
       ],
       "groupby": [
+        "Year",
         "Activity",
         "Purpose"
       ]
@@ -83,6 +69,7 @@
         }
       ],
       "groupby": [
+        "Year",
         "Activity"
       ]
     },
@@ -96,24 +83,6 @@
       ],
       "groupby": [
         "Purpose"
-      ]
-    },
-    {
-      "window": [
-        {
-          "op": "dense_rank",
-          "as": "ActivityRank"
-        }
-      ],
-      "sort": [
-        {
-          "field": "ActivityTotal",
-          "order": "descending"
-        },
-        {
-          "field": "Activity",
-          "order": "ascending"
-        }
       ]
     },
     {
@@ -135,10 +104,31 @@
       ]
     },
     {
-      "filter": "datum.ActivityRank <= topActivities"
+      "filter": "datum.Year == selectedYear"
     },
     {
-      "calculate": "datum.PurposeRank <= 4 ? replace(datum.Purpose, /^(Deliver safe experiences|Supporting Volunteers|Provide flexible participation opportunities) - /, '') : 'Other purposes'",
+      "window": [
+        {
+          "op": "dense_rank",
+          "as": "ActivityRank"
+        }
+      ],
+      "sort": [
+        {
+          "field": "ActivityTotal",
+          "order": "descending"
+        },
+        {
+          "field": "Activity",
+          "order": "ascending"
+        }
+      ]
+    },
+    {
+      "filter": "datum.ActivityRank <= 10"
+    },
+    {
+      "calculate": "datum.PurposeRank <= 4 ? datum.Purpose : 'Other purposes'",
       "as": "PurposeGroup"
     },
     {
@@ -199,11 +189,29 @@
     }
   },
   "mark": {
-    "type": "bar",
-    "stroke": "white",
-    "strokeWidth": 1
+    "type": "rect"
   },
   "encoding": {
+    "x": {
+      "field": "PurposeGroup",
+      "type": "nominal",
+      "sort": {
+        "field": "PurposeOrder",
+        "op": "min",
+        "order": "ascending"
+      },
+      "title": null,
+      "axis": {
+        "labelAngle": -60,
+        "labelAlign": "right",
+        "labelLimit": 190,
+        "labelPadding": 10,
+        "labelExpr": "datum.label === \"Equipment - on field\" ? \"Field equipment\" : datum.label === \"Education and training for volunteers\" ? \"Volunteer training\" : datum.label === \"Equipment - off field\" ? \"Off-field equipment\" : datum.label === \"Deliver safe experiences - Equipment - on field\" ? \"On-field safety\" : datum.label"
+      },
+      "scale": {
+        "padding": 0
+      }
+    },
     "y": {
       "field": "Activity",
       "type": "nominal",
@@ -214,61 +222,55 @@
       },
       "title": null,
       "axis": {
-        "labelLimit": 200,
+        "labelLimit": 240,
         "labelPadding": 10
-      }
-    },
-    "x": {
-      "field": "Share",
-      "type": "quantitative",
-      "stack": "zero",
-      "title": "Share of activity records",
-      "scale": {
-        "domain": [
-          0,
-          1
-        ]
       },
-      "axis": {
-        "format": ".0%",
-        "tickCount": 5
+      "scale": {
+        "padding": 0
       }
     },
     "color": {
-      "field": "PurposeGroup",
-      "type": "nominal",
+      "field": "Share",
+      "type": "quantitative",
+      "title": "Share within activity",
       "scale": {
+        "domain": [
+          0,
+          0.5,
+          1
+        ],
         "range": [
-          "#187f83",
-          "#e3aa45",
-          "#5476a6",
-          "#b86c46",
-          "#abb8bf"
+          "#eef6f5",
+          "#78b2ad",
+          "#087e83"
         ]
       },
       "legend": {
-        "title": [
-          "Purpose",
-          "(four leading + other)"
-        ],
         "orient": "right",
-        "labelLimit": 0,
-        "titleLimit": 0,
-        "offset": 16,
-        "labelExpr": "datum.label === \"Education and training for volunteers\" ? \"Volunteer training\" : datum.label === \"Participation activities and events\" ? \"Activities and events\" : datum.label === \"Resources for participation opportunities\" ? \"Participation resources\" : datum.label === \"Equipment - on field\" ? \"On-field equipment\" : datum.label === \"Equipment - off field\" ? \"Off-field equipment\" : datum.label"
+        "direction": "vertical",
+        "format": ".0%",
+        "values": [
+          0,
+          0.25,
+          0.5,
+          0.75,
+          1
+        ],
+        "offset": 16
       }
-    },
-    "order": {
-      "field": "PurposeOrder",
-      "type": "quantitative"
     },
     "tooltip": [
       {
-        "field": "Activity"
+        "field": "Activity",
+        "title": "Activity"
+      },
+      {
+        "field": "PurposeGroup",
+        "title": "Funding purpose"
       },
       {
         "field": "OriginalPurpose",
-        "title": "Original source purpose"
+        "title": "Source purpose"
       },
       {
         "field": "Records",
@@ -277,12 +279,13 @@
       },
       {
         "field": "ActivityTotal",
-        "title": "All records for activity",
+        "title": "All activity records",
         "type": "quantitative",
         "format": ",.0f"
       },
       {
         "field": "Share",
+        "title": "Share within activity",
         "type": "quantitative",
         "format": ".1%"
       }
